@@ -1,12 +1,12 @@
 # BetterVetSwerve
 
 ## Progress
-- [ ] Swerve Drive - Ethan
+- [ ] Swerve Drive - Ethan Hadley
   - [ ] Fix Motors to work with Phoneix 5
   - [ ] Measure Center to Center and other constants like gear ratio
   - [ ] Fully tested and working
         
-- [ ] Elevator - Danial
+- [ ] Elevator - Daniel Montgomery
   - [ ] Subsystem
     - [ ] Method to set the height of the elevator (Hopefully taking in meters and not just a number) should use PID
   - [ ] Testing Command,
@@ -15,7 +15,7 @@
   - [ ] Button Binded to command for each setpoint
   - [ ] Fully tested and working
         
-- [ ] Claw - Pizza
+- [ ] Claw - Pizza Young
   - [ ] Subsystem
     - [ ] Method to set the angle of the subsystem (Just like SweveDrive) should use PID
   - [ ] Testing Command
