@@ -12,16 +12,16 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.SwerveDriveConstants;
 
 import com.revrobotics.spark.SparkLowLevel;
-
-import com.ctre.phoenix6.hardware.TalonFX;
-import com.ctre.phoenix6.signals.NeutralModeValue;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkMax;
 
 
 public class SwerveModuleSubsystem extends SubsystemBase {
   
-  private TalonFX drive;
+  private TalonSRX drive;
   private SparkMax turn;
   private RelativeEncoder turnEncoder;
   private ProfiledPIDController turningPIDController;
@@ -36,8 +36,8 @@ public class SwerveModuleSubsystem extends SubsystemBase {
   public SwerveModuleSubsystem(int driveID, int steerID, double P, double I, double D) {
     super();
 
-    this.drive = new TalonFX(driveID, "rio");
-    this.drive.setNeutralMode(NeutralModeValue.Brake); // Stop wheel from moving when weren't not driving
+    this.drive = new TalonSRX(driveID);
+    this.drive.setNeutralMode(NeutralMode.Brake); // Stop wheel from moving when weren't not driving
 
     this.turn = new SparkMax(steerID, SparkLowLevel.MotorType.kBrushless);
     this.turnEncoder = this.turn.getEncoder(); // Zero wheels before power on
@@ -103,7 +103,7 @@ public class SwerveModuleSubsystem extends SubsystemBase {
     );
 
     // Actually sets the speed of the motors and how much they need to rotate
-    this.drive.set(Math.max(-this.maxOut, Math.min(driveOuput, this.maxOut)));
+    this.drive.set(TalonSRXControlMode.PercentOutput, Math.max(-this.maxOut, Math.min(driveOuput, this.maxOut)));
     this.turn.setVoltage(turnOutput);
   }
 }
