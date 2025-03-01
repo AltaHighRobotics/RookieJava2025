@@ -14,8 +14,7 @@ public class ElevatorHeightCommand extends Command {
     private ElevatorLevel elevatorLevel;
     private ElevatorSubsystem elevatorSubsystem;
 
-    public ElevatorHeightCommand(ElevatorSubsystem elevatorSubsystem, 
-                                 ElevatorLevel elevatorLevel) {
+    public ElevatorHeightCommand(ElevatorSubsystem elevatorSubsystem, ElevatorLevel elevatorLevel) {
         this.elevatorSubsystem = elevatorSubsystem;
         this.elevatorLevel = elevatorLevel;
         addRequirements(elevatorSubsystem);

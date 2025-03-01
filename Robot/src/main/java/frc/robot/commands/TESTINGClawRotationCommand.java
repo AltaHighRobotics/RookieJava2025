@@ -5,7 +5,8 @@ import frc.robot.Constants.ClawConstants;
 import frc.robot.subsystems.ClawSubsystem;
 
 public class ClawHeightCommand extends Command {
-    public enum ClawLevel {
+    public enum ClawLevel
+    {
         POSITION1,
         POSITION2,
         POSITION3,
@@ -17,10 +18,9 @@ public class ClawHeightCommand extends Command {
 
 	ClawLevel this.clawLevel = ClawLevel.POSITION1;    // Start example with GoStraight Off
 
-    public clawHeightCommand(ClawSubsystem clawSubsystem, 
-                                 ClawLevel clawLevel) {
+    public clawHeightCommand(ClawSubsystem clawSubsystem, ClawLevel clawLevel) {
         this.clawSubsystem = clawSubsystem;
-        this.clawLevel = ClawLevel.POSITION1; //Might not work
+        this.clawLevel = clawLevel;
         addRequirements(clawSubsystem);
     }
 
