@@ -9,16 +9,18 @@ public class ClawHeightCommand extends Command {
         POSITION1,
         POSITION2,
         POSITION3,
-        POSITION4,
-    } 
+        POSITION4
+    };
     
-    private clawLevel clawLevel;
-    private clawSubsystem clawSubsystem;
+    private ClawLevel clawLevel;
+    private ClawSubsystem clawSubsystem;
+
+	ClawLevel this.clawLevel = ClawLevel.POSITION1;    // Start example with GoStraight Off
 
     public clawHeightCommand(ClawSubsystem clawSubsystem, 
                                  ClawLevel clawLevel) {
         this.clawSubsystem = clawSubsystem;
-        this.clawLevel = clawLevel;
+        this.clawLevel = ClawLevel.POSITION1; //Might not work
         addRequirements(clawSubsystem);
     }
 

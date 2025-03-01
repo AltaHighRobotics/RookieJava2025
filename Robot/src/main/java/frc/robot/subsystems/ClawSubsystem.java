@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClawConstants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+// import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 public class ClawSubsystem extends SubsystemBase{
@@ -29,7 +30,7 @@ public class ClawSubsystem extends SubsystemBase{
         this.ClawMotorController = new TalonFX(ClawConstants.TURN_ID);
 
 
-        this.encoder = this.motorController.getEncoder();
+        this.encoder = this.ClawMotorController.getEncoder(); //Shouldn't work with Talon, but we will see, this was previously sparkmax code
 
         final double P = ClawConstants.P;
         final double I = ClawConstants.I;
@@ -37,12 +38,13 @@ public class ClawSubsystem extends SubsystemBase{
         this.pidController = new PIDController(P, I, D);
     }
 
-    public void setHeight(double height) {
-        final double motorOutput = this.pidController.calculate(encoder.getPosition(), height);
-        motorController.set(motorOutput);
+    public void setRotation(double rotation) {
+        final double motorOutput = this.pidController.calculate(encoder.getPosition() * 1, rotation);  //Added 0.1 modifier for testing so it doesn't go out of control or go too fast
+        // ClawMotorController.set(motorOutput);
+        ClawMotorController.set(TalonFX.PercentOutput, motorOutput);
     }
 
-    public double getHeight() {
+    public double getRotation() {
         return encoder.getPosition();
     }
 }
