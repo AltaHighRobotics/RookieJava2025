@@ -8,8 +8,8 @@ public class ElevatorHeightCommand extends Command {
     public enum ElevatorLevel {
         LEVEL1,
         LEVEL2,
-        LEVEL3,
-    } 
+        LEVEL3
+    };
     
     private ElevatorLevel elevatorLevel;
     private ElevatorSubsystem elevatorSubsystem;

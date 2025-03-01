@@ -11,7 +11,7 @@ public class ClawHeightCommand extends Command {
         POSITION2,
         POSITION3,
         POSITION4
-    };
+    }
     
     private ClawLevel clawLevel;
     private ClawSubsystem clawSubsystem;
