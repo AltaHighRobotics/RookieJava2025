@@ -56,7 +56,7 @@ public final class Constants {
   }
   
   public static class ElevatorConstants {
-    public static final int TURN_ID = 66;
+    public static final int TURN_ID = 6;
 
     public static final double LEVEL1_HEIGHT = 100;
     public static final double LEVEL2_HEIGHT = 200;
