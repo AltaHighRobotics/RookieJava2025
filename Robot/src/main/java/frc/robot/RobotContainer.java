@@ -10,9 +10,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.InputConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.SwerveDriveCommand;
+import frc.robot.commands.SuckNBlowCommands.SuckCommand;
 import frc.robot.commands.FollowApriltagCommand;
 import frc.robot.commands.ResetOrientationCommand;
 import frc.robot.subsystems.ApriltagSubsystem;
+import frc.robot.subsystems.SuckNBlowSubsystem;
 import frc.robot.subsystems.SwerveDriveSubsystem;
 
 /**
@@ -29,12 +31,14 @@ public class RobotContainer {
 
   private SwerveDriveSubsystem drive;
   private ApriltagSubsystem apriltagSubsystem;
+  private SuckNBlowSubsystem suckNBlowSubsystem;
 
   public RobotContainer() {
     this.driverController = new Joystick(InputConstants.DRIVER_CONTROLLER_PORT);
 
     this.drive = new SwerveDriveSubsystem();
     this.apriltagSubsystem = new ApriltagSubsystem();
+    this.suckNBlowSubsystem = new SuckNBlowSubsystem();
 
     configureBindings();
 
@@ -59,6 +63,12 @@ public class RobotContainer {
 
     JoystickButton followApriltagButton = new JoystickButton(driverController, 4);
     followApriltagButton.onTrue(new FollowApriltagCommand(this.drive, this.apriltagSubsystem));
+
+    JoystickButton suckButton = new JoystickButton(driverController, 3);
+    suckButton.onTrue(new SuckCommand(this.suckNBlowSubsystem));
+
+    JoystickButton blowButton = new JoystickButton(driverController, 2);
+    blowButton.onTrue(new SuckCommand(this.suckNBlowSubsystem));
   }
 
   /**
