@@ -17,7 +17,6 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 public class ClawSubsystem extends SubsystemBase{
     private TalonFX ClawMotorController;
-    private SparkMax motorController;
     private PIDController pidController;
     private RelativeEncoder encoder;
 
@@ -43,8 +42,8 @@ public class ClawSubsystem extends SubsystemBase{
 
     public void setRotation(double rotation) {
         final double motorOutput = this.pidController.calculate(encoder.getPosition() * 1, rotation);  //Added 0.1 modifier for testing so it doesn't go out of control or go too fast
-        // ClawMotorController.set(motorOutput); // Previously worked for sparkmax, maybe also talon
-        ClawMotorController.set(TalonFX.PercentOutput, motorOutput);
+        ClawMotorController.set(motorOutput); // Previously worked for sparkmax, maybe also talon
+        // ClawMotorController.set(TalonFX.PercentOutput, motorOutput); // Just in case
     }
 
     public double getRotation() {
