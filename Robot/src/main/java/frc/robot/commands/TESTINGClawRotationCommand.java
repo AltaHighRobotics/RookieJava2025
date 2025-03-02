@@ -4,11 +4,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.ClawConstants;
 import frc.robot.subsystems.ClawSubsystem;
 
-import frc.robot.subsystems.ClawConstants.POSITION1_ROTATION;
-import frc.robot.subsystems.ClawConstants.POSITION2_ROTATION;
-import frc.robot.subsystems.ClawConstants.POSITION3_ROTATION;
-import frc.robot.subsystems.ClawConstants.POSITION4_ROTATION;
-
 
 public class ClawRotationCommand extends Command {
     public enum ClawLevel {
@@ -31,16 +26,16 @@ public class ClawRotationCommand extends Command {
     public void initialize() {
         switch (this.clawPosition) {
             case POSITION1:
-                this.clawSubsystem.setHeight(POSITION1_ROTATION); // 0 degrees
+                this.clawSubsystem.setHeight(ClawConstants.POSITION1_ROTATION); // 0 degrees
                 break;
             case POSITION2:
-                this.clawSubsystem.setHeight(POSITION2_ROTATION); // 90 degrees
+                this.clawSubsystem.setHeight(ClawConstants.POSITION2_ROTATION); // 90 degrees
                 break;
             case POSITION3:
-                this.clawSubsystem.setHeight(POSITION3_ROTATION); // 180 degrees
+                this.clawSubsystem.setHeight(ClawConstants.POSITION3_ROTATION); // 180 degrees
                 break;
             case POSITION4:
-                this.clawSubsystem.setHeight(POSITION3_ROTATION); // 270 degrees
+                this.clawSubsystem.setHeight(ClawConstants.POSITION3_ROTATION); // 270 degrees
         }
     }
 }

@@ -19,7 +19,9 @@ import frc.robot.subsystems.TESTClawSubsystem;
 
 // TESTING 2
 import frc.robot.commands.TESTING2ClawRotationCommand;
+import frc.robot.commands.TESTING2ClawRotationCommand.ClawLevel;
 import frc.robot.subsystems.TEST2ClawSubsystem;
+
 
 
 /**
@@ -84,14 +86,14 @@ public class RobotContainer {
     MoveTwo_SeventyDegrees.whileTrue(new TESTINGClawRotationCommand(this.clawSubsystem, 3)); //The "0" sets the position to the POSITION4 enum, 270 degrees
 
     // Claw commands for testing 2
-    // JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
-    // MoveZeroDegrees.whileTrue(new 2TESTINGClawRotationCommand(this.clawSubsystem, 0)); //The "0" sets the position to the POSITION1 enum, 0 degrees
-    // JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
-    // MoveNinetyDegrees.whileTrue(new 2TESTINGClawRotationCommand(this.clawSubsystem, 1)); //The "1" sets the position to the POSITION2 enum, 90 degrees
-    // JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
-    // MoveOne_EightyDegrees.whileTrue(new 2TESTINGClawRotationCommand(this.clawSubsystem, 2)); //The "2" sets the position to the POSITION3 enum, 180 degrees
-    // JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
-    // MoveTwo_SeventyDegrees.whileTrue(new 2TESTINGClawRotationCommand(this.clawSubsystem, 3)); //The "0" sets the position to the POSITION4 enum, 270 degrees
+    JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
+    MoveZeroDegrees.whileTrue(new TESTINGClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION1)); // 0 degrees
+    JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
+    MoveNinetyDegrees.whileTrue(new TESTINGClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION2)); // 90 degrees
+    JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
+    MoveOne_EightyDegrees.whileTrue(new TESTINGClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION3)); // 180 degrees
+    JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
+    MoveTwo_SeventyDegrees.whileTrue(new TESTINGClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION4)); // 270 degrees
   }
 
   /**
