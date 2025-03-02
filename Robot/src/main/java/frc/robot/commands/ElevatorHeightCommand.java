@@ -8,14 +8,13 @@ public class ElevatorHeightCommand extends Command {
     public enum ElevatorLevel {
         LEVEL1,
         LEVEL2,
-        LEVEL3,
-    } 
+        LEVEL3
+    };
     
     private ElevatorLevel elevatorLevel;
     private ElevatorSubsystem elevatorSubsystem;
 
-    public ElevatorHeightCommand(ElevatorSubsystem elevatorSubsystem, 
-                                 ElevatorLevel elevatorLevel) {
+    public ElevatorHeightCommand(ElevatorSubsystem elevatorSubsystem, ElevatorLevel elevatorLevel) {
         this.elevatorSubsystem = elevatorSubsystem;
         this.elevatorLevel = elevatorLevel;
         addRequirements(elevatorSubsystem);

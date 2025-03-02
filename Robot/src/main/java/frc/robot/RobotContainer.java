@@ -12,8 +12,10 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.SwerveDriveCommand;
 import frc.robot.commands.FollowApriltagCommand;
 import frc.robot.commands.ResetOrientationCommand;
+import frc.robot.commands.TESTINGClawRotationCommand;
 import frc.robot.subsystems.ApriltagSubsystem;
 import frc.robot.subsystems.SwerveDriveSubsystem;
+import frc.robot.subsystems.ClawSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -29,12 +31,14 @@ public class RobotContainer {
 
   private SwerveDriveSubsystem drive;
   private ApriltagSubsystem apriltagSubsystem;
+  private ClawSubsystem clawSubsystem;
 
   public RobotContainer() {
     this.driverController = new Joystick(InputConstants.DRIVER_CONTROLLER_PORT);
 
     this.drive = new SwerveDriveSubsystem();
     this.apriltagSubsystem = new ApriltagSubsystem();
+    this.clawSubsystem = new ClawSubsystem();
 
     configureBindings();
 
@@ -59,6 +63,16 @@ public class RobotContainer {
 
     JoystickButton followApriltagButton = new JoystickButton(driverController, 4);
     followApriltagButton.onTrue(new FollowApriltagCommand(this.drive, this.apriltagSubsystem));
+
+    // Claw commands
+    JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
+    MoveZeroDegrees.onTrue(new TESTINGClawRotationCommand(this.clawSubsystem, 0)); //The "0" sets the position to the POSITION1 enum, 0 degrees
+    JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
+    MoveNinetyDegrees.onTrue(new TESTINGClawRotationCommand(this.clawSubsystem, 1)); //The "1" sets the position to the POSITION2 enum, 90 degrees
+    JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
+    MoveOne_EightyDegrees.onTrue(new TESTINGClawRotationCommand(this.clawSubsystem, 2)); //The "2" sets the position to the POSITION3 enum, 180 degrees
+    JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
+    MoveTwo_SeventyDegrees.onTrue(new TESTINGClawRotationCommand(this.clawSubsystem, 3)); //The "0" sets the position to the POSITION4 enum, 270 degrees
   }
 
   /**
