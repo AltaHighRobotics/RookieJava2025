@@ -13,7 +13,7 @@ public class ElevatorSubsystem extends SubsystemBase{
 
     public ElevatorSubsystem() {
         super();
-        this.motorController = new TalonFX(ElevatorConstants.TURN_ID, "rio");
+        this.motorController = new TalonFX(ElevatorConstants.MOTOR_ID, "rio");
 
         //this.encoder = this.motorController
 
@@ -33,11 +33,11 @@ public class ElevatorSubsystem extends SubsystemBase{
     }
 
     public void goUp() {
-        motorController.set(0.8);
+        motorController.set(ElevatorConstants.MOTOR_SPEED);
     }
 
     public void goDown() {
-        motorController.set(-0.8);
+        motorController.set(-ElevatorConstants.MOTOR_SPEED);
     }
 }
 
