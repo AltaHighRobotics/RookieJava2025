@@ -25,7 +25,10 @@ public class SuckCommand extends Command {
       addRequirements(subsystem);
     }
 
-    // Called when the command is initially scheduled.
+    /**
+     * We need to use full power to get the ball in but not to keep it
+     * So after a few seconds we lower the motor power
+     */
     @Override
     public void initialize() {
       this.subsystem.set(OralType.SUCK);
@@ -34,18 +37,4 @@ public class SuckCommand extends Command {
                          TimeUnit.MILLISECONDS);
       scheduler.shutdown();
     }
-
-    // Called every time the scheduler runs while the command is scheduled.
-    @Override
-    public void execute() {
-    }
-
-    // Called once the command ends or is interrupted.
-    @Override
-    public void end(boolean interrupted) {
-    }
-
-    // Returns true when the command should end.
-    @Override
-    public boolean isFinished() { return true; }
 }
