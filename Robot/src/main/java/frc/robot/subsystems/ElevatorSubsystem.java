@@ -8,6 +8,7 @@ import frc.robot.Constants.ElevatorConstants;
 public class ElevatorSubsystem extends SubsystemBase{
     private TalonFX motorController;
     private PIDController pidController;
+    private double targetHeight = 0.0;
 
     public ElevatorSubsystem() {
         super();
@@ -23,9 +24,17 @@ public class ElevatorSubsystem extends SubsystemBase{
      * @param height A percentage (0 to 1)
      */
     public void setHeight(final double height) {
+        if (height < 0 || height > 1 ) {
+            throw new Error("Height should be between 0 and 1");
+        } 
+
+        targetHeight = height;
+    }
+
+    public void moveToTargetHeight() {
         final double twoPi = 2 * Math.PI;
 
-        final double elevatorTargetHeightRadians = height * twoPi;
+        final double elevatorTargetHeightRadians = targetHeight * twoPi;
         final double elevatorCurrentHeightRadians = this.getHeight() * twoPi;
 
         final double motorOutput = this.pidController.calculate(elevatorCurrentHeightRadians, 
