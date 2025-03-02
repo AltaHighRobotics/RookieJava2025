@@ -10,9 +10,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.InputConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ElevatorHeightChangeTestCommand;
+import frc.robot.commands.ElevatorHeightCommand;
 import frc.robot.commands.ResetOrientationCommand;
 import frc.robot.commands.SwerveDriveCommand;
 import frc.robot.commands.ElevatorHeightChangeTestCommand.ElevatorHeightChangeDirection;
+import frc.robot.commands.ElevatorHeightCommand.ElevatorLevel;
 import frc.robot.subsystems.ApriltagSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.SwerveDriveSubsystem;
@@ -66,6 +68,12 @@ public class RobotContainer {
 
     JoystickButton elevatorGoDownTestButton = new JoystickButton(driverController, 3);
     elevatorGoDownTestButton.whileTrue(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem, ElevatorHeightChangeDirection.DOWN));
+
+    JoystickButton elevatorSetToHeight1 = new JoystickButton(driverController, 2);
+    elevatorSetToHeight1.whileTrue(new ElevatorHeightCommand(this.elevatorSubsystem, ElevatorLevel.LEVEL1));
+
+    JoystickButton elevatorSetToHeight2 = new JoystickButton(driverController, 1);
+    elevatorSetToHeight2.whileTrue(new ElevatorHeightCommand(this.elevatorSubsystem, ElevatorLevel.LEVEL2));
   }
 
   /**

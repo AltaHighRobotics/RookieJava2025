@@ -61,9 +61,9 @@ public final class Constants {
     public static final double MOTOR_SPEED = 0.8;
     public static final double SPIN_RATIO = 0.01; // Gets multiplied, should be less than one
 
-    public static final double LEVEL1_HEIGHT = 100;
-    public static final double LEVEL2_HEIGHT = 200;
-    public static final double LEVEL3_HEIGHT = 300;
+    public static final double LEVEL1_HEIGHT = 0.20;
+    public static final double LEVEL2_HEIGHT = 0.50;
+    public static final double LEVEL3_HEIGHT = 0.90;
 
     public static final double P = 10;
     public static final double I = 0;
