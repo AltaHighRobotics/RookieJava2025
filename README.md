@@ -2,7 +2,7 @@
 
 ## Progress
 - [ ] Swerve Drive - Ethan
-  - [ ] Fix Motors to work with Phoneix 5
+  - [x] Fix Motors to work with Phoneix 5
   - [ ] Measure Center to Center and other constants like gear ratio
   - [ ] Fully tested and working
         
