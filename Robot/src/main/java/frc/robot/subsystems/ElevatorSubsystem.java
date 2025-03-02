@@ -31,7 +31,7 @@ public class ElevatorSubsystem extends SubsystemBase{
         targetHeight = height;
     }
 
-    public void moveToTargetHeight() {
+    public void moveToTargetHeight() { // Meant to be called each tick
         final double twoPi = 2 * Math.PI;
 
         final double elevatorTargetHeightRadians = targetHeight * twoPi;

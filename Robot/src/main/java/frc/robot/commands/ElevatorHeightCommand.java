@@ -35,4 +35,9 @@ public class ElevatorHeightCommand extends Command {
                 break;
         }
     }
+
+    @Override
+    public void execute() {
+        elevatorSubsystem.moveToTargetHeight();
+    }
 }
