@@ -1,6 +1,11 @@
 package frc.robot.commands.SuckNBlowCommands;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants.SuckNBlowConstants;
 import frc.robot.subsystems.SuckNBlowSubsystem;
 import frc.robot.subsystems.SuckNBlowSubsystem.OralType;
 
@@ -8,6 +13,7 @@ import frc.robot.subsystems.SuckNBlowSubsystem.OralType;
 public class BlowCommand extends Command {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final SuckNBlowSubsystem subsystem;
+    private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
     /**
      * Creates a new ExampleCommand.
@@ -23,6 +29,10 @@ public class BlowCommand extends Command {
     @Override
     public void initialize() {
       this.subsystem.set(OralType.BLOW);
+      Runnable stopAfterTime = () -> this.subsystem.set(OralType.STOP);
+      scheduler.schedule(stopAfterTime, SuckNBlowConstants.BLOW_FOR_MILLISECONDS, 
+                         TimeUnit.MILLISECONDS);
+      scheduler.shutdown();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
