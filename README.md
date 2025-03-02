@@ -25,13 +25,13 @@
   - [ ] Fully tested and working
         
 - [ ] Suck and Blow - Chang
-  - [ ] Subsystem
-    - [ ] Method to activate
-    - [ ] Method to deactivate
-  - [ ] Testing Commands
-    - [ ] Command to activate through subsystem
-    - [ ] Command to deactivate through subsystem
-  - [ ] Button Binded to command
+  - [x] Subsystem
+    - [x] Method to activate
+    - [x] Method to deactivate
+  - [x] Testing Commands
+    - [x] Command to activate through subsystem
+    - [x] Command to deactivate through subsystem
+  - [x] Button Binded to command
   - [ ] Fully tested and working
         
 - [ ] Fagimizer - Not yet built
