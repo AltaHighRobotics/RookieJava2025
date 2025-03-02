@@ -10,7 +10,7 @@ public class SuckNBlowSubsystem extends SubsystemBase{
     public enum OralType {
         SUCK,
         BLOW,
-        STOP 
+        KEEP 
     }
 
     private SparkMax motor;
@@ -40,7 +40,7 @@ public class SuckNBlowSubsystem extends SubsystemBase{
                 this.motor.set(speed);
             case BLOW:
                 this.motor.set(-speed);
-            case STOP:
+            case KEEP:
                 this.motor.set(speed * SuckNBlowConstants.MOTOR_GAG_REFLEX_REDUCTION);
         }
     }

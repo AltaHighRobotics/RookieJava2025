@@ -71,6 +71,7 @@ public final class Constants {
     public static final int SPARK_MAX_ID = 42;
     public static final double MOTOR_SPEED = 0.8;
     public static final double MOTOR_GAG_REFLEX_REDUCTION = 0.3; // Keeps ball in, percentage of MOTOR_SPEED, 0.5 = 50% of MOTOR_SPEED
+    public static final long FULL_POWER_SUCK_MILLISECONDS = 1500; // We need to use more power get the ball then to keep it
     public static boolean invert = true;
   }
 }
