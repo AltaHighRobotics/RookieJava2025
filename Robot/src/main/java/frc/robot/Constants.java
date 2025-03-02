@@ -66,4 +66,11 @@ public final class Constants {
     public static final double I = 0;
     public static final double D = 0.3;
   }
+
+  public static class SuckNBlowConstants {
+    public static final int SPARK_MAX_ID = 42;
+    public static final double MOTOR_SPEED = 0.8;
+    public static final double MOTOR_GAG_REFLEX_REDUCTION = 0.3; // Keeps ball in, percentage of MOTOR_SPEED, 0.5 = 50% of MOTOR_SPEED
+    public static boolean invert = true;
+  }
 }
