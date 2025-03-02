@@ -59,6 +59,7 @@ public final class Constants {
     public static final int MOTOR_ID = 6;
 
     public static final double MOTOR_SPEED = 0.8;
+    public static final double SPIN_RATIO = 0.01; // Gets multiplied, should be less than one
 
     public static final double LEVEL1_HEIGHT = 100;
     public static final double LEVEL2_HEIGHT = 200;
