@@ -66,4 +66,17 @@ public final class Constants {
     public static final double I = 0;
     public static final double D = 0.3;
   }
+
+  public static class ClawConstants { //Pretty much a copy of the elevator constants, along with the subsystem and commands
+    public static final int TURN_ID = 77; //This ID can be changed later
+
+    public static final double POSITION1_ROTATION = 0; //In degrees
+    public static final double POSITION2_ROTATION = 90;
+    public static final double POSITION3_ROTATION = 180;
+    public static final double POSITION4_ROTATION = 270; //Cannot go past 360 or else wires will break
+
+    public static final double P = 10;
+    public static final double I = 0;
+    public static final double D = 0.3;
+  }
 }
