@@ -79,17 +79,4 @@ public final class Constants {
     public static final double I = 0;
     public static final double D = 0.3;
   }
-
-  public static class ClawConstants {
-    public static final int TURN_ID = 77;  //Can be changed later
-
-    public static final double POSITION1_ROT = 0;
-    public static final double POSITION2_ROT = 90;
-    public static final double POSITION3_ROT = 180;
-    public static final double POSITION4_ROT = 270; //SHOULD NOT GO PAST 360 DEGREES
-
-    public static final double P = 10;
-    public static final double I = 0;
-    public static final double D = 0.3;
-  }
 }

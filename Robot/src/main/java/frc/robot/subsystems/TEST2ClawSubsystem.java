@@ -43,8 +43,7 @@ public class ClawSubsystem extends SubsystemBase{
 
     public void setRotation(double rotation) {
         final double motorOutput = this.pidController.calculate(encoder.getPosition() * 1, rotation);  //Added 0.1 modifier for testing so it doesn't go out of control or go too fast
-        // ClawMotorController.set(motorOutput); // Previously worked for sparkmax
-        ClawMotorController.set(TalonFX.PercentOutput, motorOutput);
+        ClawMotorController.set(motorOutput);
     }
 
     public double getRotation() {

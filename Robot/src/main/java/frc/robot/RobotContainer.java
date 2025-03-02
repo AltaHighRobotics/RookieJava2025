@@ -15,7 +15,12 @@ import frc.robot.commands.ResetOrientationCommand;
 import frc.robot.commands.TESTINGClawRotationCommand;
 import frc.robot.subsystems.ApriltagSubsystem;
 import frc.robot.subsystems.SwerveDriveSubsystem;
-import frc.robot.subsystems.ClawSubsystem;
+import frc.robot.subsystems.TESTClawSubsystem;
+
+// TESTING 2
+import frc.robot.commands.TESTING2ClawRotationCommand;
+import frc.robot.subsystems.TEST2ClawSubsystem;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -38,7 +43,9 @@ public class RobotContainer {
 
     this.drive = new SwerveDriveSubsystem();
     this.apriltagSubsystem = new ApriltagSubsystem();
-    this.clawSubsystem = new ClawSubsystem();
+    this.clawSubsystem = new TESTClawSubsystem();
+    // TESTING 2
+    this.clawSubsystem = new TEST2ClawSubsystem();
 
     configureBindings();
 
@@ -64,15 +71,27 @@ public class RobotContainer {
     JoystickButton followApriltagButton = new JoystickButton(driverController, 4);
     followApriltagButton.onTrue(new FollowApriltagCommand(this.drive, this.apriltagSubsystem));
 
-    // Claw commands
+    // FOR CLAW COMMANDS: TURN "whileTrue" BACK TO "onTrue" WHEN DONE TESTING //
+
+    // Claw commands for testing 1
     JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
-    MoveZeroDegrees.onTrue(new TESTINGClawRotationCommand(this.clawSubsystem, 0)); //The "0" sets the position to the POSITION1 enum, 0 degrees
+    MoveZeroDegrees.whileTrue(new TESTINGClawRotationCommand(this.clawSubsystem, 0)); //The "0" sets the position to the POSITION1 enum, 0 degrees
     JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
-    MoveNinetyDegrees.onTrue(new TESTINGClawRotationCommand(this.clawSubsystem, 1)); //The "1" sets the position to the POSITION2 enum, 90 degrees
+    MoveNinetyDegrees.whileTrue(new TESTINGClawRotationCommand(this.clawSubsystem, 1)); //The "1" sets the position to the POSITION2 enum, 90 degrees
     JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
-    MoveOne_EightyDegrees.onTrue(new TESTINGClawRotationCommand(this.clawSubsystem, 2)); //The "2" sets the position to the POSITION3 enum, 180 degrees
+    MoveOne_EightyDegrees.whileTrue(new TESTINGClawRotationCommand(this.clawSubsystem, 2)); //The "2" sets the position to the POSITION3 enum, 180 degrees
     JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
-    MoveTwo_SeventyDegrees.onTrue(new TESTINGClawRotationCommand(this.clawSubsystem, 3)); //The "0" sets the position to the POSITION4 enum, 270 degrees
+    MoveTwo_SeventyDegrees.whileTrue(new TESTINGClawRotationCommand(this.clawSubsystem, 3)); //The "0" sets the position to the POSITION4 enum, 270 degrees
+
+    // Claw commands for testing 2
+    // JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
+    // MoveZeroDegrees.whileTrue(new 2TESTINGClawRotationCommand(this.clawSubsystem, 0)); //The "0" sets the position to the POSITION1 enum, 0 degrees
+    // JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
+    // MoveNinetyDegrees.whileTrue(new 2TESTINGClawRotationCommand(this.clawSubsystem, 1)); //The "1" sets the position to the POSITION2 enum, 90 degrees
+    // JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
+    // MoveOne_EightyDegrees.whileTrue(new 2TESTINGClawRotationCommand(this.clawSubsystem, 2)); //The "2" sets the position to the POSITION3 enum, 180 degrees
+    // JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
+    // MoveTwo_SeventyDegrees.whileTrue(new 2TESTINGClawRotationCommand(this.clawSubsystem, 3)); //The "0" sets the position to the POSITION4 enum, 270 degrees
   }
 
   /**
