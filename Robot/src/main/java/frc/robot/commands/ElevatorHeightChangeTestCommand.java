@@ -2,22 +2,28 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ElevatorSubsystem;
-import frc.robot.subsystems.SwerveDriveSubsystem;
 
 /** An example command that uses an example subsystem. */
-public class ElevatorGoBrrr extends Command {
+public class ElevatorHeightChangeTestCommand extends Command {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+
+    public enum ElevatorHeightChangeDirection {
+      UP,
+      DOWN
+    }
+
     private final ElevatorSubsystem subsystem;
-    private boolean goDown;
+    private final ElevatorHeightChangeDirection direction;
 
     /**
      * Creates a new ExampleCommand.
      *
      * @param subsystem The subsystem used by this command.
      */
-    public ElevatorGoBrrr(ElevatorSubsystem subsystem, boolean goUp) {
+    public ElevatorHeightChangeTestCommand(ElevatorSubsystem subsystem,  
+                                           ElevatorHeightChangeDirection direction) {
       this.subsystem = subsystem;
-      this.goDown = goDown;
+      this.direction = direction;
       addRequirements(subsystem);
     }
 
@@ -31,10 +37,14 @@ public class ElevatorGoBrrr extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-      if (goDown) {
-        this.subsystem.goDown();  
-      } else {
-        this.subsystem.goUp();
+      switch (this.direction) {
+        case UP:
+          this.subsystem.goUp();  
+          break;
+
+        case DOWN:
+          this.subsystem.goDown();
+          break;
       }
       
     }

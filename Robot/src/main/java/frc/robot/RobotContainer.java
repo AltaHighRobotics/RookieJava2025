@@ -9,9 +9,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.InputConstants;
 import frc.robot.commands.Autos;
-import frc.robot.commands.ElevatorGoBrr;
+import frc.robot.commands.ElevatorHeightChangeTestCommand;
 import frc.robot.commands.ResetOrientationCommand;
 import frc.robot.commands.SwerveDriveCommand;
+import frc.robot.commands.ElevatorHeightChangeTestCommand.ElevatorHeightChangeDirection;
 import frc.robot.subsystems.ApriltagSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.SwerveDriveSubsystem;
@@ -60,11 +61,11 @@ public class RobotContainer {
     JoystickButton gyroResetButton = new JoystickButton(driverController, 5);
     gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
 
-    JoystickButton followApriltagButton = new JoystickButton(driverController, 4);
-    followApriltagButton.whileTrue(new ElevatorGoBrr(this.elevatorSubsystem, true));
+    JoystickButton elevatorGoUpTestButton = new JoystickButton(driverController, 4);
+    elevatorGoUpTestButton.whileTrue(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem, ElevatorHeightChangeDirection.UP));
 
-    JoystickButton followApriltagButton = new JoystickButton(driverController, 3);
-    followApriltagButton.whileTrue(new ElevatorGoBrr(this.elevatorSubsystem, false));
+    JoystickButton elevatorGoDownTestButton = new JoystickButton(driverController, 3);
+    elevatorGoDownTestButton.whileTrue(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem, ElevatorHeightChangeDirection.DOWN));
   }
 
   /**
