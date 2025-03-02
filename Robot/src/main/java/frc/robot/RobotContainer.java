@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.InputConstants;
 import frc.robot.commands.Autos;
-import frc.robot.commands.SwerveDriveCommand;
+import frc.robot.commands.Swerve.ResetOrientationCommand;
+import frc.robot.commands.Swerve.SwerveDriveCommand;
 import frc.robot.commands.FollowApriltagCommand;
-import frc.robot.commands.ResetOrientationCommand;
 import frc.robot.subsystems.ApriltagSubsystem;
 import frc.robot.subsystems.Swerve.SwerveDriveSubsystem;
 
