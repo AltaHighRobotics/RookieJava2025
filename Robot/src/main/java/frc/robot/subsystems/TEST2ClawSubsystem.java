@@ -1,9 +1,5 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.RelativeEncoder;
-// import com.revrobotics.spark.SparkMax;
-// import com.revrobotics.spark.SparkLowLevel.MotorType;
-
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -14,12 +10,12 @@ import frc.robot.Constants.ClawConstants;
 // import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 // import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 public class ClawSubsystem extends SubsystemBase{
-    private TalonFX ClawMotorController;
+    private WPI_TalonFX ClawMotorController;
     private SparkMax motorController;
     private PIDController pidController;
-    private RelativeEncoder encoder;
 
     /* Code that I took from some other team, shouldn't work */
     // public double getEncoder() {
@@ -30,7 +26,7 @@ public class ClawSubsystem extends SubsystemBase{
         super();
 
         // this.motorController = new SparkMax(ClawConstants.TURN_ID, MotorType.kBrushless);
-        this.ClawMotorController = new TalonFX(ClawConstants.TURN_ID);
+        this.ClawMotorController = new WPI_TalonFX(ClawConstants.TURN_ID);
 
 
         this.encoder = this.ClawMotorController.getEncoder(); //Shouldn't work with Talon, but we will see, this was previously sparkmax code
