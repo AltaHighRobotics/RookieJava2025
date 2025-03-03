@@ -13,7 +13,6 @@ import frc.robot.subsystems.SuckNBlowSubsystem.OralType;
 public class BlowCommand extends Command {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final SuckNBlowSubsystem subsystem;
-    private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
     /**
      * Creates a new ExampleCommand.
@@ -29,8 +28,12 @@ public class BlowCommand extends Command {
      * Blows for a few seconds to shoot the ball and then stops the motor
      */
     @Override
-    public void initialize() {
-      this.subsystem.queueSet(OralType.BLOW, OralType.STOP, SuckNBlowConstants.FULL_POWER_SUCK_MILLISECONDS);
+    public void execute() {
+      this.subsystem.set(OralType.BLOW);
     }
 
+    @Override
+    public void end(boolean interrupted) {
+      this.subsystem.set(OralType.STOP);
+    }
 }

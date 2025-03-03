@@ -29,7 +29,7 @@ public class SuckCommand extends Command {
      * So after a few seconds we lower the motor power
      */
     @Override
-    public void initialize() {
-      this.subsystem.queueSet(OralType.SUCK, OralType.KEEP, SuckNBlowConstants.FULL_POWER_SUCK_MILLISECONDS);
+    public void execute() {
+      this.subsystem.set(OralType.SUCK);
     }
 }
