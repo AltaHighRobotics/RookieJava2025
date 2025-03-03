@@ -13,7 +13,6 @@ import frc.robot.subsystems.SuckNBlowSubsystem.OralType;
 public class SuckCommand extends Command {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final SuckNBlowSubsystem subsystem;
-    private ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
     /**
      * Creates a new ExampleCommand.
@@ -31,10 +30,6 @@ public class SuckCommand extends Command {
      */
     @Override
     public void initialize() {
-      this.subsystem.set(OralType.SUCK);
-      Runnable setToBallInSpeed = () -> this.subsystem.set(OralType.KEEP);
-      scheduler.schedule(setToBallInSpeed, SuckNBlowConstants.FULL_POWER_SUCK_MILLISECONDS, 
-                         TimeUnit.MILLISECONDS);
-      scheduler.shutdown();
+      this.subsystem.queueSet(OralType.SUCK, OralType.KEEP, SuckNBlowConstants.FULL_POWER_SUCK_MILLISECONDS);
     }
 }

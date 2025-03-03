@@ -30,11 +30,7 @@ public class BlowCommand extends Command {
      */
     @Override
     public void initialize() {
-      this.subsystem.set(OralType.BLOW);
-      Runnable stopAfterTime = () -> this.subsystem.set(OralType.STOP);
-      scheduler.schedule(stopAfterTime, SuckNBlowConstants.BLOW_FOR_MILLISECONDS, 
-                         TimeUnit.MILLISECONDS);
-      scheduler.shutdown();
+      this.subsystem.queueSet(OralType.BLOW, OralType.STOP, SuckNBlowConstants.FULL_POWER_SUCK_MILLISECONDS);
     }
 
 }
