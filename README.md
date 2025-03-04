@@ -24,7 +24,7 @@
   - [ ] Button Binded to command for each setpoint
   - [ ] Fully tested and working
         
-- [ ] Suck and Blow - Chang
+- [x] Suck and Blow - Chang
   - [x] Subsystem
     - [x] Method to activate
     - [x] Method to deactivate
@@ -32,7 +32,7 @@
     - [x] Command to activate through subsystem
     - [x] Command to deactivate through subsystem
   - [x] Button Binded to command
-  - [ ] Fully tested and working
+  - [x] Fully tested and working
         
 - [ ] Fagimizer - Not yet built
   - [ ] Subsystem
