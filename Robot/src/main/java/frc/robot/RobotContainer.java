@@ -74,6 +74,9 @@ public class RobotContainer {
 
     JoystickButton elevatorSetToHeight2 = new JoystickButton(driverController, 1);
     elevatorSetToHeight2.whileTrue(new ElevatorHeightCommand(this.elevatorSubsystem, ElevatorLevel.LEVEL2));
+
+    JoystickButton elevatorSetToHeight3 = new JoystickButton(driverController, 3);
+    elevatorSetToHeight3.whileTrue(new ElevatorHeightCommand(this.elevatorSubsystem, ElevatorLevel.LEVEL3));
   }
 
   /**

@@ -1,6 +1,9 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
+
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ElevatorConstants;
@@ -18,6 +21,8 @@ public class ElevatorSubsystem extends SubsystemBase{
         final double I = ElevatorConstants.I;
         final double D = ElevatorConstants.D;
         this.pidController = new PIDController(P, I, D);
+
+        this.motorController.setNeutralMode(NeutralModeValue.Brake);
     }
 
     /**
@@ -32,13 +37,15 @@ public class ElevatorSubsystem extends SubsystemBase{
     }
 
     public void moveToTargetHeight() { // Meant to be called each tick
-        final double elevatorTargetHeightRadians = targetHeight * ElevatorConstants.TOP_MAG;
-        final double elevatorCurrentHeightRadians = this.getHeight() * ElevatorConstants.TOP_MAG;
+        final double targetPosition = targetHeight * ElevatorConstants.TOP_MAG;
+        final double currentPosition = this.getHeight();
 
-        double motorOutput = this.pidController.calculate(elevatorCurrentHeightRadians, 
-                                                                elevatorTargetHeightRadians);
+        double motorOutput = this.pidController.calculate(currentPosition, targetPosition);
+        motorOutput = MathUtil.clamp(motorOutput, -ElevatorConstants.MOTOR_SPEED, ElevatorConstants.MOTOR_SPEED);
 
-        motorOutput = Math.abs(motorOutput) / motorOutput * 0.3;
+        if (motorOutput < 0) {
+            motorOutput *= 0.5;
+        }
 
         motorController.set(motorOutput);
     }
@@ -48,7 +55,6 @@ public class ElevatorSubsystem extends SubsystemBase{
      */
     public double getHeight() {
         final double realMotorAngle = this.motorController.getPosition().getValue().magnitude();
-        System.out.println(realMotorAngle);
         return realMotorAngle;
     }
 
