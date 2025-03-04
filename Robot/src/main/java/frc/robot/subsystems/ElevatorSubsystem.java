@@ -32,13 +32,14 @@ public class ElevatorSubsystem extends SubsystemBase{
     }
 
     public void moveToTargetHeight() { // Meant to be called each tick
-        final double twoPi = 2 * Math.PI;
+        final double elevatorTargetHeightRadians = targetHeight * ElevatorConstants.TOP_MAG;
+        final double elevatorCurrentHeightRadians = this.getHeight() * ElevatorConstants.TOP_MAG;
 
-        final double elevatorTargetHeightRadians = targetHeight * twoPi;
-        final double elevatorCurrentHeightRadians = this.getHeight() * twoPi;
-
-        final double motorOutput = this.pidController.calculate(elevatorCurrentHeightRadians, 
+        double motorOutput = this.pidController.calculate(elevatorCurrentHeightRadians, 
                                                                 elevatorTargetHeightRadians);
+
+        motorOutput = Math.abs(motorOutput) / motorOutput * 0.3;
+
         motorController.set(motorOutput);
     }
 
@@ -47,11 +48,13 @@ public class ElevatorSubsystem extends SubsystemBase{
      */
     public double getHeight() {
         final double realMotorAngle = this.motorController.getPosition().getValue().magnitude();
-        return realMotorAngle / ElevatorConstants.SPIN_RATIO;
+        System.out.println(realMotorAngle);
+        return realMotorAngle;
     }
 
     public void goUp() {
         motorController.set(ElevatorConstants.MOTOR_SPEED);
+        getHeight();
     }
 
     public void goDown() {

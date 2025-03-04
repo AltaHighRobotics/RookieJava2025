@@ -58,15 +58,17 @@ public final class Constants {
   public static class ElevatorConstants {
     public static final int MOTOR_ID = 6;
 
-    public static final double MOTOR_SPEED = 0.8;
+    public static final double MOTOR_SPEED = 0.1;
     public static final double SPIN_RATIO = 0.01; // Gets multiplied, should be less than one
+
+    public static final double TOP_MAG = 34;
 
     public static final double LEVEL1_HEIGHT = 0.20;
     public static final double LEVEL2_HEIGHT = 0.50;
     public static final double LEVEL3_HEIGHT = 0.90;
 
-    public static final double P = 10;
+    public static final double P = 0.1;
     public static final double I = 0;
-    public static final double D = 0.3;
+    public static final double D = 0;
   }
 }

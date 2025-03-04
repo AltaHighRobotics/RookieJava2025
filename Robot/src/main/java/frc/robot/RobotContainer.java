@@ -31,20 +31,20 @@ import frc.robot.subsystems.SwerveDriveSubsystem;
 public class RobotContainer {
   private final Joystick driverController;
 
-  private SwerveDriveSubsystem drive;
-  private ApriltagSubsystem apriltagSubsystem;
+  // private SwerveDriveSubsystem drive;
+  // private ApriltagSubsystem apriltagSubsystem;
   private ElevatorSubsystem elevatorSubsystem;
 
   public RobotContainer() {
     this.driverController = new Joystick(InputConstants.DRIVER_CONTROLLER_PORT);
 
-    this.drive = new SwerveDriveSubsystem();
-    this.apriltagSubsystem = new ApriltagSubsystem();
+    // this.drive = new SwerveDriveSubsystem();
+    // this.apriltagSubsystem = new ApriltagSubsystem();
     this.elevatorSubsystem = new ElevatorSubsystem();
 
     configureBindings();
 
-    this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
+    // this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
   }
 
   /**
@@ -60,15 +60,15 @@ public class RobotContainer {
     // cancelling on release.
     // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    JoystickButton gyroResetButton = new JoystickButton(driverController, 5);
-    gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
+    // JoystickButton gyroResetButton = new JoystickButton(driverController, 5);
+    // gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
 
-    JoystickButton elevatorGoUpTestButton = new JoystickButton(driverController, 4);
-    elevatorGoUpTestButton.whileTrue(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem, ElevatorHeightChangeDirection.UP));
+    // JoystickButton elevatorGoUpTestButton = new JoystickButton(driverController, 1);
+    // elevatorGoUpTestButton.whileTrue(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem, ElevatorHeightChangeDirection.UP));
 
-    JoystickButton elevatorGoDownTestButton = new JoystickButton(driverController, 3);
-    elevatorGoDownTestButton.whileTrue(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem, ElevatorHeightChangeDirection.DOWN));
-
+    // JoystickButton elevatorGoDownTestButton = new JoystickButton(driverController, 2);
+    // elevatorGoDownTestButton.whileTrue(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem, ElevatorHeightChangeDirection.DOWN));
+// 
     JoystickButton elevatorSetToHeight1 = new JoystickButton(driverController, 2);
     elevatorSetToHeight1.whileTrue(new ElevatorHeightCommand(this.elevatorSubsystem, ElevatorLevel.LEVEL1));
 
@@ -83,6 +83,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.stationAlign(drive, this.apriltagSubsystem);
+    // return Autos.stationAlign(drive, this.apriltagSubsystem);
+    return null;
   }
 }
