@@ -1,5 +1,5 @@
 package frc.robot;
-import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -18,7 +18,7 @@ public class Robot extends TimedRobot {
         m_chooser.setDefaultOption(“Default Auto”, kDefaultAuto);
         m_chooser.addOption(“My Auto”, kCustomAuto);
         SmartDashboard.putData(“Auto choices”, m_chooser);
-        throughBore = new Encoder(9, 360, 0);
+        DutyCycleEncoder ClawEncoder = new DutyCycleEncoder(0);
         throughBore.setDistancePerPulse(4.0/256.0); //Set sensetivity of the encoder to 4/256
     }
 
