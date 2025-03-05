@@ -1,11 +1,6 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.RelativeEncoder;
-// import com.revrobotics.spark.SparkMax;
-// import com.revrobotics.spark.SparkLowLevel.MotorType;
-
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClawConstants;
@@ -19,19 +14,22 @@ import com.ctre.phoenix6.hardware.TalonFX;
 public class ClawSubsystem extends SubsystemBase{
     private TalonFX ClawMotorController;
     private PIDController pidController;
-    private DutyCycleEncoder encoder;
+    private Encoder encoder;
 
     public ClawSubsystem() {
         super();
 
         this.ClawMotorController = new TalonFX(ClawConstants.TURN_ID);
 
+        /*
+        this.encoder = new DutyCycleEncoder(9, 360, 0);
+        this.encoder = new Encoder(  int channelA, // DIO port for channel A (blue wire)
+                                     int channelB, // DIO port for channel A (yellow wire)
+                                     int indexChannel, // DIO port for channel A (green wire)
+                                     boolean reverseDirection) //Should be true so that we can detect if the arm is going backwards as well, otherwise we only detect forwards motion
+        */
 
-        // this.encoder = new DutyCycleEncoder(9, 360, 0);
-        this.encoder = new Encoder( int channelA, // DIO port for channel A (blue wire)
-                                    int channelB, // DIO port for channel A (yellow wire)
-                                    int indexChannel, // DIO port for channel A (green wire)
-                                    boolean reverseDirection) //Should be true so that we can detect if the arm is going backwards as well, otherwise we only detect forwards motion
+        this.encoder = new Encoder(9, 8, 7, true);
 
         final double P = ClawConstants.P;
         final double I = ClawConstants.I;
