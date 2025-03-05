@@ -6,14 +6,14 @@
   - [ ] Measure Center to Center and other constants like gear ratio
   - [ ] Fully tested and working
         
-- [ ] Elevator - Danial
+- [x] Elevator - Danial
   - [x] Subsystem
     - [x] Method to set the height of the elevator (Hopefully taking in meters and not just a number) should use PID
   - [x] Testing Command,
     - [x] Can set to a height
     - [x] Takes in an enum with three different setpoints to set to different heights
   - [x] Button Binded to command for each setpoint
-  - [ ] Fully tested and working
+  - [x] Fully tested and working
         
 - [ ] Claw - Pizza
   - [ ] Subsystem
