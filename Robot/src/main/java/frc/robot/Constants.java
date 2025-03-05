@@ -71,7 +71,7 @@ public final class Constants {
   }
 
   public static class ClawConstants { //Pretty much a copy of the elevator constants, along with the subsystem and commands
-    public static final int TURN_ID = 77; //This ID can be changed later
+    public static final int TURN_ID = 7; //This ID can be changed later
 
     public static final double POSITION1_ROTATION = 0; //In degrees
     public static final double POSITION2_ROTATION = 90;
@@ -83,5 +83,11 @@ public final class Constants {
     public static final double D = 0;
 
     public static final double ENCODER_ABSOLUTE_OFFSET = 69; // We don't know this yet, we will have to see in what position that it triggers with ABS
+
+    public static final int ENCODER_A = 9; //channel A
+    public static final int ENCODER_B = 8; //channel B
+    public static final int ENCODER_I = 7; //channel I
+    public static final int ENCODER_ABS = 6; // Absolute channel
   }
+  
 }

@@ -24,8 +24,10 @@ public class ClawSubsystem extends SubsystemBase{
                                      boolean reverseDirection) //Should be true so that we can detect if the arm is going backwards as well, otherwise we only detect forwards motion
         */
 
-        this.encoder = new Encoder(9, 8, 7, true); // Plug into DIO ports 9, 8, and 7 (preferabally in colored order above)
-        encoder.setDistancePerPulse(1.0/5.7); // 360 divided by the 2048 pulses per rotation should mean every 5.7 pulses is one rotational degree
+        this.encoder = new Encoder(ClawConstants.ENCODER_A, ClawConstants.ENCODER_B, ClawConstants.ENCODER_I, true); // Plug into DIO ports 9, 8, and 7 (preferabally in colored order above)
+        encoder.setDistancePerPulse(1/4);
+        encoder.reset();
+        // encoder.setDistancePerPulse(1.0/5.7); // 360 divided by the 2048 pulses per rotation should mean every 5.7 pulses is one rotational degree
 
         final double P = ClawConstants.P;
         final double I = ClawConstants.I;
@@ -34,15 +36,20 @@ public class ClawSubsystem extends SubsystemBase{
     }
 
     public void setRotation(double targetDegrees) {
-        final double currentDegrees = encoder.get();
+        final double currentDegrees = encoder.getDistance();
         final double rawDegrees = encoder.getRaw(); //could use this instead
+        final double rawRate = encoder.getRate(); //could use this instead
+        // final boolean connectStatus = encoder();
        
         System.out.println("--- Encoder outputs for .get and .raw below");
-        System.out.printf("     Curret deg: %f.6\n", currentDegrees);
-        System.out.printf("     raw deg: %f.6\n", rawDegrees);
+        System.out.printf("     Curret deg: %.6f\n", currentDegrees);
+        System.out.printf("     raw deg: %.6f\n", rawDegrees);
+        System.out.printf("     raw rate: %.6f\n", rawRate);
+        // System.out.printf("     Is connected: %.6f\n", connectStatus);
         System.out.println("---");
 
-        final double motorOutput = this.pidController.calculate(currentDegrees, targetDegrees);       
+        // final double motorOutput = this.pidController.calculate(currentDegrees, targetDegrees);       
+        final double motorOutput = 1;
 
         final double speedLimitedOutput = MathUtil.clamp(motorOutput, -0.1, 0.1);
         
