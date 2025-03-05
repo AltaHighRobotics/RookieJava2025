@@ -75,8 +75,8 @@ public final class Constants {
     public static final double POSITION3_ROTATION = 180;
     public static final double POSITION4_ROTATION = 270; //Cannot go past 360 or else wires will break
 
-    public static final double P = 10;
+    public static final double P = 3;
     public static final double I = 0;
-    public static final double D = 0.3;
+    public static final double D = 0;
   }
 }

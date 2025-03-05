@@ -9,19 +9,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.InputConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.ClawRotationCommand;
 import frc.robot.commands.SwerveDriveCommand;
+import frc.robot.commands.ClawRotationCommand.ClawLevel;
 import frc.robot.commands.FollowApriltagCommand;
 import frc.robot.commands.ResetOrientationCommand;
-import frc.robot.commands.TESTINGClawRotationCommand;
 import frc.robot.subsystems.ApriltagSubsystem;
+import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.SwerveDriveSubsystem;
-import frc.robot.subsystems.TESTClawSubsystem;
-
-// TESTING 2
-import frc.robot.commands.TESTING2ClawRotationCommand;
-import frc.robot.commands.TESTING2ClawRotationCommand.ClawLevel;
-import frc.robot.subsystems.TEST2ClawSubsystem;
-
 
 
 /**
@@ -36,22 +31,20 @@ import frc.robot.subsystems.TEST2ClawSubsystem;
 public class RobotContainer {
   private final Joystick driverController;
 
-  private SwerveDriveSubsystem drive;
-  private ApriltagSubsystem apriltagSubsystem;
+  // private SwerveDriveSubsystem drive;
+  // private ApriltagSubsystem apriltagSubsystem;
   private ClawSubsystem clawSubsystem;
 
   public RobotContainer() {
     this.driverController = new Joystick(InputConstants.DRIVER_CONTROLLER_PORT);
 
-    this.drive = new SwerveDriveSubsystem();
-    this.apriltagSubsystem = new ApriltagSubsystem();
-    this.clawSubsystem = new TESTClawSubsystem();
-    // TESTING 2
-    this.clawSubsystem = new TEST2ClawSubsystem();
+    // this.drive = new SwerveDriveSubsystem();
+    // this.apriltagSubsystem = new ApriltagSubsystem();
+    this.clawSubsystem = new ClawSubsystem();
 
     configureBindings();
 
-    this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
+    // this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
   }
 
   /**
@@ -67,33 +60,23 @@ public class RobotContainer {
     // cancelling on release.
     // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    JoystickButton gyroResetButton = new JoystickButton(driverController, 5);
-    gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
+    // JoystickButton gyroResetButton = new JoystickButton(driverController, 5);
+    // gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
 
-    JoystickButton followApriltagButton = new JoystickButton(driverController, 4);
-    followApriltagButton.onTrue(new FollowApriltagCommand(this.drive, this.apriltagSubsystem));
+    // JoystickButton followApriltagButton = new JoystickButton(driverController, 4);
+    // followApriltagButton.onTrue(new FollowApriltagCommand(this.drive, this.apriltagSubsystem));
 
     // FOR CLAW COMMANDS: TURN "whileTrue" BACK TO "onTrue" WHEN DONE TESTING //
 
     // Claw commands for testing 1
-    JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
-    MoveZeroDegrees.whileTrue(new TESTINGClawRotationCommand(this.clawSubsystem, 0)); //The "0" sets the position to the POSITION1 enum, 0 degrees
-    JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
-    MoveNinetyDegrees.whileTrue(new TESTINGClawRotationCommand(this.clawSubsystem, 1)); //The "1" sets the position to the POSITION2 enum, 90 degrees
-    JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
-    MoveOne_EightyDegrees.whileTrue(new TESTINGClawRotationCommand(this.clawSubsystem, 2)); //The "2" sets the position to the POSITION3 enum, 180 degrees
-    JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
-    MoveTwo_SeventyDegrees.whileTrue(new TESTINGClawRotationCommand(this.clawSubsystem, 3)); //The "0" sets the position to the POSITION4 enum, 270 degrees
+    JoystickButton TestButton1 = new JoystickButton(driverController, 1);
+    TestButton1.whileTrue(new ClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION1));
 
-    // Claw commands for testing 2
-    JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
-    MoveZeroDegrees.whileTrue(new TESTINGClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION1)); // 0 degrees
-    JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
-    MoveNinetyDegrees.whileTrue(new TESTINGClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION2)); // 90 degrees
-    JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
-    MoveOne_EightyDegrees.whileTrue(new TESTINGClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION3)); // 180 degrees
-    JoystickButton MoveNinetyDegrees = new JoystickButton(driverController, 1);
-    MoveTwo_SeventyDegrees.whileTrue(new TESTINGClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION4)); // 270 degrees
+    JoystickButton TestButton2 = new JoystickButton(driverController, 2);
+    TestButton2.whileTrue(new ClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION2));
+    
+    JoystickButton TestButton3 = new JoystickButton(driverController, 3);
+    TestButton3.whileTrue(new ClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION3));
   }
 
   /**
@@ -103,6 +86,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.stationAlign(drive, this.apriltagSubsystem);
+    // return Autos.stationAlign(drive, this.apriltagSubsystem);
+    return null;
   }
 }
