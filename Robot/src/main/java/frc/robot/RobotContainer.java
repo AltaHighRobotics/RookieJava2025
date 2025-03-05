@@ -13,10 +13,9 @@ import frc.robot.commands.SuckNBlowCommands.BlowCommand;
 import frc.robot.commands.SuckNBlowCommands.SuckCommand;
 import frc.robot.commands.Swerve.ResetOrientationCommand;
 import frc.robot.commands.Swerve.SwerveDriveCommand;
-import frc.robot.commands.FollowApriltagCommand;
-import frc.robot.subsystems.ApriltagSubsystem;
 import frc.robot.subsystems.SuckNBlowSubsystem;
 import frc.robot.subsystems.Swerve.SwerveDriveSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -33,13 +32,14 @@ public class RobotContainer {
   private SwerveDriveSubsystem drive;
   // private ApriltagSubsystem apriltagSubsystem;
   private SuckNBlowSubsystem suckNBlowSubsystem;
+  private ElevatorSubsystem elevatorSubsystem;
 
   public RobotContainer() {
     this.driverController = new Joystick(InputConstants.DRIVER_CONTROLLER_PORT);
 
     this.drive = new SwerveDriveSubsystem();
-    // this.apriltagSubsystem = new ApriltagSubsystem();
     this.suckNBlowSubsystem = new SuckNBlowSubsystem();
+    this.elevatorSubsystem = new ElevatorSubsystem();
 
     configureBindings();
 
@@ -69,7 +69,7 @@ public class RobotContainer {
     suckButton.whileTrue(new SuckCommand(this.suckNBlowSubsystem));
 
     JoystickButton blowButton = new JoystickButton(driverController, 2);
-    blowButton.onTrue(new BlowCommand(this.suckNBlowSubsystem));
+    blowButton.whileTrue(new BlowCommand(this.suckNBlowSubsystem));
   }
 
   /**
