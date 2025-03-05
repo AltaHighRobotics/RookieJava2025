@@ -51,7 +51,7 @@ public class ClawSubsystem extends SubsystemBase{
         encoder.reset();        // Reset the Encoder distance to zero (a good idea to trigger when the claw is initialized)
     }
 
-    public double checkIfStopped() {
+    public boolean checkIfStopped() {
         return encoder.getStopped(); //Checks if encoder is currently stopped
     }
 }
