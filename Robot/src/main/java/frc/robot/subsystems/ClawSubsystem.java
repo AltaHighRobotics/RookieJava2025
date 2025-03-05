@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClawConstants;
@@ -35,8 +36,17 @@ public class ClawSubsystem extends SubsystemBase{
     public void setRotation(double targetDegrees) {
         final double currentDegrees = encoder.get();
         final double rawDegrees = encoder.getRaw(); //could use this instead
-        final double motorOutput = this.pidController.calculate(currentDegrees, targetDegrees);        
-        ClawMotorController.set(motorOutput); 
+       
+        System.out.println("--- Encoder outputs for .get and .raw below");
+        System.out.printf("     Curret deg: %f.6\n", currentDegrees);
+        System.out.printf("     raw deg: %f.6\n", rawDegrees);
+        System.out.println("---");
+
+        final double motorOutput = this.pidController.calculate(currentDegrees, targetDegrees);       
+
+        final double speedLimitedOutput = MathUtil.clamp(motorOutput, -0.1, 0.1);
+        
+        ClawMotorController.set(speedLimitedOutput); 
     }
 
     public double getRotation() {
@@ -53,5 +63,9 @@ public class ClawSubsystem extends SubsystemBase{
 
     public boolean checkIfStopped() {
         return encoder.getStopped(); //Checks if encoder is currently stopped
+    }
+
+    public void stop() {
+        this.ClawMotorController.set(0);
     }
 }
