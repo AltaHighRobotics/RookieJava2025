@@ -34,7 +34,7 @@ public class ClawSubsystem extends SubsystemBase{
 
     public void setRotation(double targetDegrees) {
         final double currentDegrees = encoder.get();
-        final double rawDegrees = encoder.getRaw(); //could use instead
+        final double rawDegrees = encoder.getRaw(); //could use this instead
         final double motorOutput = this.pidController.calculate(currentDegrees, targetDegrees);        
         ClawMotorController.set(motorOutput); 
     }
