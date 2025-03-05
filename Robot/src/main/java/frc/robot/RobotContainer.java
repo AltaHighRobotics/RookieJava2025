@@ -70,13 +70,16 @@ public class RobotContainer {
 
     // Claw commands for testing 1
     JoystickButton TestButton1 = new JoystickButton(driverController, 1);
-    TestButton1.whileTrue(new ClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION1));
+    TestButton1.whileTrue(new ClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION1)); // Down
 
     JoystickButton TestButton2 = new JoystickButton(driverController, 2);
-    TestButton2.whileTrue(new ClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION2));
+    TestButton2.whileTrue(new ClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION2)); // Forward
     
     JoystickButton TestButton3 = new JoystickButton(driverController, 3);
-    TestButton3.whileTrue(new ClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION3));
+    TestButton3.whileTrue(new ClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION3)); // Up
+        
+    JoystickButton TestButton4 = new JoystickButton(driverController, 4);
+    TestButton4.whileTrue(new ClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION4)); // Backwards (DO NOT POWER OFF IN THIS POSITION)
   }
 
   /**
