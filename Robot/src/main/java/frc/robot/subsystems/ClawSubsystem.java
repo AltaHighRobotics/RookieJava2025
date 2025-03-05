@@ -27,7 +27,11 @@ public class ClawSubsystem extends SubsystemBase{
         this.ClawMotorController = new TalonFX(ClawConstants.TURN_ID);
 
 
-        this.encoder = new DutyCycleEncoder(9, 360, 0);
+        // this.encoder = new DutyCycleEncoder(9, 360, 0);
+        this.encoder = new Encoder( int channelA, // DIO port for channel A (blue wire)
+                                    int channelB, // DIO port for channel A (yellow wire)
+                                    int indexChannel, // DIO port for channel A (green wire)
+                                    boolean reverseDirection) //Should be true so that we can detect if the arm is going backwards as well, otherwise we only detect forwards motion
 
         final double P = ClawConstants.P;
         final double I = ClawConstants.I;
