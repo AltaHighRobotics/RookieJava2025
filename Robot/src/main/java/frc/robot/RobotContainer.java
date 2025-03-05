@@ -9,10 +9,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.InputConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.FullArmCommand;
+import frc.robot.commands.FullArmCommand.ArmState;
 import frc.robot.commands.SuckNBlowCommands.BlowCommand;
 import frc.robot.commands.SuckNBlowCommands.SuckCommand;
 import frc.robot.commands.Swerve.ResetOrientationCommand;
 import frc.robot.commands.Swerve.SwerveDriveCommand;
+import frc.robot.commands.elevator.ElevatorHeightChangeTestCommand;
+import frc.robot.commands.elevator.ElevatorHeightChangeTestCommand.ElevatorHeightChangeDirection;
 import frc.robot.subsystems.SuckNBlowSubsystem;
 import frc.robot.subsystems.Swerve.SwerveDriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -46,6 +50,13 @@ public class RobotContainer {
     this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
   }
 
+  private void addStateBinding(int buttonNumber, ArmState armState) {
+    JoystickButton stateButton = new JoystickButton(driverController, buttonNumber);
+    stateButton.whileTrue(new FullArmCommand(
+      this.elevatorSubsystem, this.elevatorSubsystem, armState
+    ));
+  }
+
   /**
    * Use this method to define your trigger->command mappings. Triggers can be
    */
@@ -70,6 +81,28 @@ public class RobotContainer {
 
     JoystickButton blowButton = new JoystickButton(driverController, 2);
     blowButton.whileTrue(new BlowCommand(this.suckNBlowSubsystem));
+
+    JoystickButton elevatorUPButton = new JoystickButton(driverController, 3);
+    elevatorUPButton.whileTrue(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem, 
+                                                                   ElevatorHeightChangeDirection.UP));
+
+    JoystickButton elevatorDownButton = new JoystickButton(driverController, 4);
+    elevatorDownButton.whileTrue(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem, 
+                                                                     ElevatorHeightChangeDirection.DOWN));
+    
+    // States
+    addStateBinding(100, ArmState.STOWED);
+    addStateBinding(100, ArmState.BALL_PICKUP_1);
+    addStateBinding(100, ArmState.BALL_PICKUP_2);
+    addStateBinding(100, ArmState.BALL_SCORE_1);
+    addStateBinding(100, ArmState.BALL_SCORE_2);
+    addStateBinding(100, ArmState.BALL_CARRY);
+    addStateBinding(100, ArmState.CORAL_PICKUP);
+    addStateBinding(100, ArmState.CORAL_SCORE_1);
+    addStateBinding(100, ArmState.CORAL_SCORE_2);
+    addStateBinding(100, ArmState.CORAL_SCORE_3);
+    addStateBinding(100, ArmState.CORAL_SCORE_4);
+    addStateBinding(100, ArmState.BLOW);
   }
 
   /**

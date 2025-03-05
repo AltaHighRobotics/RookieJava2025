@@ -1,14 +1,10 @@
-package frc.robot.commands;
+package frc.robot.commands.apriltag;
 
-import org.photonvision.targeting.PhotonTrackedTarget;
-
-import edu.wpi.first.math.geometry.Rotation3d;
-import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ApriltagSubsystem;
 import frc.robot.subsystems.Swerve.SwerveDriveSubsystem;
 
-public class TravelToApriltagCommand extends Command {
+public class FollowApriltagCommand extends Command {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private SwerveDriveSubsystem drive;
     private ApriltagSubsystem apriltagSubsystem;
@@ -18,7 +14,7 @@ public class TravelToApriltagCommand extends Command {
      *
      * @param subsystem The subsystem used by this command.
      */
-    public TravelToApriltagCommand(SwerveDriveSubsystem drive, ApriltagSubsystem apriltagSubsystem) {
+    public FollowApriltagCommand(SwerveDriveSubsystem drive, ApriltagSubsystem apriltagSubsystem) {
       this.drive = drive;
       this.apriltagSubsystem = apriltagSubsystem;
       addRequirements(drive, apriltagSubsystem);
@@ -32,18 +28,9 @@ public class TravelToApriltagCommand extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        final PhotonTrackedTarget target = this.apriltagSubsystem.getFirstTarget();
-        final Transform3d pose = target.getBestCameraToTarget();
-        final double xMetersAway = pose.getX();
-        final double yMetersAway = pose.getY();
-        final Rotation3d rotationAway = pose.getRotation();
-
-        final double driveXSpeed = Math.abs(xMetersAway) / xMetersAway; // Make sure they are in terms of -1 to 1
-        final double driveYSpeed = Math.abs(yMetersAway) / yMetersAway;
-        final double driveRotation = rotationAway.getAngle();
-        final double driveSpeed = 0.7;
-
-        drive.drive(driveYSpeed, driveXSpeed, driveRotation, driveSpeed);
+        if (apriltagSubsystem.getTargetYaw(0) != 0) {
+            drive.drive(1, 0, 0, 0.5);
+        }
     }
 
     // Called once the command ends or is interrupted.

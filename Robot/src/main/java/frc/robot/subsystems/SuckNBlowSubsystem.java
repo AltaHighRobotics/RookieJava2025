@@ -1,12 +1,6 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix6.jni.OrchestraJNI;
 import com.revrobotics.spark.SparkMax;
-
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;

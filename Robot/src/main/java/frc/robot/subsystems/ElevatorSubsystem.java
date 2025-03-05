@@ -51,11 +51,15 @@ public class ElevatorSubsystem extends SubsystemBase{
     }
 
     /**
-     * @return Height as a percentage (0 to 1)
+     * @return Height as revolutions
      */
     public double getHeight() {
         final double realMotorAngle = this.motorController.getPosition().getValue().magnitude();
         return realMotorAngle;
+    }
+
+    public double getHeightAsPercentage() {
+        return getHeight() / ElevatorConstants.TOP_MAG;
     }
 
     public void goUp() {
@@ -65,6 +69,10 @@ public class ElevatorSubsystem extends SubsystemBase{
 
     public void goDown() {
         motorController.set(-ElevatorConstants.MOTOR_SPEED);
+    }
+
+    public void stop() {
+        motorController.set(0);
     }
 }
 

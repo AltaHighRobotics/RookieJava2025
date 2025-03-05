@@ -1,24 +1,30 @@
-package frc.robot.commands;
+package frc.robot.commands.elevator;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.ApriltagSubsystem;
-import frc.robot.subsystems.Swerve.SwerveDriveSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
 
-public class FollowApriltagCommand extends Command {
+/** An example command that uses an example subsystem. */
+public class StopElevatorCommand extends Command {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-    private SwerveDriveSubsystem drive;
-    private ApriltagSubsystem apriltagSubsystem;
+
+    public enum ElevatorHeightChangeDirection {
+      UP,
+      DOWN
+    }
+
+    private final ElevatorSubsystem subsystem;
 
     /**
      * Creates a new ExampleCommand.
      *
      * @param subsystem The subsystem used by this command.
      */
-    public FollowApriltagCommand(SwerveDriveSubsystem drive, ApriltagSubsystem apriltagSubsystem) {
-      this.drive = drive;
-      this.apriltagSubsystem = apriltagSubsystem;
-      addRequirements(drive, apriltagSubsystem);
+    public StopElevatorCommand(ElevatorSubsystem subsystem) {
+      this.subsystem = subsystem;
+      addRequirements(subsystem);
     }
+
+    
 
     // Called when the command is initially scheduled.
     @Override
@@ -28,9 +34,10 @@ public class FollowApriltagCommand extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if (apriltagSubsystem.getTargetYaw(0) != 0) {
-            drive.drive(1, 0, 0, 0.5);
-        }
+      this.subsystem.stop();  
+
+      final double height = this.subsystem.getHeightAsPercentage() * 100;
+      System.out.printf("Elevator stoped at position: %.6f (Goes from 0 to 100, 0.0 to 1.0 internally)\n", height);
     }
 
     // Called once the command ends or is interrupted.

@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ElevatorSubsystem;
-import frc.robot.subsystems.SwerveDriveSubsystem;
 
 /** An example command that uses an example subsystem. */
 public class FullArmCommand extends Command {
@@ -43,28 +42,40 @@ public class FullArmCommand extends Command {
     public void initialize() {
       switch (this.armState) {
         case STOWED: // Default state, also is the CORAL_CARRY
+          this.elevatorSubsystem.setHeight(0.5);
           break;
         case BALL_PICKUP_1:
+          this.elevatorSubsystem.setHeight(0.5);
           break;
         case BALL_PICKUP_2:
+          this.elevatorSubsystem.setHeight(0.5);
           break;
         case BALL_SCORE_1:
+          this.elevatorSubsystem.setHeight(0.5);
           break;
         case BALL_SCORE_2:
+          this.elevatorSubsystem.setHeight(0.5);
           break;
         case BALL_CARRY:
+          this.elevatorSubsystem.setHeight(0.5);
           break;
         case CORAL_PICKUP:
+          this.elevatorSubsystem.setHeight(0.5);
           break;
         case CORAL_SCORE_1:
+          this.elevatorSubsystem.setHeight(0.5);
           break;
         case CORAL_SCORE_2:
+          this.elevatorSubsystem.setHeight(0.5);
           break;
         case CORAL_SCORE_3:
+          this.elevatorSubsystem.setHeight(0.5);
           break;
         case CORAL_SCORE_4:
+          this.elevatorSubsystem.setHeight(0.5);
           break;
         case BLOW:
+          this.elevatorSubsystem.setHeight(0.5);
           break;
       }
     }
