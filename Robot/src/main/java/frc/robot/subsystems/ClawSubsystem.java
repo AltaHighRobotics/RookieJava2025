@@ -6,6 +6,7 @@ import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClawConstants;
@@ -37,7 +38,8 @@ public class ClawSubsystem extends SubsystemBase{
 
     public void setRotation(double targetDegrees) {
         final double currentDegrees = encoder.get();
-        final double motorOutput = this.pidController.calculate(currentDegrees, targetDegrees);        
+        double motorOutput = this.pidController.calculate(currentDegrees, targetDegrees);        
+        motorOutput = MathUtil.clamp(motorOutput, -0.1, 1);
         ClawMotorController.set(motorOutput); 
     }
 
