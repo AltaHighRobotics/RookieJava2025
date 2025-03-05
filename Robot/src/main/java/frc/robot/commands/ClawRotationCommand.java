@@ -6,36 +6,35 @@ import frc.robot.subsystems.ClawSubsystem;
 
 
 public class ClawRotationCommand extends Command {
-    public enum ClawLevel {
-        POSITION1,
-        POSITION2,
-        POSITION3,
-        POSITION4
+    public enum ClawDirection {
+        FORWARDS,
+        BACKWARDS,
+        STOP
     } 
     
-    private ClawLevel clawPosition;
+    private ClawDirection clawDirection;
     private ClawSubsystem clawSubsystem;
 
-    public ClawRotationCommand(ClawSubsystem clawSubsystem, ClawLevel clawPosition) {
+    public ClawRotationCommand(ClawSubsystem clawSubsystem, ClawDirection clawDirection) {
         this.clawSubsystem = clawSubsystem;
-        this.clawPosition = clawPosition;
+        this.clawDirection = clawDirection;
         addRequirements(clawSubsystem);
     }
 
     @Override
-    public void initialize() {
-        switch (this.clawPosition) {
-            case POSITION1:
-                this.clawSubsystem.setRotation(ClawConstants.POSITION1_ROTATION); // 0 degrees
+    public void execute() {
+        switch (this.clawDirection) {
+            case FORWARDS:
+                this.clawSubsystem.forwards();
                 break;
-            case POSITION2:
-                this.clawSubsystem.setRotation(ClawConstants.POSITION2_ROTATION); // 90 degrees
+            
+            case BACKWARDS:
+                this.clawSubsystem.backwards();
                 break;
-            case POSITION3:
-                this.clawSubsystem.setRotation(ClawConstants.POSITION3_ROTATION); // 180 degrees
+
+            case STOP:
+                this.clawSubsystem.stop();
                 break;
-            case POSITION4:
-                this.clawSubsystem.setRotation(ClawConstants.POSITION4_ROTATION); // 270 degrees
         }
     }
 }

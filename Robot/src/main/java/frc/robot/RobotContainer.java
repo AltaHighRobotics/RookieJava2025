@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import java.security.cert.CertPathValidatorException.BasicReason;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -11,7 +13,7 @@ import frc.robot.Constants.InputConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ClawRotationCommand;
 import frc.robot.commands.SwerveDriveCommand;
-import frc.robot.commands.ClawRotationCommand.ClawLevel;
+import frc.robot.commands.ClawRotationCommand.ClawDirection;
 import frc.robot.commands.FollowApriltagCommand;
 import frc.robot.commands.ResetOrientationCommand;
 import frc.robot.subsystems.ApriltagSubsystem;
@@ -70,16 +72,12 @@ public class RobotContainer {
 
     // Claw commands for testing 1
     JoystickButton TestButton1 = new JoystickButton(driverController, 1);
-    TestButton1.whileTrue(new ClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION1)); // Down
-
     JoystickButton TestButton2 = new JoystickButton(driverController, 2);
-    TestButton2.whileTrue(new ClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION2)); // Forward
-    
-    JoystickButton TestButton3 = new JoystickButton(driverController, 3);
-    TestButton3.whileTrue(new ClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION3)); // Up
-        
-    JoystickButton TestButton4 = new JoystickButton(driverController, 4);
-    TestButton4.whileTrue(new ClawRotationCommand(this.clawSubsystem, ClawLevel.POSITION4)); // Backwards (DO NOT POWER OFF IN THIS POSITION)
+
+    TestButton1.whileFalse(new ClawRotationCommand(this.clawSubsystem, ClawDirection.STOP)); // Down
+    TestButton2.whileFalse(new ClawRotationCommand(this.clawSubsystem, ClawDirection.STOP)); // Down
+    TestButton1.whileTrue(new ClawRotationCommand(this.clawSubsystem, ClawDirection.FORWARDS)); // Down
+    TestButton2.whileTrue(new ClawRotationCommand(this.clawSubsystem, ClawDirection.BACKWARDS)); // Forward POSITION)
   }
 
   /**
