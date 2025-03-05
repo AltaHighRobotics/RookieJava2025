@@ -16,6 +16,7 @@ import frc.robot.commands.SuckNBlowCommands.SuckCommand;
 import frc.robot.commands.Swerve.ResetOrientationCommand;
 import frc.robot.commands.Swerve.SwerveDriveCommand;
 import frc.robot.commands.elevator.ElevatorHeightChangeTestCommand;
+import frc.robot.commands.elevator.StopElevatorCommand;
 import frc.robot.commands.elevator.ElevatorHeightChangeTestCommand.ElevatorHeightChangeDirection;
 import frc.robot.subsystems.SuckNBlowSubsystem;
 import frc.robot.subsystems.Swerve.SwerveDriveSubsystem;
@@ -89,6 +90,9 @@ public class RobotContainer {
     JoystickButton elevatorDownButton = new JoystickButton(driverController, 4);
     elevatorDownButton.whileTrue(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem, 
                                                                      ElevatorHeightChangeDirection.DOWN));
+
+    JoystickButton elevatorStopButton = new JoystickButton(driverController, 6);
+    elevatorStopButton.whileTrue(new StopElevatorCommand(this.elevatorSubsystem));
     
     // States
     addStateBinding(100, ArmState.STOWED);
