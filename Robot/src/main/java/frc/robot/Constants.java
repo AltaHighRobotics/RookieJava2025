@@ -76,4 +76,32 @@ public final class Constants {
     public static final double MOTOR_SUCK_SPEED = 0.4;
     public static final double MOTOR_BLOW_SPEED = 0.8;
   }
+
+  public static class ArmStateConstants {
+    // STOWED = Default state, also is the CORAL_CARRY
+    public static final double STOWED_ELEVATOR_HEIGHT = 0.5;
+    public static final double STOWED_CLAW_ANGLE = 50      ;
+    public static final double BALL_PICKUP_1_ELEVATOR_HEIGHT = 0.5;
+    public static final double BALL_PICKUP_1_CLAW_ANGLE = 50      ;
+    public static final double BALL_PICKUP_2_ELEVATOR_HEIGHT = 0.5;
+    public static final double BALL_PICKUP_2_CLAW_ANGLE = 50      ;
+    public static final double BALL_SCORE_1_ELEVATOR_HEIGHT = 0.5;
+    public static final double BALL_SCORE_1_CLAW_ANGLE = 50      ;
+    public static final double BALL_SCORE_2_ELEVATOR_HEIGHT = 0.5;
+    public static final double BALL_SCORE_2_CLAW_ANGLE = 50      ;
+    public static final double BALL_CARRY_2_ELEVATOR_HEIGHT = 0.5;
+    public static final double BALL_CARRY_2_CLAW_ANGLE = 50      ;
+    public static final double CORAL_PICKUP_ELEVATOR_HEIGHT = 0.5;
+    public static final double CORAL_PICKUP_CLAW_ANGLE = 50      ;
+    public static final double CORAL_SCORE_1_ELEVATOR_HEIGHT = 0.5;
+    public static final double CORAL_SCORE_1_CLAW_ANGLE = 50      ;
+    public static final double CORAL_SCORE_2_ELEVATOR_HEIGHT = 0.5;
+    public static final double CORAL_SCORE_2_CLAW_ANGLE = 50      ;
+    public static final double CORAL_SCORE_3_ELEVATOR_HEIGHT = 0.5;
+    public static final double CORAL_SCORE_3_CLAW_ANGLE = 50      ;
+    public static final double CORAL_SCORE_4_ELEVATOR_HEIGHT = 0.5;
+    public static final double CORAL_SCORE_4_CLAW_ANGLE = 50      ;
+    public static final double BLOW_ELEVATOR_HEIGHT = 0.5;
+    public static final double BLOW_CLAW_ANGLE = 50      ;
+  }
 }
