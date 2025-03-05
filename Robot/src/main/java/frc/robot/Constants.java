@@ -81,5 +81,7 @@ public final class Constants {
     public static final double P = 3;
     public static final double I = 0;
     public static final double D = 0;
+
+    public static final double ENCODER_ABSOLUTE_OFFSET = 69; // We don't know this yet, we will have to see in what position that it triggers with ABS
   }
 }

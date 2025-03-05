@@ -35,7 +35,7 @@ public class ClawRotationCommand extends Command {
                 this.clawSubsystem.setRotation(ClawConstants.POSITION3_ROTATION); // 180 degrees
                 break;
             case POSITION4:
-                this.clawSubsystem.setRotation(ClawConstants.POSITION3_ROTATION); // 270 degrees
+                this.clawSubsystem.setRotation(ClawConstants.POSITION4_ROTATION); // 270 degrees
         }
     }
 }

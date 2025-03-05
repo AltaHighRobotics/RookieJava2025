@@ -4,11 +4,6 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClawConstants;
-
-
-// import com.ctre.phoenix.motorcontrol.ControlMode;
-// import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
-// import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 public class ClawSubsystem extends SubsystemBase{
@@ -21,7 +16,7 @@ public class ClawSubsystem extends SubsystemBase{
 
         this.ClawMotorController = new TalonFX(ClawConstants.TURN_ID);
 
-        /*
+        /* ENCODER OBJECT EXAMPLE
         this.encoder = new DutyCycleEncoder(9, 360, 0);
         this.encoder = new Encoder(  int channelA, // DIO port for channel A (blue wire)
                                      int channelB, // DIO port for channel A (yellow wire)
@@ -39,11 +34,16 @@ public class ClawSubsystem extends SubsystemBase{
 
     public void setRotation(double targetDegrees) {
         final double currentDegrees = encoder.get();
+        final double rawDegrees = encoder.getRaw(); //could use instead
         final double motorOutput = this.pidController.calculate(currentDegrees, targetDegrees);        
         ClawMotorController.set(motorOutput); 
     }
 
     public double getRotation() {
         return encoder.get();
+    }
+
+    public void resetRotation() {
+        encoder.reset();        // Reset the Encoder distance to zero
     }
 }
