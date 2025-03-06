@@ -62,7 +62,7 @@ public class RobotContainer {
   private void addStateBinding(int buttonNumber, ArmState armState) {
     JoystickButton stateButton = new JoystickButton(driverController, buttonNumber);
     stateButton.whileTrue(new FullArmCommand(
-      this.elevatorSubsystem, this.elevatorSubsystem, armState
+      this.elevatorSubsystem, this.clawSubsystem, armState
     ));
   }
 
@@ -93,6 +93,23 @@ public class RobotContainer {
     JoystickButton clawBackwardButton = new JoystickButton(driverController, 4);
     clawForwardButton.onTrue(new ClawTickForwardCommand(this.clawSubsystem));
     clawBackwardButton.onTrue(new ClawTickBackwardCommand(this.clawSubsystem));
+    
+    // States
+    if (this.driverController.getRawAxis(3) > 0) { 
+      addStateBinding(7, ArmState.STOWED); // Default state, also is the CORAL_CARRY
+      addStateBinding(8, ArmState.BALL_PICKUP_1);
+      addStateBinding(9, ArmState.BALL_PICKUP_2);
+      addStateBinding(10, ArmState.BALL_SCORE_1);
+      addStateBinding(11, ArmState.BALL_SCORE_2);
+      addStateBinding(12, ArmState.BALL_CARRY);
+    } else {
+      addStateBinding(7,  ArmState.CORAL_PICKUP);
+      addStateBinding(8,  ArmState.CORAL_SCORE_1);
+      addStateBinding(9,  ArmState.CORAL_SCORE_2);
+      addStateBinding(10, ArmState.CORAL_SCORE_3);
+      addStateBinding(11, ArmState.CORAL_SCORE_4);
+      addStateBinding(12, ArmState.BLOW);
+    }
   }
 
   /**

@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 
 /** An example command that uses an example subsystem. */
@@ -22,7 +23,7 @@ public class FullArmCommand extends Command {
 
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final ElevatorSubsystem elevatorSubsystem;
-    private final ElevatorSubsystem clawSubsystem;
+    private final ClawSubsystem clawSubsystem;
     private final ArmState armState;
 
     /**
@@ -30,7 +31,7 @@ public class FullArmCommand extends Command {
      *
      * @param subsystem The subsystem used by this command.
      */
-    public FullArmCommand(ElevatorSubsystem elevatorSubsystem, ElevatorSubsystem clawSubsystem, ArmState armState) {
+    public FullArmCommand(ElevatorSubsystem elevatorSubsystem, ClawSubsystem clawSubsystem, ArmState armState) {
       this.elevatorSubsystem = elevatorSubsystem;
       this.clawSubsystem = clawSubsystem;
       this.armState = armState;
@@ -43,39 +44,51 @@ public class FullArmCommand extends Command {
       switch (this.armState) {
         case STOWED: // Default state, also is the CORAL_CARRY
           this.elevatorSubsystem.setHeight(0.5);
+          this.clawSubsystem.setDegrees(90);
           break;
         case BALL_PICKUP_1:
           this.elevatorSubsystem.setHeight(0.5);
+          this.clawSubsystem.setDegrees(90);
           break;
         case BALL_PICKUP_2:
           this.elevatorSubsystem.setHeight(0.5);
+          this.clawSubsystem.setDegrees(90);
           break;
         case BALL_SCORE_1:
           this.elevatorSubsystem.setHeight(0.5);
+          this.clawSubsystem.setDegrees(90);
           break;
         case BALL_SCORE_2:
           this.elevatorSubsystem.setHeight(0.5);
+          this.clawSubsystem.setDegrees(90);
           break;
         case BALL_CARRY:
           this.elevatorSubsystem.setHeight(0.5);
+          this.clawSubsystem.setDegrees(90);
           break;
         case CORAL_PICKUP:
           this.elevatorSubsystem.setHeight(0.5);
+          this.clawSubsystem.setDegrees(90);
           break;
         case CORAL_SCORE_1:
           this.elevatorSubsystem.setHeight(0.5);
+          this.clawSubsystem.setDegrees(90);
           break;
         case CORAL_SCORE_2:
           this.elevatorSubsystem.setHeight(0.5);
+          this.clawSubsystem.setDegrees(90);
           break;
         case CORAL_SCORE_3:
           this.elevatorSubsystem.setHeight(0.5);
+          this.clawSubsystem.setDegrees(90);
           break;
         case CORAL_SCORE_4:
           this.elevatorSubsystem.setHeight(0.5);
+          this.clawSubsystem.setDegrees(90);
           break;
         case BLOW:
           this.elevatorSubsystem.setHeight(0.5);
+          this.clawSubsystem.setDegrees(90);
           break;
       }
     }
