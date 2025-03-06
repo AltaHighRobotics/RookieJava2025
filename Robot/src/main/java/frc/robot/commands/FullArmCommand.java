@@ -40,7 +40,7 @@ public class FullArmCommand extends Command {
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {
+    public void execute() {
       switch (this.armState) {
         case STOWED: // Default state, also is the CORAL_CARRY
           this.elevatorSubsystem.setHeight(0.5);

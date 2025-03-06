@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.InputConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.FullArmCommand;
+import frc.robot.commands.PauseArm;
 import frc.robot.commands.FullArmCommand.ArmState;
 import frc.robot.commands.SuckNBlowCommands.BlowCommand;
 import frc.robot.commands.SuckNBlowCommands.SuckCommand;
@@ -65,6 +66,7 @@ public class RobotContainer {
 
   private void addStateBinding(int buttonNumber, ArmState armState) {
     JoystickButton stateButton = new JoystickButton(driverController, buttonNumber);
+    stateButton.whileFalse(new PauseArm(elevatorSubsystem, clawSubsystem));
     stateButton.whileTrue(new FullArmCommand(
       this.elevatorSubsystem, this.clawSubsystem, armState
     ));
