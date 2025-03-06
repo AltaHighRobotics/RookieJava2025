@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import java.security.cert.CertPathValidatorException.BasicReason;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -21,6 +23,11 @@ import frc.robot.commands.elevator.ElevatorHeightChangeTestCommand.ElevatorHeigh
 import frc.robot.subsystems.SuckNBlowSubsystem;
 import frc.robot.subsystems.Swerve.SwerveDriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.commands.ClawRotationCommand;
+import frc.robot.commands.ClawRotationCommand.ClawDirection;
+import frc.robot.subsystems.ApriltagSubsystem;
+import frc.robot.subsystems.ClawSubsystem;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -35,9 +42,9 @@ public class RobotContainer {
   private final Joystick driverController;
 
   private SwerveDriveSubsystem drive;
-  // private ApriltagSubsystem apriltagSubsystem;
   private SuckNBlowSubsystem suckNBlowSubsystem;
   private ElevatorSubsystem elevatorSubsystem;
+  private ClawSubsystem clawSubsystem;
 
   public RobotContainer() {
     this.driverController = new Joystick(InputConstants.DRIVER_CONTROLLER_PORT);
@@ -45,10 +52,11 @@ public class RobotContainer {
     this.drive = new SwerveDriveSubsystem();
     this.suckNBlowSubsystem = new SuckNBlowSubsystem();
     this.elevatorSubsystem = new ElevatorSubsystem();
+    this.clawSubsystem = new ClawSubsystem();
 
     configureBindings();
 
-    this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
+    // this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
   }
 
   private void addStateBinding(int buttonNumber, ArmState armState) {
@@ -71,8 +79,8 @@ public class RobotContainer {
     // cancelling on release.
     // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    JoystickButton gyroResetButton = new JoystickButton(driverController, 5);
-    gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
+    // JoystickButton gyroResetButton = new JoystickButton(driverController, 5);
+    // gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
 
     // JoystickButton followApriltagButton = new JoystickButton(driverController, 4);
     // followApriltagButton.onTrue(new FollowApriltagCommand(this.drive, this.apriltagSubsystem));
@@ -96,17 +104,27 @@ public class RobotContainer {
     
     // States
     addStateBinding(100, ArmState.STOWED);
-    addStateBinding(100, ArmState.BALL_PICKUP_1);
-    addStateBinding(100, ArmState.BALL_PICKUP_2);
-    addStateBinding(100, ArmState.BALL_SCORE_1);
-    addStateBinding(100, ArmState.BALL_SCORE_2);
-    addStateBinding(100, ArmState.BALL_CARRY);
-    addStateBinding(100, ArmState.CORAL_PICKUP);
-    addStateBinding(100, ArmState.CORAL_SCORE_1);
-    addStateBinding(100, ArmState.CORAL_SCORE_2);
-    addStateBinding(100, ArmState.CORAL_SCORE_3);
-    addStateBinding(100, ArmState.CORAL_SCORE_4);
-    addStateBinding(100, ArmState.BLOW);
+    // addStateBinding(100, ArmState.BALL_PICKUP_1);
+    // addStateBinding(100, ArmState.BALL_PICKUP_2);
+    // addStateBinding(100, ArmState.BALL_SCORE_1);
+    // addStateBinding(100, ArmState.BALL_SCORE_2);
+    // addStateBinding(100, ArmState.BALL_CARRY);
+    // addStateBinding(100, ArmState.CORAL_PICKUP);
+    // addStateBinding(100, ArmState.CORAL_SCORE_1);
+    // addStateBinding(100, ArmState.CORAL_SCORE_2);
+    // addStateBinding(100, ArmState.CORAL_SCORE_3);
+    // addStateBinding(100, ArmState.CORAL_SCORE_4);
+    // addStateBinding(100, ArmState.BLOW);
+    // FOR CLAW COMMANDS: TURN "whileTrue" BACK TO "onTrue" WHEN DONE TESTING //
+
+    // Claw commands for testing 1
+    JoystickButton TestButton1 = new JoystickButton(driverController, 7);
+    JoystickButton TestButton2 = new JoystickButton(driverController, 8);
+
+    TestButton1.whileFalse(new ClawRotationCommand(this.clawSubsystem, ClawDirection.STOP)); // Down
+    TestButton2.whileFalse(new ClawRotationCommand(this.clawSubsystem, ClawDirection.STOP)); // Down
+    TestButton1.whileTrue(new ClawRotationCommand(this.clawSubsystem, ClawDirection.FORWARDS)); // Down
+    TestButton2.whileTrue(new ClawRotationCommand(this.clawSubsystem, ClawDirection.BACKWARDS)); // Forward POSITION)
   }
 
   /**
