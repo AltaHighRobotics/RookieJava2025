@@ -25,7 +25,7 @@ public final class Constants {
   }
 
   public static class SwerveDriveConstants {
-    public static final double SWERVE_TURN_GEAR_RATIO = 2.099982500145832 / 42;
+    public static final double SWERVE_TURN_GEAR_RATIO = 0.03;
     public static final double SWERVE_MOD_CENTER_TO_CENTER = 0.635;
     public static final double MODULE_MAX_ANGULAR_VELOCITY = Math.PI;
     public static final double MODULE_MAX_ANGULAR_ACCELERATION = Math.PI * 2;
