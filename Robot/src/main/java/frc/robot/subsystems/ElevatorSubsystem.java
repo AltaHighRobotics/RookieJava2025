@@ -28,9 +28,13 @@ public class ElevatorSubsystem extends SubsystemBase{
     /**
      * @param height A percentage (0 to 1)
      */
-    public void setHeight(final double heightPercentage) {
-        if (heightPercentage < 0 || heightPercentage > 1 ) {
-            throw new Error("Height should be between 0 and 1");
+    public void setHeight(double heightPercentage) {
+        if (heightPercentage < 0) {
+            heightPercentage = 0;
+        }
+        
+        if (heightPercentage > 1 ) {
+            heightPercentage = 1;
         } 
 
         targetHeightPercentage = heightPercentage;
