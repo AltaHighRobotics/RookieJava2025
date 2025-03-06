@@ -43,7 +43,7 @@ public class ElevatorSubsystem extends SubsystemBase{
         double motorOutput = this.pidController.calculate(currentPositionRevolutions, targetPositionRevolutions);
 
         // Clamp limits the motor speed, should probably use the max output speed but oh well this works too
-        motorOutput = MathUtil.clamp(motorOutput, -ElevatorConstants.MOTOR_SPEED, ElevatorConstants.MOTOR_SPEED);
+        motorOutput = MathUtil.clamp(motorOutput, -ElevatorConstants.MOTOR_MAX_OUTPUT, ElevatorConstants.MOTOR_MAX_OUTPUT);
 
         // Make it move half as fast when going down (Gravity makes it go down quicker)
         if (motorOutput < 0) {
@@ -70,15 +70,16 @@ public class ElevatorSubsystem extends SubsystemBase{
         return getHeight() / ElevatorConstants.TOP_MAG;
     }
 
-    public void goUp() {
-        motorController.set(ElevatorConstants.MOTOR_SPEED);
+    public void tickUpwards() {
+        setHeight(this.getHeightAsPercentage());
     }
 
-    public void goDown() {
-        motorController.set(-ElevatorConstants.MOTOR_SPEED);
+    public void tickBackwards() {
+        setHeight(this.getHeightAsPercentage());
     }
 
     public void stop() {
+        setHeight(this.getHeightAsPercentage());
         motorController.set(0);
     }
 }

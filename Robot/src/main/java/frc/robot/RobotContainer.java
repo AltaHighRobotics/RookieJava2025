@@ -17,15 +17,15 @@ import frc.robot.commands.SuckNBlowCommands.BlowCommand;
 import frc.robot.commands.SuckNBlowCommands.SuckCommand;
 import frc.robot.commands.Swerve.ResetOrientationCommand;
 import frc.robot.commands.Swerve.SwerveDriveCommand;
-import frc.robot.commands.elevator.ElevatorHeightChangeTestCommand;
+import frc.robot.commands.claw.ClawStopCommand;
+import frc.robot.commands.claw.ClawTickBackwardCommand;
+import frc.robot.commands.claw.ClawTickForwardCommand;
+import frc.robot.commands.elevator.ElevatorTickBackwards;
+import frc.robot.commands.elevator.ElevatorTickUpwards;
 import frc.robot.commands.elevator.StopElevatorCommand;
-import frc.robot.commands.elevator.ElevatorHeightChangeTestCommand.ElevatorHeightChangeDirection;
 import frc.robot.subsystems.SuckNBlowSubsystem;
 import frc.robot.subsystems.Swerve.SwerveDriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
-import frc.robot.commands.ClawRotationCommand;
-import frc.robot.commands.ClawRotationCommand.ClawDirection;
-import frc.robot.subsystems.ApriltagSubsystem;
 import frc.robot.subsystems.ClawSubsystem;
 
 
@@ -70,46 +70,29 @@ public class RobotContainer {
    * Use this method to define your trigger->command mappings. Triggers can be
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    // new Trigger(m_exampleSubsystem::exampleCondition)
-    // .onTrue(new ExampleCommand(m_exampleSubsystem));
-
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is
-    // pressed,
-    // cancelling on release.
-    // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
-
     JoystickButton gyroResetButton = new JoystickButton(driverController, 7);
     gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
 
-    // JoystickButton followApriltagButton = new JoystickButton(driverController, 4);
-    // followApriltagButton.onTrue(new FollowApriltagCommand(this.drive, this.apriltagSubsystem));
-
+    // Suck N Blow
     JoystickButton suckButton = new JoystickButton(driverController, 1);
-    suckButton.whileTrue(new SuckCommand(this.suckNBlowSubsystem));
-
     JoystickButton blowButton = new JoystickButton(driverController, 2);
+    suckButton.whileTrue(new SuckCommand(this.suckNBlowSubsystem));
     blowButton.whileTrue(new BlowCommand(this.suckNBlowSubsystem));
 
+    // Elevator Manual
     JoystickButton elevatorUPButton = new JoystickButton(driverController, 5);
     JoystickButton elevatorDownButton = new JoystickButton(driverController, 3);
-
-    elevatorUPButton.whileFalse(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem, ElevatorHeightChangeDirection.STOP));
-    elevatorDownButton.whileFalse(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem,  ElevatorHeightChangeDirection.STOP));
-    elevatorUPButton.whileTrue(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem, ElevatorHeightChangeDirection.UP));
-    elevatorDownButton.whileTrue(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem,  ElevatorHeightChangeDirection.DOWN));
+    elevatorUPButton.onTrue(new ElevatorTickUpwards(this.elevatorSubsystem));
+    elevatorDownButton.onTrue(new ElevatorTickBackwards(this.elevatorSubsystem));
 
     JoystickButton elevatorStopButton = new JoystickButton(driverController, 6);
     elevatorStopButton.whileTrue(new StopElevatorCommand(this.elevatorSubsystem));
     
-    // Claw commands for testing 1
-    JoystickButton TestButton1 = new JoystickButton(driverController, 6);
-    JoystickButton TestButton2 = new JoystickButton(driverController, 4);
-
-    TestButton1.whileFalse(new ClawRotationCommand(this.clawSubsystem, ClawDirection.STOP)); // Down
-    TestButton2.whileFalse(new ClawRotationCommand(this.clawSubsystem, ClawDirection.STOP)); // Down
-    TestButton1.whileTrue(new ClawRotationCommand(this.clawSubsystem, ClawDirection.FORWARDS)); // Down
-    TestButton2.whileTrue(new ClawRotationCommand(this.clawSubsystem, ClawDirection.BACKWARDS)); // Forward POSITION)
+    // Claw Manual
+    JoystickButton clawForwardButton = new JoystickButton(driverController, 6);
+    JoystickButton clawBackwardButton = new JoystickButton(driverController, 4);
+    clawForwardButton.onTrue(new ClawTickForwardCommand(this.clawSubsystem));
+    clawBackwardButton.onTrue(new ClawTickBackwardCommand(this.clawSubsystem));
   }
 
   /**

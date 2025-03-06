@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -9,24 +8,61 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 public class ClawSubsystem extends SubsystemBase{
-    private TalonFX ClawMotorController;
+    private TalonFX motor;
+    private PIDController pidController;
+    
+    private double targetDegrees = 0;
 
     public ClawSubsystem() {
         super();
 
-        this.ClawMotorController = new TalonFX(ClawConstants.TURN_ID);
-        this.ClawMotorController.setNeutralMode(NeutralModeValue.Brake);
+        this.motor = new TalonFX(ClawConstants.TURN_ID);
+
+        final double P = ClawConstants.P;
+        final double I = ClawConstants.I;
+        final double D = ClawConstants.D;
+        this.pidController = new PIDController(P, I, D);
+
+        this.motor.setNeutralMode(NeutralModeValue.Brake);
     }
 
-    public void forwards() {
-        this.ClawMotorController.set(0.4);
+    public void moveToTarget() {
+        while (this.targetDegrees > 360) {
+            this.targetDegrees -= 360;
+        }
+
+        final double currentDegrees = this.getDegrees();
+        final double motorRawOutput = this.pidController.calculate(currentDegrees, this.targetDegrees);
+        final double limitedMotorOutput = MathUtil.clamp(motorRawOutput, -ClawConstants.MOTOR_MAX_OUTPUT, ClawConstants.MOTOR_MAX_OUTPUT);
+        motor.set(limitedMotorOutput);
     }
 
-    public void backwards() {
-        this.ClawMotorController.set(-0.4);
+    public void setDegrees(double targetDegrees) {
+        this.targetDegrees = targetDegrees;
+    }
+
+    public double getDegrees() {
+        final double currentMotorRevolutions = this.motor.getPosition().getValue().magnitude();
+        double currentMotorPercentage = currentMotorRevolutions / ClawConstants.MOTOR_REVOLUTIONS_FOR_FULL_ROTATION;
+
+        // Make sure motor resets after 360 deg
+        while (currentMotorPercentage > 1) {
+            currentMotorPercentage --;
+        }
+
+        return currentMotorPercentage * 360;
+    }
+
+    public void tickForward() {
+        setDegrees(this.getDegrees() + ClawConstants.TICK_DEGREE_DISTANCE);
+    }
+
+    public void tickBackward() {
+        setDegrees(this.getDegrees() - ClawConstants.TICK_DEGREE_DISTANCE);
     }
 
     public void stop() {
-        this.ClawMotorController.set(0);
+        setDegrees(this.getDegrees());
+        this.motor.set(0);
     }
 }
