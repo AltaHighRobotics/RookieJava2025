@@ -66,7 +66,7 @@ public class RobotContainer {
 
   private void addStateBinding(int buttonNumber, ArmState armState) {
     JoystickButton stateButton = new JoystickButton(driverController, buttonNumber);
-    stateButton.whileFalse(new PauseArm(elevatorSubsystem, clawSubsystem));
+    // stateButton.whileFalse(new PauseArm(elevatorSubsystem, clawSubsystem));
     stateButton.whileTrue(new FullArmCommand(
       this.elevatorSubsystem, this.clawSubsystem, armState
     ));
@@ -88,14 +88,14 @@ public class RobotContainer {
     // Elevator Manual
     JoystickButton elevatorUPButton = new JoystickButton(driverController, 5);
     JoystickButton elevatorDownButton = new JoystickButton(driverController, 3);
-    elevatorUPButton.onTrue(new ElevatorTickUpwards(this.elevatorSubsystem));
-    elevatorDownButton.onTrue(new ElevatorTickBackwards(this.elevatorSubsystem));
+    elevatorUPButton.whileTrue(new ElevatorTickUpwards(this.elevatorSubsystem));
+    elevatorDownButton.whileTrue(new ElevatorTickBackwards(this.elevatorSubsystem));
     
     // Claw Manual
     JoystickButton clawForwardButton = new JoystickButton(driverController, 6);
     JoystickButton clawBackwardButton = new JoystickButton(driverController, 4);
-    clawForwardButton.onTrue(new ClawTickForwardCommand(this.clawSubsystem));
-    clawBackwardButton.onTrue(new ClawTickBackwardCommand(this.clawSubsystem));
+    clawForwardButton.whileTrue(new ClawTickForwardCommand(this.clawSubsystem));
+    clawBackwardButton.whileTrue(new ClawTickBackwardCommand(this.clawSubsystem));
     
     // States
     if (this.driverController.getRawAxis(3) > 0) { 

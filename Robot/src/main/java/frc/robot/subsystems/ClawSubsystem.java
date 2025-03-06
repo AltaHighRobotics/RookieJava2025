@@ -31,6 +31,8 @@ public class ClawSubsystem extends SubsystemBase{
             this.targetDegrees -= 360;
         }
 
+        System.out.printf("Claw Target Degrees %.2f\n", this.targetDegrees);
+
         final double currentDegrees = this.getDegrees();
         final double motorRawOutput = this.pidController.calculate(currentDegrees, this.targetDegrees);
         final double limitedMotorOutput = MathUtil.clamp(motorRawOutput, -ClawConstants.MOTOR_MAX_OUTPUT, ClawConstants.MOTOR_MAX_OUTPUT);
@@ -54,14 +56,15 @@ public class ClawSubsystem extends SubsystemBase{
     }
 
     public void tickForward() {
-        setDegrees(this.getDegrees() + ClawConstants.TICK_DEGREE_DISTANCE);
+        setDegrees(this.targetDegrees + ClawConstants.TICK_DEGREE_DISTANCE);
     }
 
     public void tickBackward() {
-        setDegrees(this.getDegrees() - ClawConstants.TICK_DEGREE_DISTANCE);
+        setDegrees(this.targetDegrees - ClawConstants.TICK_DEGREE_DISTANCE);
     }
 
     public void stop() {
+        System.out.println("Claw Rotation Stoped");
         setDegrees(this.getDegrees());
         this.motor.set(0);
     }

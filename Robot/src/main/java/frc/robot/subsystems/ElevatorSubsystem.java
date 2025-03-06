@@ -75,11 +75,11 @@ public class ElevatorSubsystem extends SubsystemBase{
     }
 
     public void tickUpwards() {
-        setHeight(this.getHeightAsPercentage());
+        setHeight(this.targetHeightPercentage + ElevatorConstants.TICK_PERCENT_DISTANCE);
     }
 
     public void tickBackwards() {
-        setHeight(this.getHeightAsPercentage());
+        setHeight(this.targetHeightPercentage - ElevatorConstants.TICK_PERCENT_DISTANCE);
     }
 
     public void stop() {
