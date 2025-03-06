@@ -17,9 +17,11 @@ import frc.robot.commands.SuckNBlowCommands.BlowCommand;
 import frc.robot.commands.SuckNBlowCommands.SuckCommand;
 import frc.robot.commands.Swerve.ResetOrientationCommand;
 import frc.robot.commands.Swerve.SwerveDriveCommand;
+import frc.robot.commands.claw.ClawGoToTarget;
 import frc.robot.commands.claw.ClawStopCommand;
 import frc.robot.commands.claw.ClawTickBackwardCommand;
 import frc.robot.commands.claw.ClawTickForwardCommand;
+import frc.robot.commands.elevator.ElevatorGoToTarget;
 import frc.robot.commands.elevator.ElevatorTickBackwards;
 import frc.robot.commands.elevator.ElevatorTickUpwards;
 import frc.robot.commands.elevator.StopElevatorCommand;
@@ -57,6 +59,8 @@ public class RobotContainer {
     configureBindings();
 
     this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
+    this.elevatorSubsystem.setDefaultCommand(new ElevatorGoToTarget(elevatorSubsystem));
+    this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem));
   }
 
   private void addStateBinding(int buttonNumber, ArmState armState) {
