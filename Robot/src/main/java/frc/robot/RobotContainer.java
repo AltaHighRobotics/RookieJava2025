@@ -79,8 +79,8 @@ public class RobotContainer {
     // cancelling on release.
     // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    // JoystickButton gyroResetButton = new JoystickButton(driverController, 5);
-    // gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
+    JoystickButton gyroResetButton = new JoystickButton(driverController, 7);
+    gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
 
     // JoystickButton followApriltagButton = new JoystickButton(driverController, 4);
     // followApriltagButton.onTrue(new FollowApriltagCommand(this.drive, this.apriltagSubsystem));
@@ -91,35 +91,20 @@ public class RobotContainer {
     JoystickButton blowButton = new JoystickButton(driverController, 2);
     blowButton.whileTrue(new BlowCommand(this.suckNBlowSubsystem));
 
-    JoystickButton elevatorUPButton = new JoystickButton(driverController, 3);
+    JoystickButton elevatorUPButton = new JoystickButton(driverController, 5);
     elevatorUPButton.whileTrue(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem, 
                                                                    ElevatorHeightChangeDirection.UP));
 
-    JoystickButton elevatorDownButton = new JoystickButton(driverController, 4);
+    JoystickButton elevatorDownButton = new JoystickButton(driverController, 3);
     elevatorDownButton.whileTrue(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem, 
                                                                      ElevatorHeightChangeDirection.DOWN));
 
     JoystickButton elevatorStopButton = new JoystickButton(driverController, 6);
     elevatorStopButton.whileTrue(new StopElevatorCommand(this.elevatorSubsystem));
     
-    // States
-    addStateBinding(9, ArmState.STOWED);
-    // addStateBinding(100, ArmState.BALL_PICKUP_1);
-    // addStateBinding(100, ArmState.BALL_PICKUP_2);
-    // addStateBinding(100, ArmState.BALL_SCORE_1);
-    // addStateBinding(100, ArmState.BALL_SCORE_2);
-    // addStateBinding(100, ArmState.BALL_CARRY);
-    // addStateBinding(100, ArmState.CORAL_PICKUP);
-    // addStateBinding(100, ArmState.CORAL_SCORE_1);
-    // addStateBinding(100, ArmState.CORAL_SCORE_2);
-    // addStateBinding(100, ArmState.CORAL_SCORE_3);
-    // addStateBinding(100, ArmState.CORAL_SCORE_4);
-    // addStateBinding(100, ArmState.BLOW);
-    // FOR CLAW COMMANDS: TURN "whileTrue" BACK TO "onTrue" WHEN DONE TESTING //
-
     // Claw commands for testing 1
-    JoystickButton TestButton1 = new JoystickButton(driverController, 7);
-    JoystickButton TestButton2 = new JoystickButton(driverController, 8);
+    JoystickButton TestButton1 = new JoystickButton(driverController, 6);
+    JoystickButton TestButton2 = new JoystickButton(driverController, 4);
 
     TestButton1.whileFalse(new ClawRotationCommand(this.clawSubsystem, ClawDirection.STOP)); // Down
     TestButton2.whileFalse(new ClawRotationCommand(this.clawSubsystem, ClawDirection.STOP)); // Down
