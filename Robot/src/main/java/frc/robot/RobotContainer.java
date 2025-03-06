@@ -56,7 +56,7 @@ public class RobotContainer {
 
     configureBindings();
 
-    // this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
+    this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
   }
 
   private void addStateBinding(int buttonNumber, ArmState armState) {
