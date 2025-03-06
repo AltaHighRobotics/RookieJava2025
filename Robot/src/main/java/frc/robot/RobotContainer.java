@@ -76,8 +76,8 @@ public class RobotContainer {
    * Use this method to define your trigger->command mappings. Triggers can be
    */
   private void configureBindings() {
-    JoystickButton gyroResetButton = new JoystickButton(driverController, 7);
-    gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
+    // JoystickButton gyroResetButton = new JoystickButton(driverController, 5);
+    // gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
 
     // Suck N Blow
     JoystickButton suckButton = new JoystickButton(driverController, 1);
