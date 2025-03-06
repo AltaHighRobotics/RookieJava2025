@@ -103,7 +103,7 @@ public class RobotContainer {
     elevatorStopButton.whileTrue(new StopElevatorCommand(this.elevatorSubsystem));
     
     // States
-    addStateBinding(100, ArmState.STOWED);
+    addStateBinding(9, ArmState.STOWED);
     // addStateBinding(100, ArmState.BALL_PICKUP_1);
     // addStateBinding(100, ArmState.BALL_PICKUP_2);
     // addStateBinding(100, ArmState.BALL_SCORE_1);
