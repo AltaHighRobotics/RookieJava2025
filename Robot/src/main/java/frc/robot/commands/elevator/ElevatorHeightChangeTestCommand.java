@@ -9,7 +9,8 @@ public class ElevatorHeightChangeTestCommand extends Command {
 
     public enum ElevatorHeightChangeDirection {
       UP,
-      DOWN
+      DOWN,
+      STOP
     }
 
     private final ElevatorSubsystem subsystem;
@@ -44,6 +45,10 @@ public class ElevatorHeightChangeTestCommand extends Command {
 
         case DOWN:
           this.subsystem.goDown();
+          break;
+        
+        case STOP:
+          this.subsystem.stop();
           break;
       }
       

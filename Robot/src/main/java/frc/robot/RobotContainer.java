@@ -92,12 +92,12 @@ public class RobotContainer {
     blowButton.whileTrue(new BlowCommand(this.suckNBlowSubsystem));
 
     JoystickButton elevatorUPButton = new JoystickButton(driverController, 5);
-    elevatorUPButton.whileTrue(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem, 
-                                                                   ElevatorHeightChangeDirection.UP));
-
     JoystickButton elevatorDownButton = new JoystickButton(driverController, 3);
-    elevatorDownButton.whileTrue(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem, 
-                                                                     ElevatorHeightChangeDirection.DOWN));
+
+    elevatorUPButton.whileFalse(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem, ElevatorHeightChangeDirection.STOP));
+    elevatorDownButton.whileFalse(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem,  ElevatorHeightChangeDirection.STOP));
+    elevatorUPButton.whileTrue(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem, ElevatorHeightChangeDirection.UP));
+    elevatorDownButton.whileTrue(new ElevatorHeightChangeTestCommand(this.elevatorSubsystem,  ElevatorHeightChangeDirection.DOWN));
 
     JoystickButton elevatorStopButton = new JoystickButton(driverController, 6);
     elevatorStopButton.whileTrue(new StopElevatorCommand(this.elevatorSubsystem));
