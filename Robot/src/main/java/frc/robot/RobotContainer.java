@@ -90,9 +90,6 @@ public class RobotContainer {
     JoystickButton elevatorDownButton = new JoystickButton(driverController, 3);
     elevatorUPButton.onTrue(new ElevatorTickUpwards(this.elevatorSubsystem));
     elevatorDownButton.onTrue(new ElevatorTickBackwards(this.elevatorSubsystem));
-
-    JoystickButton elevatorStopButton = new JoystickButton(driverController, 6);
-    elevatorStopButton.whileTrue(new StopElevatorCommand(this.elevatorSubsystem));
     
     // Claw Manual
     JoystickButton clawForwardButton = new JoystickButton(driverController, 6);
