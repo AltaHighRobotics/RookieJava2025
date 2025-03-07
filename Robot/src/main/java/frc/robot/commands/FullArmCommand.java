@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ClawSubsystem;
+import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.subsystems.ElevatorSubsystem;
 
 /** An example command that uses an example subsystem. */
@@ -25,22 +26,25 @@ public class FullArmCommand extends Command {
     private final ElevatorSubsystem elevatorSubsystem;
     private final ClawSubsystem clawSubsystem;
     private final ArmState armState;
+    private final Joystick driverController;
 
     /**
      * Creates a new ExampleCommand.
      *
      * @param subsystem The subsystem used by this command.
      */
-    public FullArmCommand(ElevatorSubsystem elevatorSubsystem, ClawSubsystem clawSubsystem, ArmState armState) {
+    public FullArmCommand(ElevatorSubsystem elevatorSubsystem, ClawSubsystem clawSubsystem, ArmState armState, Joystick driverController) {
       this.elevatorSubsystem = elevatorSubsystem;
       this.clawSubsystem = clawSubsystem;
       this.armState = armState;
+      this.driverController = driverController;
       addRequirements(elevatorSubsystem, clawSubsystem);
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void execute() {
+    if (this.driverController.getRawAxis(3) > 0) { 
       switch (this.armState) {
         case STOWED: // Default state, also is the CORAL_CARRY
           this.elevatorSubsystem.setHeight(0.1);
@@ -66,6 +70,9 @@ public class FullArmCommand extends Command {
           this.elevatorSubsystem.setHeight(0.6);
           this.clawSubsystem.setDegrees(20);
           break;
+      }
+    } else {
+      switch (this.armState) {
         case CORAL_PICKUP:
           this.elevatorSubsystem.setHeight(0.7);
           this.clawSubsystem.setDegrees(10);
@@ -92,4 +99,5 @@ public class FullArmCommand extends Command {
           break;
       }
     }
+  }
 }
