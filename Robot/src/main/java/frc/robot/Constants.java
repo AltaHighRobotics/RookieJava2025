@@ -25,15 +25,15 @@ public final class Constants {
   }
 
   public static class SwerveDriveConstants {
-    public static final double SWERVE_TURN_GEAR_RATIO = 0.03;
+    public static final double SWERVE_TURN_GEAR_RATIO = 1.0/36.0;
     public static final double SWERVE_MOD_CENTER_TO_CENTER = 0.635;
     public static final double MODULE_MAX_ANGULAR_VELOCITY = Math.PI;
     public static final double MODULE_MAX_ANGULAR_ACCELERATION = Math.PI * 2;
     public static final double WHEEL_RADIUS = 0.0508;
 
     public static final double SWERVE_MIN_SPEED = 0.3;
-    public static final double SWERVE_MAX_SPEED = 0.8;
-    public static final double SWERVE_MAX_OUTPUT = 0.6;
+    public static final double SWERVE_MAX_SPEED = 0.5;
+    public static final double SWERVE_MAX_OUTPUT = 0.8;
 
     public static final int INTAKE_LEFT_ID = 10;
     public static final int INTAKE_RIGHT_ID = 11;
@@ -52,7 +52,7 @@ public final class Constants {
 
     public static final double P = 10;
     public static final double I = 0;
-    public static final double D = 0.3;
+    public static final double D = 0;
   }
   
   public static class ElevatorConstants {

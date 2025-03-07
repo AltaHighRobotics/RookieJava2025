@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems.Swerve;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
@@ -15,6 +16,7 @@ import com.revrobotics.spark.SparkLowLevel;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix6.swerve.SwerveDrivetrain.SwerveControlParameters;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkMax;
 
@@ -96,14 +98,18 @@ public class SwerveModuleSubsystem extends SubsystemBase {
     state.speedMetersPerSecond *= state.angle.minus(encoderRotation).getCos();
 
     final double driveOuput = state.speedMetersPerSecond;
-    
+
+    System.out.printf("Current Rev WIth gear: %.6f\n", this.turnEncoder.getPosition() * gearRatio * tau);
+    System.out.printf("Target Rev: %.6f\n", state.angle.getRadians());
+
     // Uses PID to tell the SparkMax's how much to rotate
     final double turnOutput = this.turningPIDController.calculate(
-      this.turnEncoder.getPosition() * tau * gearRatio, state.angle.getRadians()
+      this.turnEncoder.getPosition() * gearRatio * tau, state.angle.getRadians()
     );
 
     // Actually sets the speed of the motors and how much they need to rotate
-    this.drive.set(TalonSRXControlMode.PercentOutput, Math.max(-this.maxOut, Math.min(driveOuput, this.maxOut)));
+    final double maxOut = SwerveDriveConstants.SWERVE_MAX_OUTPUT;
+    this.drive.set(TalonSRXControlMode.PercentOutput, MathUtil.clamp(driveOuput, -maxOut, maxOut));
     this.turn.setVoltage(turnOutput);
   }
 }
