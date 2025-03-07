@@ -1,21 +1,22 @@
-package frc.robot.commands;
+package frc.robot.commands.claw;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.SwerveDriveSubsystem;
+import frc.robot.subsystems.ClawSubsystem;
 
 /** An example command that uses an example subsystem. */
-public class ResetOrientationCommand extends Command {
+public class ClawGoToTarget extends Command {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-    private final SwerveDriveSubsystem drive;
+
+    private final ClawSubsystem subsystem;
 
     /**
      * Creates a new ExampleCommand.
      *
      * @param subsystem The subsystem used by this command.
      */
-    public ResetOrientationCommand(SwerveDriveSubsystem drive) {
-      this.drive = drive;
-      addRequirements(drive);
+    public ClawGoToTarget(ClawSubsystem subsystem) {
+      this.subsystem = subsystem;
+      addRequirements(subsystem);
     }
 
     // Called when the command is initially scheduled.
@@ -26,7 +27,7 @@ public class ResetOrientationCommand extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-      this.drive.resetOrientation();
+      this.subsystem.moveToTarget();
     }
 
     // Called once the command ends or is interrupted.
