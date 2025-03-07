@@ -64,11 +64,11 @@ public class RobotContainer {
     this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem));
   }
 
-  private void addStateBinding(int buttonNumber, ArmState armState) {
+  private void addStateBinding(int buttonNumber, ArmState armState, ArmState armState2) {
     JoystickButton stateButton = new JoystickButton(driverController, buttonNumber);
     // stateButton.whileFalse(new PauseArm(elevatorSubsystem, clawSubsystem));
     stateButton.whileTrue(new FullArmCommand(
-      this.elevatorSubsystem, this.clawSubsystem, armState, this.driverController
+      this.elevatorSubsystem, this.clawSubsystem, armState, armState2, this.driverController
     ));
   }
 
@@ -98,19 +98,12 @@ public class RobotContainer {
     clawBackwardButton.whileTrue(new ClawTickBackwardCommand(this.clawSubsystem));
     
     // States
-    addStateBinding(7, ArmState.STOWED); // Default state, also is the CORAL_CARRY
-    addStateBinding(8, ArmState.BALL_PICKUP_1);
-    addStateBinding(9, ArmState.BALL_PICKUP_2);
-    addStateBinding(10, ArmState.BALL_SCORE_1);
-    addStateBinding(11, ArmState.BALL_SCORE_2);
-    addStateBinding(12, ArmState.BALL_CARRY);
-
-    addStateBinding(7,  ArmState.CORAL_PICKUP);
-    addStateBinding(8,  ArmState.CORAL_SCORE_1);
-    addStateBinding(9,  ArmState.CORAL_SCORE_2);
-    addStateBinding(10, ArmState.CORAL_SCORE_3);
-    addStateBinding(11, ArmState.CORAL_SCORE_4);
-    addStateBinding(12, ArmState.BLOW);
+    addStateBinding(7, ArmState.STOWED, ArmState.CORAL_PICKUP); // Default state, also is the CORAL_CARRY
+    addStateBinding(8, ArmState.BALL_PICKUP_1, ArmState.CORAL_SCORE_1);
+    addStateBinding(9, ArmState.BALL_PICKUP_2, ArmState.CORAL_SCORE_2);
+    addStateBinding(10, ArmState.BALL_SCORE_1, ArmState.CORAL_SCORE_3);
+    addStateBinding(11, ArmState.BALL_SCORE_2, ArmState.CORAL_SCORE_4);
+    addStateBinding(12, ArmState.BALL_CARRY, ArmState.BLOW);
   }
 
   /**

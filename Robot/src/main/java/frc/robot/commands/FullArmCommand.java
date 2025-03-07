@@ -26,6 +26,7 @@ public class FullArmCommand extends Command {
     private final ElevatorSubsystem elevatorSubsystem;
     private final ClawSubsystem clawSubsystem;
     private final ArmState armState;
+    private final ArmState armState2;
     private final Joystick driverController;
 
     /**
@@ -33,10 +34,11 @@ public class FullArmCommand extends Command {
      *
      * @param subsystem The subsystem used by this command.
      */
-    public FullArmCommand(ElevatorSubsystem elevatorSubsystem, ClawSubsystem clawSubsystem, ArmState armState, Joystick driverController) {
+    public FullArmCommand(ElevatorSubsystem elevatorSubsystem, ClawSubsystem clawSubsystem, ArmState armState, ArmState armState2, Joystick driverController) {
       this.elevatorSubsystem = elevatorSubsystem;
       this.clawSubsystem = clawSubsystem;
       this.armState = armState;
+      this.armState2 = armState2;
       this.driverController = driverController;
       addRequirements(elevatorSubsystem, clawSubsystem);
     }
@@ -72,7 +74,7 @@ public class FullArmCommand extends Command {
           break;
       }
     } else {
-      switch (this.armState) {
+      switch (this.armState2) {
         case CORAL_PICKUP:
           this.elevatorSubsystem.setHeight(0.7);
           this.clawSubsystem.setDegrees(10);
