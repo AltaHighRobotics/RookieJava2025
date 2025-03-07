@@ -4,32 +4,25 @@
 
 package frc.robot;
 
-import java.security.cert.CertPathValidatorException.BasicReason;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.InputConstants;
-import frc.robot.commands.Autos;
 import frc.robot.commands.FullArmCommand;
-import frc.robot.commands.PauseArm;
 import frc.robot.commands.FullArmCommand.ArmState;
 import frc.robot.commands.SuckNBlowCommands.BlowCommand;
 import frc.robot.commands.SuckNBlowCommands.SuckCommand;
-import frc.robot.commands.Swerve.ResetOrientationCommand;
 import frc.robot.commands.Swerve.SwerveDriveCommand;
 import frc.robot.commands.claw.ClawGoToTarget;
-import frc.robot.commands.claw.ClawStopCommand;
 import frc.robot.commands.claw.ClawTickBackwardCommand;
 import frc.robot.commands.claw.ClawTickForwardCommand;
 import frc.robot.commands.elevator.ElevatorGoToTarget;
 import frc.robot.commands.elevator.ElevatorTickBackwards;
 import frc.robot.commands.elevator.ElevatorTickUpwards;
-import frc.robot.commands.elevator.StopElevatorCommand;
+import frc.robot.subsystems.ClawSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.SuckNBlowSubsystem;
 import frc.robot.subsystems.Swerve.SwerveDriveSubsystem;
-import frc.robot.subsystems.ElevatorSubsystem;
-import frc.robot.subsystems.ClawSubsystem;
 
 
 /**
@@ -57,11 +50,21 @@ public class RobotContainer {
     this.elevatorSubsystem = new ElevatorSubsystem();
     this.clawSubsystem = new ClawSubsystem();
 
-    configureBindings();
+    // configureBindings();
 
     this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
     this.elevatorSubsystem.setDefaultCommand(new ElevatorGoToTarget(elevatorSubsystem));
     this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem));
+
+    while (true) { 
+      if (driverController.getThrottle() > 0) {
+        configureBindings1();
+        System.out.printf("Binding type 1");
+      } else {
+        configureBindings2();
+        System.out.printf("Binding type 2");        
+      }
+    }
   }
 
   private void addStateBinding(int buttonNumber, ArmState armState) {
@@ -75,7 +78,7 @@ public class RobotContainer {
   /**
    * Use this method to define your trigger->command mappings. Triggers can be
    */
-  private void configureBindings() {
+  private void configureBindings1() {
     // JoystickButton gyroResetButton = new JoystickButton(driverController, 5);
     // gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
 
@@ -96,7 +99,7 @@ public class RobotContainer {
     JoystickButton clawBackwardButton = new JoystickButton(driverController, 4);
     clawForwardButton.whileTrue(new ClawTickForwardCommand(this.clawSubsystem));
     clawBackwardButton.whileTrue(new ClawTickBackwardCommand(this.clawSubsystem));
-    
+  
     // States
     addStateBinding(7, ArmState.STOWED); // Default state, also is the CORAL_CARRY
     addStateBinding(8, ArmState.BALL_PICKUP_1);
@@ -105,12 +108,40 @@ public class RobotContainer {
     addStateBinding(11, ArmState.BALL_SCORE_2);
     addStateBinding(12, ArmState.BALL_CARRY);
 
+  }
+
+    private void configureBindings2() {
+    // JoystickButton gyroResetButton = new JoystickButton(driverController, 5);
+    // gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
+
+    // Suck N Blow
+    JoystickButton suckButton = new JoystickButton(driverController, 1);
+    JoystickButton blowButton = new JoystickButton(driverController, 2);
+    suckButton.whileTrue(new SuckCommand(this.suckNBlowSubsystem));
+    blowButton.whileTrue(new BlowCommand(this.suckNBlowSubsystem));
+
+    // Elevator Manual
+    JoystickButton elevatorUPButton = new JoystickButton(driverController, 5);
+    JoystickButton elevatorDownButton = new JoystickButton(driverController, 3);
+    elevatorUPButton.whileTrue(new ElevatorTickUpwards(this.elevatorSubsystem));
+    elevatorDownButton.whileTrue(new ElevatorTickBackwards(this.elevatorSubsystem));
+    
+    // Claw Manual
+    JoystickButton clawForwardButton = new JoystickButton(driverController, 6);
+    JoystickButton clawBackwardButton = new JoystickButton(driverController, 4);
+    clawForwardButton.whileTrue(new ClawTickForwardCommand(this.clawSubsystem));
+    clawBackwardButton.whileTrue(new ClawTickBackwardCommand(this.clawSubsystem));
+
     addStateBinding(7,  ArmState.CORAL_PICKUP);
     addStateBinding(8,  ArmState.CORAL_SCORE_1);
     addStateBinding(9,  ArmState.CORAL_SCORE_2);
     addStateBinding(10, ArmState.CORAL_SCORE_3);
     addStateBinding(11, ArmState.CORAL_SCORE_4);
     addStateBinding(12, ArmState.BLOW);
+
+    // JoystickButton print_turny = new JoystickButton(driverController, 12);
+    // print_turny.whileTrue(new ClawTickForwardCommand(this.clawSubsystem));
+    
   }
 
   /**

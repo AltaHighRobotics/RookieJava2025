@@ -19,6 +19,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix6.swerve.SwerveDrivetrain.SwerveControlParameters;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkMax;
+import frc.robot.RobotContainer;
 
 
 public class SwerveModuleSubsystem extends SubsystemBase {
@@ -99,8 +100,12 @@ public class SwerveModuleSubsystem extends SubsystemBase {
 
     final double driveOuput = state.speedMetersPerSecond;
 
-    System.out.printf("Current Rev WIth gear: %.6f\n", this.turnEncoder.getPosition() * gearRatio * tau);
-    System.out.printf("Target Rev: %.6f\n", state.angle.getRadians());
+    // System.out.printf("Current Rev WIth gear: %.6f\n", this.turnEncoder.getPosition() * gearRatio * tau);
+    // System.out.printf("Target Rev: %.6f\n", state.angle.getRadians());
+    // System.out.printf("Target Rev: %.6f\n", state.angle.getRadians());
+
+    
+
 
     // Uses PID to tell the SparkMax's how much to rotate
     final double turnOutput = this.turningPIDController.calculate(
