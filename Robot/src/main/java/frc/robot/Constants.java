@@ -15,6 +15,8 @@ package frc.robot;
 public final class Constants {
   public static class InputConstants {
     public static final int DRIVER_CONTROLLER_PORT = 0;
+    public static final int FIRST_DRIVER_CONTROLLER_PORT = 0;
+    public static final int SECOND_DRIVER_CONTROLLER_PORT = 1;
     public static final double DEADBAND = 0.2;
     public static final double TURN_DEADBAND = 0.5;
     public static final boolean FIELD_ORIENTED = true;

@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.InputConstants;
+import frc.robot.Constants.SwerveDriveConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.FullArmCommand;
 import frc.robot.commands.PauseArm;
@@ -28,6 +29,7 @@ import frc.robot.commands.elevator.ElevatorTickUpwards;
 import frc.robot.commands.elevator.StopElevatorCommand;
 import frc.robot.subsystems.SuckNBlowSubsystem;
 import frc.robot.subsystems.Swerve.SwerveDriveSubsystem;
+import frc.robot.subsystems.Swerve.SwerveEncoders;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ClawSubsystem;
 
@@ -44,6 +46,10 @@ import frc.robot.subsystems.ClawSubsystem;
 public class RobotContainer {
   private final Joystick driverController;
 
+  private final Joystick flightDriverController;
+  private final Joystick xboxDriverController;
+  
+
   private SwerveDriveSubsystem drive;
   private SuckNBlowSubsystem suckNBlowSubsystem;
   private ElevatorSubsystem elevatorSubsystem;
@@ -52,6 +58,9 @@ public class RobotContainer {
   public RobotContainer() {
     this.driverController = new Joystick(InputConstants.DRIVER_CONTROLLER_PORT);
 
+    this.flightDriverController = new Joystick(InputConstants.FIRST_DRIVER_CONTROLLER_PORT);
+    this.xboxDriverController = new Joystick(InputConstants.SECOND_DRIVER_CONTROLLER_PORT);
+
     this.drive = new SwerveDriveSubsystem();
     this.suckNBlowSubsystem = new SuckNBlowSubsystem();
     this.elevatorSubsystem = new ElevatorSubsystem();
@@ -59,16 +68,16 @@ public class RobotContainer {
 
     configureBindings();
 
-    this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
+    this.drive.setDefaultCommand(new SwerveDriveCommand(drive, flightDriverController)); ///
     this.elevatorSubsystem.setDefaultCommand(new ElevatorGoToTarget(elevatorSubsystem));
     this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem));
   }
 
   private void addStateBinding(int buttonNumber, ArmState armState, ArmState armState2) {
-    JoystickButton stateButton = new JoystickButton(driverController, buttonNumber);
+    JoystickButton stateButton = new JoystickButton(xboxDriverController, buttonNumber);
     // stateButton.whileFalse(new PauseArm(elevatorSubsystem, clawSubsystem));
     stateButton.whileTrue(new FullArmCommand(
-      this.elevatorSubsystem, this.clawSubsystem, armState, armState2, this.driverController
+      this.elevatorSubsystem, this.clawSubsystem, armState, armState2, this.xboxDriverController
     ));
   }
 
@@ -80,20 +89,20 @@ public class RobotContainer {
     // gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
 
     // Suck N Blow
-    JoystickButton suckButton = new JoystickButton(driverController, 1);
-    JoystickButton blowButton = new JoystickButton(driverController, 2);
+    JoystickButton suckButton = new JoystickButton(xboxDriverController, 1);
+    JoystickButton blowButton = new JoystickButton(xboxDriverController, 2);
     suckButton.whileTrue(new SuckCommand(this.suckNBlowSubsystem));
     blowButton.whileTrue(new BlowCommand(this.suckNBlowSubsystem));
 
     // Elevator Manual
-    JoystickButton elevatorUPButton = new JoystickButton(driverController, 5);
-    JoystickButton elevatorDownButton = new JoystickButton(driverController, 3);
+    JoystickButton elevatorUPButton = new JoystickButton(xboxDriverController, 5);
+    JoystickButton elevatorDownButton = new JoystickButton(xboxDriverController, 3);
     elevatorUPButton.whileTrue(new ElevatorTickUpwards(this.elevatorSubsystem));
     elevatorDownButton.whileTrue(new ElevatorTickBackwards(this.elevatorSubsystem));
     
     // Claw Manual
-    JoystickButton clawForwardButton = new JoystickButton(driverController, 6);
-    JoystickButton clawBackwardButton = new JoystickButton(driverController, 4);
+    JoystickButton clawForwardButton = new JoystickButton(xboxDriverController, 6);
+    JoystickButton clawBackwardButton = new JoystickButton(xboxDriverController, 4);
     clawForwardButton.whileTrue(new ClawTickForwardCommand(this.clawSubsystem));
     clawBackwardButton.whileTrue(new ClawTickBackwardCommand(this.clawSubsystem));
     
