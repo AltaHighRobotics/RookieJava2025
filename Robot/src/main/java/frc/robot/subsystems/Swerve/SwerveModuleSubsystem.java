@@ -41,7 +41,7 @@ public class SwerveModuleSubsystem extends SubsystemBase {
     this.drive.setNeutralMode(NeutralMode.Brake); // Stop wheel from moving when weren't not driving
 
     this.turn = new SparkMax(steerID, SparkLowLevel.MotorType.kBrushless);
-    this.turnEncoder = this.turn.getEncoder(); // Zero wheels before power on
+    this.turnEncoder = this.turn.getAlternateEncoder(); // Zero wheels before power on
 
     this.turningPIDController = new ProfiledPIDController(
       P, I, D,
