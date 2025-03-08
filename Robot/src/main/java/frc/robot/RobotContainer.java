@@ -64,11 +64,11 @@ public class RobotContainer {
     this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem));
   }
 
-  private void addStateBinding(int buttonNumber, ArmState armState) {
+  private void addStateBinding(int buttonNumber, ArmState armState, ArmState armState2) {
     JoystickButton stateButton = new JoystickButton(driverController, buttonNumber);
-    stateButton.whileFalse(new PauseArm(elevatorSubsystem, clawSubsystem));
+    // stateButton.whileFalse(new PauseArm(elevatorSubsystem, clawSubsystem));
     stateButton.whileTrue(new FullArmCommand(
-      this.elevatorSubsystem, this.clawSubsystem, armState
+      this.elevatorSubsystem, this.clawSubsystem, armState, armState2, this.driverController
     ));
   }
 
@@ -88,31 +88,22 @@ public class RobotContainer {
     // Elevator Manual
     JoystickButton elevatorUPButton = new JoystickButton(driverController, 5);
     JoystickButton elevatorDownButton = new JoystickButton(driverController, 3);
-    elevatorUPButton.onTrue(new ElevatorTickUpwards(this.elevatorSubsystem));
-    elevatorDownButton.onTrue(new ElevatorTickBackwards(this.elevatorSubsystem));
+    elevatorUPButton.whileTrue(new ElevatorTickUpwards(this.elevatorSubsystem));
+    elevatorDownButton.whileTrue(new ElevatorTickBackwards(this.elevatorSubsystem));
     
     // Claw Manual
     JoystickButton clawForwardButton = new JoystickButton(driverController, 6);
     JoystickButton clawBackwardButton = new JoystickButton(driverController, 4);
-    clawForwardButton.onTrue(new ClawTickForwardCommand(this.clawSubsystem));
-    clawBackwardButton.onTrue(new ClawTickBackwardCommand(this.clawSubsystem));
+    clawForwardButton.whileTrue(new ClawTickForwardCommand(this.clawSubsystem));
+    clawBackwardButton.whileTrue(new ClawTickBackwardCommand(this.clawSubsystem));
     
     // States
-    if (this.driverController.getRawAxis(3) > 0) { 
-      addStateBinding(7, ArmState.STOWED); // Default state, also is the CORAL_CARRY
-      addStateBinding(8, ArmState.BALL_PICKUP_1);
-      addStateBinding(9, ArmState.BALL_PICKUP_2);
-      addStateBinding(10, ArmState.BALL_SCORE_1);
-      addStateBinding(11, ArmState.BALL_SCORE_2);
-      addStateBinding(12, ArmState.BALL_CARRY);
-    } else {
-      addStateBinding(7,  ArmState.CORAL_PICKUP);
-      addStateBinding(8,  ArmState.CORAL_SCORE_1);
-      addStateBinding(9,  ArmState.CORAL_SCORE_2);
-      addStateBinding(10, ArmState.CORAL_SCORE_3);
-      addStateBinding(11, ArmState.CORAL_SCORE_4);
-      addStateBinding(12, ArmState.BLOW);
-    }
+    addStateBinding(7, ArmState.STOWED, ArmState.CORAL_PICKUP); // Default state, also is the CORAL_CARRY
+    addStateBinding(8, ArmState.BALL_PICKUP_1, ArmState.CORAL_SCORE_1);
+    addStateBinding(9, ArmState.BALL_PICKUP_2, ArmState.CORAL_SCORE_2);
+    addStateBinding(10, ArmState.BALL_SCORE_1, ArmState.CORAL_SCORE_3);
+    addStateBinding(11, ArmState.BALL_SCORE_2, ArmState.CORAL_SCORE_4);
+    addStateBinding(12, ArmState.BALL_CARRY, ArmState.BLOW);
   }
 
   /**

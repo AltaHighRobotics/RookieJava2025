@@ -150,10 +150,10 @@ public class SwerveDriveSubsystem extends SubsystemBase {
     }
 
     // Uses our method to set the rotation and speed of the modules from the calculated values
-    this.frontLeftModule.setDesiredState(swerveModulesStates[0]);
+    // this.frontLeftModule.setDesiredState(swerveModulesStates[0]);
     this.frontRightModule.setDesiredState(swerveModulesStates[1]);
-    this.backLeftModule.setDesiredState(swerveModulesStates[2]);
-    this.backRightModule.setDesiredState(swerveModulesStates[3]);
+    // this.backLeftModule.setDesiredState(swerveModulesStates[2]);
+    // this.backRightModule.setDesiredState(swerveModulesStates[3]);
   }
 
   /**

@@ -44,6 +44,8 @@ public class ElevatorSubsystem extends SubsystemBase{
         final double targetPositionRevolutions = targetHeightPercentage * ElevatorConstants.TOP_MAG;
         final double currentPositionRevolutions = this.getHeight();
 
+        // System.out.printf("Elevator Current Position: %.6f\n", this.getHeight());
+
         double motorOutput = this.pidController.calculate(currentPositionRevolutions, targetPositionRevolutions);
 
         // Clamp limits the motor speed, should probably use the max output speed but oh well this works too
@@ -54,7 +56,11 @@ public class ElevatorSubsystem extends SubsystemBase{
             motorOutput *= 0.5;
         }
 
+        if (motorOutput > 0 && this.getHeight() > ElevatorConstants.MAX_HEIGHT) {
+            this.stop();
+        } else {
         motorController.set(motorOutput);
+        }
     }
 
     /**
@@ -75,11 +81,11 @@ public class ElevatorSubsystem extends SubsystemBase{
     }
 
     public void tickUpwards() {
-        setHeight(this.getHeightAsPercentage());
+        setHeight(this.targetHeightPercentage + 0.01);
     }
 
     public void tickBackwards() {
-        setHeight(this.getHeightAsPercentage());
+        setHeight(this.targetHeightPercentage - 0.01);
     }
 
     public void stop() {

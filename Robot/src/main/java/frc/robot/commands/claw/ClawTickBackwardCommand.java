@@ -14,6 +14,7 @@ public class ClawTickBackwardCommand extends Command {
 
     @Override
     public void execute() {
-        this.clawSubsystem.tickForward();
+        this.clawSubsystem.backward();
+        this.clawSubsystem.moveToTarget();
     }
 }
