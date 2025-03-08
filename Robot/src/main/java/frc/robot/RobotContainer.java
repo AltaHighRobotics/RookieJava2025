@@ -56,15 +56,7 @@ public class RobotContainer {
     this.elevatorSubsystem.setDefaultCommand(new ElevatorGoToTarget(elevatorSubsystem));
     this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem));
 
-    while (true) { 
-      if (driverController.getThrottle() > 0) {
-        configureBindings1();
-        System.out.printf("Binding type 1");
-      } else {
-        configureBindings2();
-        System.out.printf("Binding type 2");        
-      }
-    }
+    configureBindings();
   }
 
   private void addStateBinding(int buttonNumber, ArmState armState, ArmState armState2) {
@@ -78,7 +70,7 @@ public class RobotContainer {
   /**
    * Use this method to define your trigger->command mappings. Triggers can be
    */
-  private void configureBindings1() {
+  private void configureBindings() {
     // JoystickButton gyroResetButton = new JoystickButton(driverController, 5);
     // gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
 
