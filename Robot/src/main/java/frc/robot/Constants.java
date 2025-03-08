@@ -29,7 +29,7 @@ public final class Constants {
     public static final double SWERVE_MOD_CENTER_TO_CENTER = 0.635;
     public static final double MODULE_MAX_ANGULAR_VELOCITY = Math.PI;
     public static final double MODULE_MAX_ANGULAR_ACCELERATION = Math.PI * 2;
-    public static final double WHEEL_RADIUS = 0.0508;
+    public static final double WHEEL_RADIUS = 1/ 33.94;
 
     public static final double SWERVE_MIN_SPEED = 0.3;
     public static final double SWERVE_MAX_SPEED = 0.8;
@@ -40,15 +40,19 @@ public final class Constants {
 
     public static final int FRONT_LEFT_DRIVE_ID = 3;
     public static final int FRONT_LEFT_TURN_ID = 33;
+    public static final int FRONT_LEFT_ENCODER_ID = 1; //Not sure what these are yet
 
     public static final int FRONT_RIGHT_DRIVE_ID = 4;
     public static final int FRONT_RIGHT_TURN_ID = 44;
+    public static final int FRONT_RIGHT_ENCODER_ID = 1; //Not sure what these are yet
 
     public static final int BACK_LEFT_DRIVE_ID = 2;
     public static final int BACK_LEFT_TURN_ID = 22;
+    public static final int BACK_LEFT_ENCODER_ID = 1; //Not sure what these are yet
 
     public static final int BACK_RIGHT_DRIVE_ID = 5;
     public static final int BACK_RIGHT_TURN_ID = 55;
+    public static final int BACK_RIGHT_ENCODER_ID = 1; //Not sure what these are yet
 
     public static final double P = 10;
     public static final double I = 0;

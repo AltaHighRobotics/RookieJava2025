@@ -10,6 +10,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.SwerveDriveConstants;
+import com.revrobotics.spark.SparkAbsoluteEncoder;
 
 import com.revrobotics.spark.SparkLowLevel;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -17,6 +18,7 @@ import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkMax;
+import frc.robot.subsystems.Swerve.SwerveEncoders;
 
 
 public class SwerveModuleSubsystem extends SubsystemBase {
@@ -26,7 +28,6 @@ public class SwerveModuleSubsystem extends SubsystemBase {
   private RelativeEncoder turnEncoder;
   private ProfiledPIDController turningPIDController;
   private double maxOut;
-
   /**
   * Construct module, pid, and start encoder
   *
@@ -88,6 +89,11 @@ public class SwerveModuleSubsystem extends SubsystemBase {
 
     // Gets the current angle of the module
     final Rotation2d encoderRotation = this.getEncoder();
+
+    final SwerveEncoders FL_Encoder = new SwerveEncoders(SwerveDriveConstants.FRONT_LEFT_ENCODER_ID);
+    final SwerveEncoders FR_Encoder = new SwerveEncoders(SwerveDriveConstants.FRONT_RIGHT_ENCODER_ID);
+    final SwerveEncoders BL_Encoder = new SwerveEncoders(SwerveDriveConstants.BACK_LEFT_ENCODER_ID);
+    final SwerveEncoders BR_Encoder = new SwerveEncoders(SwerveDriveConstants.BACK_RIGHT_ENCODER_ID);
 
     SwerveModuleState state = desiredState;
 

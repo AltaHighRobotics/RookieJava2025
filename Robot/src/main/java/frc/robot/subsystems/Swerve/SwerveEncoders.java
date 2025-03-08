@@ -1,22 +1,5 @@
 package frc.robot.subsystems.Swerve;
-// import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-// import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
-// public class SwerveEncoders {
-//     private WPI_TalonSRX motor;
-
-//     public void robotInit() {
-//         motor = new WPI_TalonSRX(1); // Initialize Talon SRX on CAN ID 1
-//         motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10); // Configure the encoder
-//     }
-
-//     public void teleopPeriodic() {
-//         double position = motor.getSelectedSensorPosition(0); // Get current encoder position
-//         double velocity = motor.getSelectedSensorVelocity(0); // Get current encoder velocity
-
-//         System.out.println("Position: " + position + " Velocity: " + velocity);
-//     }
-// }
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 // import com.revrobotics.RelativeEncoder;
