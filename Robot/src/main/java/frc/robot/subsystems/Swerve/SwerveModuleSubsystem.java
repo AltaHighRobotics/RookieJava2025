@@ -90,15 +90,21 @@ public class SwerveModuleSubsystem extends SubsystemBase {
     // Gets the current angle of the module
     final Rotation2d encoderRotation = this.getEncoder();
 
-    final SwerveEncoders FL_Encoder = new SwerveEncoders(SwerveDriveConstants.FRONT_LEFT_ENCODER_ID);
-    final SwerveEncoders FR_Encoder = new SwerveEncoders(SwerveDriveConstants.FRONT_RIGHT_ENCODER_ID);
-    final SwerveEncoders BL_Encoder = new SwerveEncoders(SwerveDriveConstants.BACK_LEFT_ENCODER_ID);
-    final SwerveEncoders BR_Encoder = new SwerveEncoders(SwerveDriveConstants.BACK_RIGHT_ENCODER_ID);
+    // Gets the sprakmax's to see the absolute encoders
+    final SwerveEncoders FL_Encoder = new SwerveEncoders(SwerveDriveConstants.FRONT_LEFT_DRIVE_ID);
+    final SwerveEncoders FR_Encoder = new SwerveEncoders(SwerveDriveConstants.FRONT_RIGHT_DRIVE_ID);
+    final SwerveEncoders BL_Encoder = new SwerveEncoders(SwerveDriveConstants.BACK_LEFT_DRIVE_ID);
+    final SwerveEncoders BR_Encoder = new SwerveEncoders(SwerveDriveConstants.BACK_RIGHT_DRIVE_ID);
+    // Gets the current positions of the encoders
+    final double fl_encoder = FL_Encoder.getAbsolutePosition();
+    final double fr_encoder = FR_Encoder.getAbsolutePosition();
+    final double bl_encoder = BL_Encoder.getAbsolutePosition();
+    final double br_encoder = BR_Encoder.getAbsolutePosition();
 
-    System.out.printf("Front Left Encoder ABS Position: %.6f\n", FL_Encoder);
-    System.out.printf("Front Right Encoder ABS Position: %.6f\n", FR_Encoder);
-    System.out.printf("Back Left Encoder ABS Position: %.6f\n", BL_Encoder);
-    System.out.printf("Back Right Encoder ABS Position: %.6f\n", BR_Encoder);
+    System.out.printf("Front Left Encoder ABS Position: %.6f\n", fl_encoder);
+    System.out.printf("Front Right Encoder ABS Position: %.6f\n", fr_encoder);
+    System.out.printf("Back Left Encoder ABS Position: %.6f\n", bl_encoder);
+    System.out.printf("Back Right Encoder ABS Position: %.6f\n", br_encoder);
 
     SwerveModuleState state = desiredState;
 
