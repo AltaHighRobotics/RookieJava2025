@@ -55,7 +55,7 @@ public class ElevatorSubsystem extends SubsystemBase{
         if (motorOutput < 0) {
             motorOutput *= 0.5;
         }
-        
+        // If the robot is trying to move upwards while at max height, it will stop itself, will always work when moving down
         motorController.set(motorOutput);
     }
 
