@@ -29,7 +29,7 @@ public final class Constants {
     public static final double SWERVE_MOD_CENTER_TO_CENTER = 0.635;
     public static final double MODULE_MAX_ANGULAR_VELOCITY = Math.PI;
     public static final double MODULE_MAX_ANGULAR_ACCELERATION = Math.PI * 2;
-    public static final double WHEEL_RADIUS = 0.0508;
+    public static final double WHEEL_RADIUS = 1 / 33.94;
 
     public static final double SWERVE_MIN_SPEED = 0.2;
     public static final double SWERVE_MAX_SPEED = 0.3;
