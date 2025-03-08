@@ -102,7 +102,7 @@ public class SwerveModuleSubsystem extends SubsystemBase {
     final double fr_encoder = FR_Encoder.getAbsolutePosition();
     final double bl_encoder = BL_Encoder.getAbsolutePosition();
     final double br_encoder = BR_Encoder.getAbsolutePosition();
-
+    // Print out the enocder positions
     System.out.printf("Front Left Encoder ABS Position: %.6f\n", fl_encoder);
     System.out.printf("Front Right Encoder ABS Position: %.6f\n", fr_encoder);
     System.out.printf("Back Left Encoder ABS Position: %.6f\n", bl_encoder);
