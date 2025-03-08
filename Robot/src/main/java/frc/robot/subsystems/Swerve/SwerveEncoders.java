@@ -27,14 +27,14 @@ public class SwerveEncoders {
       return absEncoder.getVelocity();
    }
 
-   public static void main(String[] args) {
-      // Create an instance of the example class
-      SwerveEncoders example = new SwerveEncoders(1);
-      // Read and print the absolute position of the encoder
-      double absolutePosition = example.getAbsolutePosition();
-      System.out.println("Absolute Position: " + absolutePosition);
-      // Read and print the velocity of the encoder
-      double velocity = example.getVelocity();
-      System.out.println("Velocity: " + velocity);
-   }
+   // public static void main(String[] args) {
+   //    // Create an instance of the example class
+   //    SwerveEncoders example = new SwerveEncoders(2);
+   //    // Read and print the absolute position of the encoder
+   //    double absolutePosition = example.getAbsolutePosition();
+   //    System.out.println("Absolute Position: " + absolutePosition);
+   //    // Read and print the velocity of the encoder
+   //    double velocity = example.getVelocity();
+   //    System.out.println("Velocity: " + velocity);
+   // }
 }

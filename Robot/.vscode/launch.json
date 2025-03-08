@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "SwerveEncoders",
+      "request": "launch",
+      "mainClass": "frc.robot.subsystems.Swerve.SwerveEncoders",
+      "projectName": "Robot"
+    },
+    {
+      "type": "java",
       "name": "Main",
       "request": "launch",
       "mainClass": "frc.robot.Main",
