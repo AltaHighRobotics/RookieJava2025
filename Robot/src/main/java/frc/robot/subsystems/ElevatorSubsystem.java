@@ -56,7 +56,11 @@ public class ElevatorSubsystem extends SubsystemBase{
             motorOutput *= 0.5;
         }
 
+        if (motorOutput > 0 && this.getHeight() > ElevatorConstants.MAX_HEIGHT) {
+            this.stop();
+        } else {
         motorController.set(motorOutput);
+        }
     }
 
     /**
