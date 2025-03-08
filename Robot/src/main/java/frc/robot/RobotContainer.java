@@ -67,11 +67,11 @@ public class RobotContainer {
     }
   }
 
-  private void addStateBinding(int buttonNumber, ArmState armState) {
+  private void addStateBinding(int buttonNumber, ArmState armState, ArmState armState2) {
     JoystickButton stateButton = new JoystickButton(driverController, buttonNumber);
     // stateButton.whileFalse(new PauseArm(elevatorSubsystem, clawSubsystem));
     stateButton.whileTrue(new FullArmCommand(
-      this.elevatorSubsystem, this.clawSubsystem, armState, this.driverController
+      this.elevatorSubsystem, this.clawSubsystem, armState, armState2, this.driverController
     ));
   }
 
@@ -101,47 +101,12 @@ public class RobotContainer {
     clawBackwardButton.whileTrue(new ClawTickBackwardCommand(this.clawSubsystem));
   
     // States
-    addStateBinding(7, ArmState.STOWED); // Default state, also is the CORAL_CARRY
-    addStateBinding(8, ArmState.BALL_PICKUP_1);
-    addStateBinding(9, ArmState.BALL_PICKUP_2);
-    addStateBinding(10, ArmState.BALL_SCORE_1);
-    addStateBinding(11, ArmState.BALL_SCORE_2);
-    addStateBinding(12, ArmState.BALL_CARRY);
-
-  }
-
-    private void configureBindings2() {
-    // JoystickButton gyroResetButton = new JoystickButton(driverController, 5);
-    // gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
-
-    // Suck N Blow
-    JoystickButton suckButton = new JoystickButton(driverController, 1);
-    JoystickButton blowButton = new JoystickButton(driverController, 2);
-    suckButton.whileTrue(new SuckCommand(this.suckNBlowSubsystem));
-    blowButton.whileTrue(new BlowCommand(this.suckNBlowSubsystem));
-
-    // Elevator Manual
-    JoystickButton elevatorUPButton = new JoystickButton(driverController, 5);
-    JoystickButton elevatorDownButton = new JoystickButton(driverController, 3);
-    elevatorUPButton.whileTrue(new ElevatorTickUpwards(this.elevatorSubsystem));
-    elevatorDownButton.whileTrue(new ElevatorTickBackwards(this.elevatorSubsystem));
-    
-    // Claw Manual
-    JoystickButton clawForwardButton = new JoystickButton(driverController, 6);
-    JoystickButton clawBackwardButton = new JoystickButton(driverController, 4);
-    clawForwardButton.whileTrue(new ClawTickForwardCommand(this.clawSubsystem));
-    clawBackwardButton.whileTrue(new ClawTickBackwardCommand(this.clawSubsystem));
-
-    addStateBinding(7,  ArmState.CORAL_PICKUP);
-    addStateBinding(8,  ArmState.CORAL_SCORE_1);
-    addStateBinding(9,  ArmState.CORAL_SCORE_2);
-    addStateBinding(10, ArmState.CORAL_SCORE_3);
-    addStateBinding(11, ArmState.CORAL_SCORE_4);
-    addStateBinding(12, ArmState.BLOW);
-
-    // JoystickButton print_turny = new JoystickButton(driverController, 12);
-    // print_turny.whileTrue(new ClawTickForwardCommand(this.clawSubsystem));
-    
+    addStateBinding(7, ArmState.STOWED, ArmState.CORAL_PICKUP); // Default state, also is the CORAL_CARRY
+    addStateBinding(8, ArmState.BALL_PICKUP_1, ArmState.CORAL_SCORE_1);
+    addStateBinding(9, ArmState.BALL_PICKUP_2, ArmState.CORAL_SCORE_2);
+    addStateBinding(10, ArmState.BALL_SCORE_1, ArmState.CORAL_SCORE_3);
+    addStateBinding(11, ArmState.BALL_SCORE_2, ArmState.CORAL_SCORE_4);
+    addStateBinding(12, ArmState.BALL_CARRY, ArmState.BLOW);
   }
 
   /**

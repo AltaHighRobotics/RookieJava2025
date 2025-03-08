@@ -12,7 +12,8 @@ public class ElevatorTickBackwards extends Command {
     }
 
     @Override
-    public void initialize() {
+    public void execute() {
         this.elevatorSubsystem.tickBackwards();
+        this.elevatorSubsystem.moveToTargetHeight();
     }
 }
