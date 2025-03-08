@@ -95,6 +95,11 @@ public class SwerveModuleSubsystem extends SubsystemBase {
     final SwerveEncoders BL_Encoder = new SwerveEncoders(SwerveDriveConstants.BACK_LEFT_ENCODER_ID);
     final SwerveEncoders BR_Encoder = new SwerveEncoders(SwerveDriveConstants.BACK_RIGHT_ENCODER_ID);
 
+    System.out.printf("Front Left Encoder ABS Position: %.6f\n", FL_Encoder);
+    System.out.printf("Front Right Encoder ABS Position: %.6f\n", FR_Encoder);
+    System.out.printf("Back Left Encoder ABS Position: %.6f\n", BL_Encoder);
+    System.out.printf("Back Right Encoder ABS Position: %.6f\n", BR_Encoder);
+
     SwerveModuleState state = desiredState;
 
     state.angle = desiredState.angle.times(-1); // Inverts the angle
