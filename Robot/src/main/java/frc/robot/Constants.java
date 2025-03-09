@@ -50,7 +50,7 @@ public final class Constants {
     public static final int BACK_RIGHT_DRIVE_ID = 5;
     public static final int BACK_RIGHT_TURN_ID = 55;
 
-    public static final double P = 10;
+    public static final double P = 5;
     public static final double I = 0;
     public static final double D = 0;
   }
@@ -65,6 +65,22 @@ public final class Constants {
     public static final double TOP_MAG = 45;
 
     public static final double MAX_HEIGHT = 15; // CHANGE THIS
+
+    public static final double P = 0.3;
+    public static final double I = 0;
+    public static final double D = 0;
+  }
+
+  public static class PenetratorConstants {
+    public static final int MOTOR_ID = 8;
+    
+    public static final double MOTOR_MAX_OUTPUT = 0.2;
+
+    public static final double TICK_PERCENT_DISTANCE = 0.05;
+
+    public static final double TOP_MAG = 45;
+
+    public static final double MAX_EXTENTION = 15; // CHANGE THIS
 
     public static final double P = 0.3;
     public static final double I = 0;

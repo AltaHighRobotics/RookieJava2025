@@ -17,6 +17,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix6.swerve.SwerveDrivetrain.SwerveControlParameters;
+import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkMax;
 
@@ -25,7 +26,7 @@ public class SwerveModuleSubsystem extends SubsystemBase {
   
   private TalonSRX drive;
   private SparkMax turn;
-  private RelativeEncoder turnEncoder;
+  private AbsoluteEncoder turnEncoder;
   private ProfiledPIDController turningPIDController;
   private double maxOut;
 
@@ -42,7 +43,7 @@ public class SwerveModuleSubsystem extends SubsystemBase {
     this.drive.setNeutralMode(NeutralMode.Brake); // Stop wheel from moving when weren't not driving
 
     this.turn = new SparkMax(steerID, SparkLowLevel.MotorType.kBrushless);
-    this.turnEncoder = this.turn.getAlternateEncoder(); // Zero wheels before power on
+    this.turnEncoder = this.turn.getAbsoluteEncoder(); // Zero wheels before power on
 
     this.turningPIDController = new ProfiledPIDController(
       P, I, D,
@@ -100,12 +101,16 @@ public class SwerveModuleSubsystem extends SubsystemBase {
     final double driveOuput = state.speedMetersPerSecond;
 
     // Uses PID to tell the SparkMax's how much to rotate
+    System.out.printf("---------------------\nTurn Current Pos Raw: %.6f\n", this.turnEncoder.getPosition());
+    System.out.printf("Turn Current Pos Rad: %.6f\n", this.turnEncoder.getPosition() * gearRatio * tau);
+    System.out.printf("Turn Target Rad: %.6f\n", state.angle.getRadians());
     final double turnOutput = this.turningPIDController.calculate(
-      this.turnEncoder.getPosition() * gearRatio * tau, state.angle.getRadians()
+      encoderRotation.getRadians(), state.angle.getRadians()
     );
-
+    
     // Actually sets the speed of the motors and how much they need to rotate
     final double maxOut = SwerveDriveConstants.SWERVE_MAX_OUTPUT;
+    System.out.printf("PID Volt: %.6f\n", MathUtil.clamp(driveOuput, -maxOut, maxOut));
     this.drive.set(TalonSRXControlMode.PercentOutput, MathUtil.clamp(driveOuput, -maxOut, maxOut));
     this.turn.setVoltage(turnOutput);
   }
