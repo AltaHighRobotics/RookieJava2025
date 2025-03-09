@@ -3,92 +3,41 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
-import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.ElevatorConstants;
-
-// MODIFIED VERSION OF ELEVATOR SUBSYSTEM
+import frc.robot.Constants.PenetratorConstants;
 
 public class PenetratorSubsystem extends SubsystemBase{
-    private TalonFX motorController;
-    private PIDController pidController;
-    private double targetHeightPercentage = 0.0;
+    public enum MoveStyle {
+        INSERT,
+        PULLOUT,
+        STOP 
+    }
+
+    private TalonFX motor;
 
     public PenetratorSubsystem() {
         super();
-        this.motorController = new TalonFX(ElevatorConstants.MOTOR_ID, "rio");
+        this.motor = new TalonFX(PenetratorConstants.MOTOR_ID);
 
-        final double P = ElevatorConstants.P;
-        final double I = ElevatorConstants.I;
-        final double D = ElevatorConstants.D;
-        this.pidController = new PIDController(P, I, D);
-
-        this.motorController.setNeutralMode(NeutralModeValue.Brake);
+        this.motor.setNeutralMode(NeutralModeValue.Brake);
     }
 
     /**
-     * @param height A percentage (0 to 1)
+     * Sets the state of the motors
+     * @param oralType The direction the motors will go, positive, negitive, or stopped
      */
-    public void setHeight(double heightPercentage) {
-        if (heightPercentage < 0) {
-            heightPercentage = 0;
+    public void set(MoveStyle oralType) {
+        switch (oralType) {
+            case INSERT:
+                this.motor.set(-PenetratorConstants.MOTOR_INSERT_SPEED);
+                break;
+            case PULLOUT:
+                this.motor.set(PenetratorConstants.MOTOR_PULLOUT_SPEED);
+                break;
+            case STOP:
+                this.motor.set(0);
+                break;
         }
-        
-        if (heightPercentage > 1 ) {
-            heightPercentage = 1;
-        } 
-
-        targetHeightPercentage = heightPercentage;
-    }
-
-    public void moveToTargetHeight() { // Meant to be called each tick
-        final double targetPositionRevolutions = targetHeightPercentage * ElevatorConstants.TOP_MAG;
-        final double currentPositionRevolutions = this.getHeight();
-
-        // System.out.printf("Elevator Current Position: %.6f\n", this.getHeight());
-
-        double motorOutput = this.pidController.calculate(currentPositionRevolutions, targetPositionRevolutions);
-
-        // Clamp limits the motor speed, should probably use the max output speed but oh well this works too
-        motorOutput = MathUtil.clamp(motorOutput, -ElevatorConstants.MOTOR_MAX_OUTPUT, ElevatorConstants.MOTOR_MAX_OUTPUT);
-
-        // Make it move half as fast when going down (Gravity makes it go down quicker)
-        if (motorOutput < 0) {
-            motorOutput *= 0.5;
-        }
-        // If the robot is trying to move upwards while at max height, it will stop itself, will always work when moving down
-        motorController.set(motorOutput);
-    }
-
-    /**
-     * Gets the current height of the elevator
-     * @return Height as revolutions
-     */
-    public double getHeight() {
-        final double realMotorAngle = this.motorController.getPosition().getValue().magnitude();
-        return realMotorAngle;
-    }
-
-    /**
-     * Gets the current height of the elevator
-     * @return Height as percentage (0.0 to 1.0)
-     */
-    public double getHeightAsPercentage() {
-        return getHeight() / ElevatorConstants.TOP_MAG;
-    }
-
-    public void tickUpwards() {
-        setHeight(this.targetHeightPercentage + 0.01);
-    }
-
-    public void tickBackwards() {
-        setHeight(this.targetHeightPercentage - 0.01);
-    }
-
-    public void stop() {
-        setHeight(this.getHeightAsPercentage());
-        motorController.set(0);
     }
 }
 

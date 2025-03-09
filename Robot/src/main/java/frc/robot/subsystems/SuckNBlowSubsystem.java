@@ -17,8 +17,7 @@ public class SuckNBlowSubsystem extends SubsystemBase{
 
     public SuckNBlowSubsystem() {
         super();
-        this.motor = new SparkMax(SuckNBlowConstants.SPARK_MAX_ID, MotorType.kBrushless);
-    }
+        this.motor = new SparkMax(SuckNBlowConstants.SPARK_MAX_ID, MotorType.kBrushless);    }
 
     /**
      * Sets the state of the motors

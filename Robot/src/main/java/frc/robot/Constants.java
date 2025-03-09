@@ -62,7 +62,7 @@ public final class Constants {
 
     public static final double TICK_PERCENT_DISTANCE = 0.05;
 
-    public static final double TOP_MAG = 45;
+    public static final double TOP_MAG = 45; // What the fuck does this mean
 
     public static final double MAX_HEIGHT = 15; // CHANGE THIS
 
@@ -73,22 +73,14 @@ public final class Constants {
 
   public static class PenetratorConstants {
     public static final int MOTOR_ID = 8;
-    public static final double MOTOR_MAX_OUTPUT = 0.2; // Voltage limiter to the motor
-
-    public static final double MAX_EXTENTION = 15; // CHANGE THIS (used as a distance amount)
-
-    public static final double P = 0.3;
-    public static final double I = 0;
-    public static final double D = 0;
+    public static final double MOTOR_INSERT_SPEED = 0.4;
+    public static final double MOTOR_PULLOUT_SPEED = 0.8;
   }
 
   public static class RimmerConstants {
-    public static final int MOTOR_ID = 9;
-    public static final double MOTOR_MAX_OUTPUT = 0.2; // Voltage limiter to the motor
-
-    public static final double P = 0.3;
-    public static final double I = 0;
-    public static final double D = 0;
+    public static final int SPARK_MAX_ID = 43; //CHANGE THIS
+    public static final double MOTOR_INSERT_SPEED = 0.4;
+    public static final double MOTOR_PULLOUT_SPEED = 0.8;
   }
 
   public static class SuckNBlowConstants {

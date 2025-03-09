@@ -28,10 +28,16 @@ import frc.robot.commands.elevator.ElevatorGoToTarget;
 import frc.robot.commands.elevator.ElevatorTickBackwards;
 import frc.robot.commands.elevator.ElevatorTickUpwards;
 import frc.robot.commands.elevator.StopElevatorCommand;
+import frc.robot.commands.lift.ClockwiseRim;
+import frc.robot.commands.lift.CounterClockwiseRim;
+import frc.robot.commands.lift.InsertPenetrator;
+import frc.robot.commands.lift.PullOutPenetrator;
 import frc.robot.subsystems.SuckNBlowSubsystem;
 import frc.robot.subsystems.Swerve.SwerveDriveSubsystem;
 import frc.robot.subsystems.Swerve.TESTSwervesusbsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.PenetratorSubsystem;
+import frc.robot.subsystems.RimmerSubsystem;
 import frc.robot.subsystems.ClawSubsystem;
 
 
@@ -51,6 +57,8 @@ public class RobotContainer {
   private SuckNBlowSubsystem suckNBlowSubsystem;
   private ElevatorSubsystem elevatorSubsystem;
   private ClawSubsystem clawSubsystem;
+  private PenetratorSubsystem penetratorSubsystem;
+  private RimmerSubsystem rimmerSubsystem;
 
   private TESTSwervesusbsystem swerveTestSubsystem;
 
@@ -107,13 +115,25 @@ public class RobotContainer {
     clawForwardButton.whileTrue(new ClawTickForwardCommand(this.clawSubsystem));
     clawBackwardButton.whileTrue(new ClawTickBackwardCommand(this.clawSubsystem));
     
-    // States
-    addStateBinding(7, ArmState.STOWED, ArmState.CORAL_PICKUP); // Default state, also is the CORAL_CARRY
-    addStateBinding(8, ArmState.BALL_PICKUP_1, ArmState.CORAL_SCORE_1);
-    addStateBinding(9, ArmState.BALL_PICKUP_2, ArmState.CORAL_SCORE_2);
-    addStateBinding(10, ArmState.BALL_SCORE_1, ArmState.CORAL_SCORE_3);
-    addStateBinding(11, ArmState.BALL_SCORE_2, ArmState.CORAL_SCORE_4);
-    addStateBinding(12, ArmState.BALL_CARRY, ArmState.BLOW);
+    // Lift Manual
+    // Penetrator (kind of like elevator, talonfx encoder)
+    JoystickButton penetratorForwardButton = new JoystickButton(driverController, 7);
+    JoystickButton penetratorBackwardButton = new JoystickButton(driverController, 8);
+    penetratorForwardButton.whileTrue(new InsertPenetrator(this.penetratorSubsystem));
+    penetratorBackwardButton.whileTrue(new PullOutPenetrator(this.penetratorSubsystem));
+    // Rimmer (kind of like sucknblow, sparkmax encoder)
+    JoystickButton rimmerForwardButton = new JoystickButton(driverController, 9);
+    JoystickButton rimmerBackwardButton = new JoystickButton(driverController, 10);
+    rimmerForwardButton.whileTrue(new ClockwiseRim(this.rimmerSubsystem));
+    rimmerBackwardButton.whileTrue(new CounterClockwiseRim(this.rimmerSubsystem));
+
+    // // States
+    // addStateBinding(7, ArmState.STOWED, ArmState.CORAL_PICKUP); // Default state, also is the CORAL_CARRY
+    // addStateBinding(8, ArmState.BALL_PICKUP_1, ArmState.CORAL_SCORE_1);
+    // addStateBinding(9, ArmState.BALL_PICKUP_2, ArmState.CORAL_SCORE_2);
+    // addStateBinding(10, ArmState.BALL_SCORE_1, ArmState.CORAL_SCORE_3);
+    // addStateBinding(11, ArmState.BALL_SCORE_2, ArmState.CORAL_SCORE_4);
+    // addStateBinding(12, ArmState.BALL_CARRY, ArmState.BLOW);
   }
 
   /**
