@@ -72,7 +72,7 @@ public class RobotContainer {
     this.rimmerSubsystem = new RimmerSubsystem();
     this.penetratorSubsystem = new PenetratorSubsystem();
 
-    this.swerveTestSubsystem = new TESTSwervesusbsystem(SwerveDriveConstants.FRONT_RIGHT_TURN_ID);
+    // this.swerveTestSubsystem = new TESTSwervesusbsystem(SwerveDriveConstants.FRONT_RIGHT_TURN_ID);
 
     configureBindings();
 
@@ -110,6 +110,9 @@ public class RobotContainer {
     JoystickButton elevatorDownButton = new JoystickButton(driverController, 3);
     elevatorUPButton.whileTrue(new ElevatorTickUpwards(this.elevatorSubsystem));
     elevatorDownButton.whileTrue(new ElevatorTickBackwards(this.elevatorSubsystem));
+
+    JoystickButton stopElevatorCommand = new JoystickButton(driverController, 11);
+    stopElevatorCommand.whileTrue(new StopElevatorCommand(this.elevatorSubsystem));
     
     // Claw Manual
     JoystickButton clawForwardButton = new JoystickButton(driverController, 6);
@@ -117,17 +120,17 @@ public class RobotContainer {
     clawForwardButton.whileTrue(new ClawTickForwardCommand(this.clawSubsystem));
     clawBackwardButton.whileTrue(new ClawTickBackwardCommand(this.clawSubsystem));
     
-    // // Lift Manual
-    // // Penetrator (kind of like elevator, talonfx encoder)
-    // JoystickButton penetratorForwardButton = new JoystickButton(driverController, 7);
-    // JoystickButton penetratorBackwardButton = new JoystickButton(driverController, 8);
-    // penetratorForwardButton.whileTrue(new InsertPenetrator(this.penetratorSubsystem));
-    // penetratorBackwardButton.whileTrue(new PullOutPenetrator(this.penetratorSubsystem));
-    // // Rimmer (kind of like sucknblow, sparkmax encoder)
-    // JoystickButton rimmerForwardButton = new JoystickButton(driverController, 9);
-    // JoystickButton rimmerBackwardButton = new JoystickButton(driverController, 10);
-    // rimmerForwardButton.whileTrue(new ClockwiseRim(this.rimmerSubsystem));
-    // rimmerBackwardButton.whileTrue(new CounterClockwiseRim(this.rimmerSubsystem));
+    // Lift Manual
+    // Penetrator (kind of like elevator, talonfx encoder)
+    JoystickButton penetratorForwardButton = new JoystickButton(driverController, 7);
+    JoystickButton penetratorBackwardButton = new JoystickButton(driverController, 8);
+    penetratorForwardButton.whileTrue(new InsertPenetrator(this.penetratorSubsystem));
+    penetratorBackwardButton.whileTrue(new PullOutPenetrator(this.penetratorSubsystem));
+    // Rimmer (kind of like sucknblow, sparkmax encoder)
+    JoystickButton rimmerForwardButton = new JoystickButton(driverController, 9);
+    JoystickButton rimmerBackwardButton = new JoystickButton(driverController, 10);
+    rimmerForwardButton.whileTrue(new ClockwiseRim(this.rimmerSubsystem));
+    rimmerBackwardButton.whileTrue(new CounterClockwiseRim(this.rimmerSubsystem));
 
     // // States
     // addStateBinding(7, ArmState.STOWED, ArmState.CORAL_PICKUP); // Default state, also is the CORAL_CARRY
