@@ -65,10 +65,12 @@ public class RobotContainer {
   public RobotContainer() {
     this.driverController = new Joystick(InputConstants.DRIVER_CONTROLLER_PORT);
 
-    // this.drive = new SwerveDriveSubsystem();
-    // this.suckNBlowSubsystem = new SuckNBlowSubsystem();
-    // this.elevatorSubsystem = new ElevatorSubsystem();
-    // this.clawSubsystem = new ClawSubsystem();
+    this.drive = new SwerveDriveSubsystem();
+    this.suckNBlowSubsystem = new SuckNBlowSubsystem();
+    this.elevatorSubsystem = new ElevatorSubsystem();
+    this.clawSubsystem = new ClawSubsystem();
+    this.rimmerSubsystem = new RimmerSubsystem();
+    this.penetratorSubsystem = new PenetratorSubsystem();
 
     this.swerveTestSubsystem = new TESTSwervesusbsystem(SwerveDriveConstants.FRONT_RIGHT_TURN_ID);
 
@@ -115,17 +117,17 @@ public class RobotContainer {
     clawForwardButton.whileTrue(new ClawTickForwardCommand(this.clawSubsystem));
     clawBackwardButton.whileTrue(new ClawTickBackwardCommand(this.clawSubsystem));
     
-    // Lift Manual
-    // Penetrator (kind of like elevator, talonfx encoder)
-    JoystickButton penetratorForwardButton = new JoystickButton(driverController, 7);
-    JoystickButton penetratorBackwardButton = new JoystickButton(driverController, 8);
-    penetratorForwardButton.whileTrue(new InsertPenetrator(this.penetratorSubsystem));
-    penetratorBackwardButton.whileTrue(new PullOutPenetrator(this.penetratorSubsystem));
-    // Rimmer (kind of like sucknblow, sparkmax encoder)
-    JoystickButton rimmerForwardButton = new JoystickButton(driverController, 9);
-    JoystickButton rimmerBackwardButton = new JoystickButton(driverController, 10);
-    rimmerForwardButton.whileTrue(new ClockwiseRim(this.rimmerSubsystem));
-    rimmerBackwardButton.whileTrue(new CounterClockwiseRim(this.rimmerSubsystem));
+    // // Lift Manual
+    // // Penetrator (kind of like elevator, talonfx encoder)
+    // JoystickButton penetratorForwardButton = new JoystickButton(driverController, 7);
+    // JoystickButton penetratorBackwardButton = new JoystickButton(driverController, 8);
+    // penetratorForwardButton.whileTrue(new InsertPenetrator(this.penetratorSubsystem));
+    // penetratorBackwardButton.whileTrue(new PullOutPenetrator(this.penetratorSubsystem));
+    // // Rimmer (kind of like sucknblow, sparkmax encoder)
+    // JoystickButton rimmerForwardButton = new JoystickButton(driverController, 9);
+    // JoystickButton rimmerBackwardButton = new JoystickButton(driverController, 10);
+    // rimmerForwardButton.whileTrue(new ClockwiseRim(this.rimmerSubsystem));
+    // rimmerBackwardButton.whileTrue(new CounterClockwiseRim(this.rimmerSubsystem));
 
     // // States
     // addStateBinding(7, ArmState.STOWED, ArmState.CORAL_PICKUP); // Default state, also is the CORAL_CARRY

@@ -19,7 +19,7 @@ public class PenetratorSubsystem extends SubsystemBase{
         super();
         this.motor = new TalonFX(PenetratorConstants.MOTOR_ID);
 
-        this.motor.setNeutralMode(NeutralModeValue.Brake);
+        // this.motor.setNeutralMode(NeutralModeValue.Brake);
     }
 
     /**

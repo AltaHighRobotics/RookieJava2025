@@ -38,14 +38,14 @@ public final class Constants {
     public static final int INTAKE_LEFT_ID = 10;
     public static final int INTAKE_RIGHT_ID = 11;
 
+    public static final int BACK_LEFT_DRIVE_ID = 2;
+    public static final int BACK_LEFT_TURN_ID = 22;
+
     public static final int FRONT_LEFT_DRIVE_ID = 3;
     public static final int FRONT_LEFT_TURN_ID = 33;
 
     public static final int FRONT_RIGHT_DRIVE_ID = 4;
     public static final int FRONT_RIGHT_TURN_ID = 44;
-
-    public static final int BACK_LEFT_DRIVE_ID = 2;
-    public static final int BACK_LEFT_TURN_ID = 22;
 
     public static final int BACK_RIGHT_DRIVE_ID = 5;
     public static final int BACK_RIGHT_TURN_ID = 55;
@@ -78,7 +78,7 @@ public final class Constants {
   }
 
   public static class RimmerConstants {
-    public static final int SPARK_MAX_ID = 43; //CHANGE THIS
+    public static final int SPARK_MAX_ID = 15; //CHANGE THIS
     public static final double MOTOR_INSERT_SPEED = 0.4;
     public static final double MOTOR_PULLOUT_SPEED = 0.8;
   }
