@@ -17,8 +17,9 @@ import frc.robot.commands.FullArmCommand;
 import frc.robot.commands.PauseArm;
 import frc.robot.commands.FullArmCommand.ArmState;
 import frc.robot.commands.SuckNBlowCommands.BlowCommand;
+import frc.robot.commands.SuckNBlowCommands.StopSuckCommand;
 import frc.robot.commands.SuckNBlowCommands.SuckCommand;
-import frc.robot.commands.Swerve.EncoderTestCommand;
+// import frc.robot.commands.Swerve.EncoderTestCommand;
 import frc.robot.commands.Swerve.ResetOrientationCommand;
 import frc.robot.commands.Swerve.SwerveDriveCommand;
 import frc.robot.commands.claw.ClawGoToTarget;
@@ -35,7 +36,7 @@ import frc.robot.commands.lift.InsertPenetrator;
 import frc.robot.commands.lift.PullOutPenetrator;
 import frc.robot.subsystems.SuckNBlowSubsystem;
 import frc.robot.subsystems.Swerve.SwerveDriveSubsystem;
-import frc.robot.subsystems.Swerve.TESTSwervesusbsystem;
+// import frc.robot.subsystems.Swerve.TESTSwervesusbsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PenetratorSubsystem;
 import frc.robot.subsystems.RimmerSubsystem;
@@ -52,8 +53,8 @@ import frc.robot.subsystems.ClawSubsystem;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-  private final Joystick driverController;
-  private final Joystick armController;
+  private final Joystick driverController;  // Xbox Controller
+  private final Joystick armController;     // Flight controller
 
   private SwerveDriveSubsystem drive;
   private SuckNBlowSubsystem suckNBlowSubsystem;
@@ -77,7 +78,7 @@ public class RobotContainer {
 
     configureBindings();
 
-    this.drive.setDefaultCommand(new SwerveDriveCommand(drive, armController));
+    this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
     this.elevatorSubsystem.setDefaultCommand(new ElevatorGoToTarget(elevatorSubsystem));
     this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem));
   }
@@ -105,6 +106,9 @@ public class RobotContainer {
     JoystickButton blowButton = new JoystickButton(armController, 2);
     suckButton.whileTrue(new SuckCommand(this.suckNBlowSubsystem));
     blowButton.whileTrue(new BlowCommand(this.suckNBlowSubsystem));
+    // STOP MOVING
+    // JoystickButton stopBlowButton = new JoystickButton(armController, 6);
+    // stopBlowButton.whileTrue(new StopSuckCommand(this.suckNBlowSubsystem));
 
     // Elevator Manual
     JoystickButton elevatorUPButton = new JoystickButton(armController, 5);
@@ -112,8 +116,8 @@ public class RobotContainer {
     elevatorUPButton.whileTrue(new ElevatorTickUpwards(this.elevatorSubsystem));
     elevatorDownButton.whileTrue(new ElevatorTickBackwards(this.elevatorSubsystem));
     // STOP ELEVATOR ITS GOING CRAZY
-    JoystickButton stopElevatorCommand = new JoystickButton(armController, 11);
-    stopElevatorCommand.whileTrue(new StopElevatorCommand(this.elevatorSubsystem));
+    // JoystickButton stopElevatorCommand = new JoystickButton(armController, 7);
+    // stopElevatorCommand.whileTrue(new StopElevatorCommand(this.elevatorSubsystem));
     
     // Claw Manual
     JoystickButton clawForwardButton = new JoystickButton(armController, 4);
@@ -123,23 +127,23 @@ public class RobotContainer {
     
     // Lift Manual
     // Penetrator (kind of like elevator, talonfx encoder)
-    JoystickButton penetratorForwardButton = new JoystickButton(armController, 7);
-    JoystickButton penetratorBackwardButton = new JoystickButton(armController, 8);
+    JoystickButton penetratorForwardButton = new JoystickButton(driverController, 1); // Xbox "A" button    // 7);  // flight controller version
+    JoystickButton penetratorBackwardButton = new JoystickButton(driverController, 2); // Xbox "B" button   // 8);  // flight controller version
     penetratorForwardButton.whileTrue(new InsertPenetrator(this.penetratorSubsystem));
     penetratorBackwardButton.whileTrue(new PullOutPenetrator(this.penetratorSubsystem));
     // Rimmer (kind of like sucknblow, sparkmax encoder)
-    JoystickButton rimmerForwardButton = new JoystickButton(armController, 9);
-    JoystickButton rimmerBackwardButton = new JoystickButton(armController, 10);
+    JoystickButton rimmerForwardButton = new JoystickButton(driverController, 3); // Xbox "X" button        // 9);  // flight controller version
+    JoystickButton rimmerBackwardButton = new JoystickButton(driverController, 4); // Xbox "Y" button       // 10);  // flight controller version
     rimmerForwardButton.whileTrue(new ClockwiseRim(this.rimmerSubsystem));
     rimmerBackwardButton.whileTrue(new CounterClockwiseRim(this.rimmerSubsystem));
 
-    // // States
-    // addStateBinding(7, ArmState.STOWED, ArmState.CORAL_PICKUP); // Default state, also is the CORAL_CARRY
-    // addStateBinding(8, ArmState.BALL_PICKUP_1, ArmState.CORAL_SCORE_1);
-    // addStateBinding(9, ArmState.BALL_PICKUP_2, ArmState.CORAL_SCORE_2);
-    // addStateBinding(10, ArmState.BALL_SCORE_1, ArmState.CORAL_SCORE_3);
-    // addStateBinding(11, ArmState.BALL_SCORE_2, ArmState.CORAL_SCORE_4);
-    // addStateBinding(12, ArmState.BALL_CARRY, ArmState.BLOW);
+    // States
+    addStateBinding(7, ArmState.STOWED, ArmState.CORAL_PICKUP); // Default state, also is the CORAL_CARRY
+    addStateBinding(8, ArmState.BALL_PICKUP_1, ArmState.CORAL_SCORE_1);
+    addStateBinding(9, ArmState.BALL_PICKUP_2, ArmState.CORAL_SCORE_2);
+    addStateBinding(10, ArmState.BALL_SCORE_1, ArmState.CORAL_SCORE_3);
+    addStateBinding(11, ArmState.BALL_SCORE_2, ArmState.CORAL_SCORE_4);
+    addStateBinding(12, ArmState.BALL_CARRY, ArmState.BLOW);
   }
 
   /**

@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.PenetratorConstants;
 
@@ -19,7 +20,8 @@ public class PenetratorSubsystem extends SubsystemBase{
         super();
         this.motor = new TalonFX(PenetratorConstants.MOTOR_ID);
 
-        // this.motor.setNeutralMode(NeutralModeValue.Brake);
+        final double extension = this.motor.getPosition().getValue().magnitude();
+        SmartDashboard.putNumber("Penetrator Extension", extension);
     }
 
     /**
