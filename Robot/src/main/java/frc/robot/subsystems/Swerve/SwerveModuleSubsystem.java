@@ -9,6 +9,8 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.SwerveDriveConstants;
 
@@ -16,7 +18,8 @@ import com.revrobotics.spark.SparkLowLevel;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.revrobotics.AbsoluteEncoder;
+import com.revrobotics.RelativeEncoder;
+// import edu.wpi.first.wpilibj.Encoder;
 import com.revrobotics.spark.SparkMax;
 
 
@@ -24,7 +27,7 @@ public class SwerveModuleSubsystem extends SubsystemBase {
   
   private TalonSRX drive;
   private SparkMax turn;
-  private AbsoluteEncoder turnEncoder;
+  private RelativeEncoder turnEncoder;
   private ProfiledPIDController turningPIDController;
   private double maxOut;
 
@@ -41,7 +44,7 @@ public class SwerveModuleSubsystem extends SubsystemBase {
     this.drive.setNeutralMode(NeutralMode.Brake); // Stop wheel from moving when weren't not driving
 
     this.turn = new SparkMax(steerID, SparkLowLevel.MotorType.kBrushless);
-    this.turnEncoder = this.turn.getAbsoluteEncoder(); // Zero wheels before power on
+    this.turnEncoder = this.turn.getEncoder(); // Zero wheels before power on
 
     this.turningPIDController = new ProfiledPIDController(
       P, I, D,
@@ -55,6 +58,8 @@ public class SwerveModuleSubsystem extends SubsystemBase {
 
     // Default maxOutput to 0
     this.maxOut = 0;
+
+    SmartDashboard.putNumber("Gear Ratio", SwerveDriveConstants.SWERVE_TURN_GEAR_RATIO);
   }
 
   /**
@@ -64,7 +69,7 @@ public class SwerveModuleSubsystem extends SubsystemBase {
   */
   public Rotation2d getEncoder() {
     final double tau = Math.PI * 2;
-    final double gearRatio = SwerveDriveConstants.SWERVE_TURN_GEAR_RATIO;
+    final double gearRatio = SmartDashboard.getNumber("Gear Ratio", 0);
     return new Rotation2d(this.turnEncoder.getPosition() * tau * gearRatio);
   }
 
@@ -85,7 +90,7 @@ public class SwerveModuleSubsystem extends SubsystemBase {
   */
   public void setDesiredState(final SwerveModuleState desiredState) {
     final double tau = Math.PI * 2;
-    final double gearRatio = SwerveDriveConstants.SWERVE_TURN_GEAR_RATIO;
+    final double gearRatio = SmartDashboard.getNumber("Gear Ratio", 0);
 
     // Gets the current angle of the module
     final Rotation2d encoderRotation = this.getEncoder();
@@ -99,9 +104,9 @@ public class SwerveModuleSubsystem extends SubsystemBase {
     final double driveOuput = state.speedMetersPerSecond;
 
     // Uses PID to tell the SparkMax's how much to rotate
-    System.out.printf("---------------------\nTurn Current Pos Raw: %.6f\n", this.turnEncoder.getPosition());
-    System.out.printf("Turn Current Pos Rad: %.6f\n", this.turnEncoder.getPosition() * gearRatio * tau);
-    System.out.printf("Turn Target Rad: %.6f\n", state.angle.getRadians());
+    // System.out.printf("---------------------\nTurn Current Pos Raw: %.6f\n", this.turnEncoder.getPosition());
+    // System.out.printf("Turn Current Pos Rad: %.6f\n", this.turnEncoder.getPosition() * gearRatio * tau);
+    // System.out.printf("Turn Target Rad: %.6f\n", state.angle.getRadians());
     final double turnOutput = this.turningPIDController.calculate(
       encoderRotation.getRadians(), state.angle.getRadians()
     );

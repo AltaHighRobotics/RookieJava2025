@@ -7,6 +7,7 @@ package frc.robot;
 import java.security.cert.CertPathValidatorException.BasicReason;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.InputConstants;
@@ -52,6 +53,7 @@ import frc.robot.subsystems.ClawSubsystem;
  */
 public class RobotContainer {
   private final Joystick driverController;
+  private final Joystick armController;
 
   private SwerveDriveSubsystem drive;
   private SuckNBlowSubsystem suckNBlowSubsystem;
@@ -60,10 +62,9 @@ public class RobotContainer {
   private PenetratorSubsystem penetratorSubsystem;
   private RimmerSubsystem rimmerSubsystem;
 
-  private TESTSwervesusbsystem swerveTestSubsystem;
-
   public RobotContainer() {
-    this.driverController = new Joystick(InputConstants.DRIVER_CONTROLLER_PORT);
+    this.driverController = new Joystick(1);
+    this.armController = new Joystick(0);
 
     this.drive = new SwerveDriveSubsystem();
     this.suckNBlowSubsystem = new SuckNBlowSubsystem();
@@ -76,16 +77,16 @@ public class RobotContainer {
 
     configureBindings();
 
-    // this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
-    // this.elevatorSubsystem.setDefaultCommand(new ElevatorGoToTarget(elevatorSubsystem));
-    // this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem));
+    this.drive.setDefaultCommand(new SwerveDriveCommand(drive, armController));
+    this.elevatorSubsystem.setDefaultCommand(new ElevatorGoToTarget(elevatorSubsystem));
+    this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem));
   }
 
   private void addStateBinding(int buttonNumber, ArmState armState, ArmState armState2) {
-    JoystickButton stateButton = new JoystickButton(driverController, buttonNumber);
+    JoystickButton stateButton = new JoystickButton(armController, buttonNumber);
     // stateButton.whileFalse(new PauseArm(elevatorSubsystem, clawSubsystem));
     stateButton.whileTrue(new FullArmCommand(
-      this.elevatorSubsystem, this.clawSubsystem, armState, armState2, this.driverController
+      this.elevatorSubsystem, this.clawSubsystem, armState, armState2, this.armController
     ));
   }
 
@@ -93,42 +94,42 @@ public class RobotContainer {
    * Use this method to define your trigger->command mappings. Triggers can be
    */
   private void configureBindings() {
-    // JoystickButton gyroResetButton = new JoystickButton(driverController, 5);
-    // gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
+    JoystickButton gyroResetButton = new JoystickButton(driverController, 5);
+    gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
 
     // JoystickButton myButton = new JoystickButton(driverController, 1);
     // myButton.whileTrue(new EncoderTestCommand(swerveTestSubsystem));
 
     // Suck N Blow
-    JoystickButton suckButton = new JoystickButton(driverController, 1);
-    JoystickButton blowButton = new JoystickButton(driverController, 2);
+    JoystickButton suckButton = new JoystickButton(armController, 1);
+    JoystickButton blowButton = new JoystickButton(armController, 2);
     suckButton.whileTrue(new SuckCommand(this.suckNBlowSubsystem));
     blowButton.whileTrue(new BlowCommand(this.suckNBlowSubsystem));
 
     // Elevator Manual
-    JoystickButton elevatorUPButton = new JoystickButton(driverController, 5);
-    JoystickButton elevatorDownButton = new JoystickButton(driverController, 3);
+    JoystickButton elevatorUPButton = new JoystickButton(armController, 1);
+    JoystickButton elevatorDownButton = new JoystickButton(armController, 3);
     elevatorUPButton.whileTrue(new ElevatorTickUpwards(this.elevatorSubsystem));
     elevatorDownButton.whileTrue(new ElevatorTickBackwards(this.elevatorSubsystem));
-
-    JoystickButton stopElevatorCommand = new JoystickButton(driverController, 11);
+    // STOP ELEVATOR ITS GOING CRAZY
+    JoystickButton stopElevatorCommand = new JoystickButton(armController, 11);
     stopElevatorCommand.whileTrue(new StopElevatorCommand(this.elevatorSubsystem));
     
     // Claw Manual
-    JoystickButton clawForwardButton = new JoystickButton(driverController, 6);
-    JoystickButton clawBackwardButton = new JoystickButton(driverController, 4);
+    JoystickButton clawForwardButton = new JoystickButton(armController, 4);
+    JoystickButton clawBackwardButton = new JoystickButton(armController, 6);
     clawForwardButton.whileTrue(new ClawTickForwardCommand(this.clawSubsystem));
     clawBackwardButton.whileTrue(new ClawTickBackwardCommand(this.clawSubsystem));
     
     // Lift Manual
     // Penetrator (kind of like elevator, talonfx encoder)
-    JoystickButton penetratorForwardButton = new JoystickButton(driverController, 7);
-    JoystickButton penetratorBackwardButton = new JoystickButton(driverController, 8);
+    JoystickButton penetratorForwardButton = new JoystickButton(armController, 7);
+    JoystickButton penetratorBackwardButton = new JoystickButton(armController, 8);
     penetratorForwardButton.whileTrue(new InsertPenetrator(this.penetratorSubsystem));
     penetratorBackwardButton.whileTrue(new PullOutPenetrator(this.penetratorSubsystem));
     // Rimmer (kind of like sucknblow, sparkmax encoder)
-    JoystickButton rimmerForwardButton = new JoystickButton(driverController, 9);
-    JoystickButton rimmerBackwardButton = new JoystickButton(driverController, 10);
+    JoystickButton rimmerForwardButton = new JoystickButton(armController, 9);
+    JoystickButton rimmerBackwardButton = new JoystickButton(armController, 10);
     rimmerForwardButton.whileTrue(new ClockwiseRim(this.rimmerSubsystem));
     rimmerBackwardButton.whileTrue(new CounterClockwiseRim(this.rimmerSubsystem));
 
