@@ -1,10 +1,10 @@
 # BetterVetSwerve
 
 ## Progress
-- [ ] Swerve Drive - Ethan
+- [x] Swerve Drive - Ethan
   - [x] Fix Motors to work with Phoneix 5
   - [x] Measure Center to Center and other constants like gear ratio
-  - [ ] Fully tested and working
+  - [x] Fully tested and working
         
 - [x] Elevator - Danial
   - [x] Subsystem
@@ -16,10 +16,10 @@
   - [x] Fully tested and working
         
 - [ ] Claw - Pizza
-  - [ ] Subsystem
-    - [ ] Method to set the angle of the subsystem (Just like SweveDrive) should use PID
-  - [ ] Testing Command
-    - [ ] Can set to any angle in degrees
+  - [x] Subsystem
+    - [x] Method to set the angle of the subsystem (Just like SweveDrive) should use PID
+  - [x] Testing Command
+    - [x] Can set to any angle in degrees
     - [ ] Takes in an enum with three different setpoints
   - [ ] Button Binded to command for each setpoint
   - [ ] Fully tested and working
@@ -34,15 +34,25 @@
   - [x] Button Binded to command
   - [x] Fully tested and working
         
-- [ ] Fagimizer - Not yet built
-  - [ ] Subsystem
-    - [ ] Method to go in
-    - [ ] Method to pull out 
-  - [ ] Testing Command
-    - [ ] Command to go in through subsystem
-    - [ ] Command to pull out through subsystem
-  - [ ] Button Binded to commands
-  - [ ] Fully tested and working
+- [x] Fagimizer
+  - [x] Subsystem
+    - [x] Method to go in
+    - [x] Method to pull out 
+  - [x] Testing Command
+    - [x] Command to go in through subsystem
+    - [x] Command to pull out through subsystem
+  - [x] Button Binded to commands
+  - [x] Fully tested and working
+
+- [x] Rimmer
+  - [x] Subsystem
+    - [x] Method of insertion
+    - [x] Method to pull out
+  - [x] Testing Command
+    - [X] Command to insert through subsystem
+    - [x] Command to pull out through subsystem
+  - [x] Button binded to commands
+  - [x] Fully tested and working
 
 ## Git
 * The main branch is only for 100% tested, working code
