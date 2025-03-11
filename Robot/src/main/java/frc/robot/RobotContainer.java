@@ -94,7 +94,7 @@ public class RobotContainer {
    * Use this method to define your trigger->command mappings. Triggers can be
    */
   private void configureBindings() {
-    JoystickButton gyroResetButton = new JoystickButton(driverController, 5);
+    JoystickButton gyroResetButton = new JoystickButton(driverController, 12);
     gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
 
     // JoystickButton myButton = new JoystickButton(driverController, 1);
@@ -107,7 +107,7 @@ public class RobotContainer {
     blowButton.whileTrue(new BlowCommand(this.suckNBlowSubsystem));
 
     // Elevator Manual
-    JoystickButton elevatorUPButton = new JoystickButton(armController, 1);
+    JoystickButton elevatorUPButton = new JoystickButton(armController, 5);
     JoystickButton elevatorDownButton = new JoystickButton(armController, 3);
     elevatorUPButton.whileTrue(new ElevatorTickUpwards(this.elevatorSubsystem));
     elevatorDownButton.whileTrue(new ElevatorTickBackwards(this.elevatorSubsystem));
