@@ -78,7 +78,7 @@ public class RobotContainer {
 
     configureBindings();
 
-    this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
+    this.drive.setDefaultCommand(new SwerveDriveCommand(drive, armController));
     this.elevatorSubsystem.setDefaultCommand(new ElevatorGoToTarget(elevatorSubsystem));
     this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem));
   }
@@ -127,23 +127,23 @@ public class RobotContainer {
     
     // Lift Manual
     // Penetrator (kind of like elevator, talonfx encoder)
-    JoystickButton penetratorForwardButton = new JoystickButton(driverController, 1); // Xbox "A" button    // 7);  // flight controller version
-    JoystickButton penetratorBackwardButton = new JoystickButton(driverController, 2); // Xbox "B" button   // 8);  // flight controller version
+    JoystickButton penetratorForwardButton = new JoystickButton(driverController, 7);  // flight controller version
+    JoystickButton penetratorBackwardButton = new JoystickButton(driverController, 8);  // flight controller version
     penetratorForwardButton.whileTrue(new InsertPenetrator(this.penetratorSubsystem));
     penetratorBackwardButton.whileTrue(new PullOutPenetrator(this.penetratorSubsystem));
     // Rimmer (kind of like sucknblow, sparkmax encoder)
-    JoystickButton rimmerForwardButton = new JoystickButton(driverController, 3); // Xbox "X" button        // 9);  // flight controller version
-    JoystickButton rimmerBackwardButton = new JoystickButton(driverController, 4); // Xbox "Y" button       // 10);  // flight controller version
+    JoystickButton rimmerForwardButton = new JoystickButton(driverController, 9);  // flight controller version
+    JoystickButton rimmerBackwardButton = new JoystickButton(driverController, 10);  // flight controller version
     rimmerForwardButton.whileTrue(new ClockwiseRim(this.rimmerSubsystem));
     rimmerBackwardButton.whileTrue(new CounterClockwiseRim(this.rimmerSubsystem));
 
-    // States
-    addStateBinding(7, ArmState.STOWED, ArmState.CORAL_PICKUP); // Default state, also is the CORAL_CARRY
-    addStateBinding(8, ArmState.BALL_PICKUP_1, ArmState.CORAL_SCORE_1);
-    addStateBinding(9, ArmState.BALL_PICKUP_2, ArmState.CORAL_SCORE_2);
-    addStateBinding(10, ArmState.BALL_SCORE_1, ArmState.CORAL_SCORE_3);
-    addStateBinding(11, ArmState.BALL_SCORE_2, ArmState.CORAL_SCORE_4);
-    addStateBinding(12, ArmState.BALL_CARRY, ArmState.BLOW);
+    // // States
+    // addStateBinding(7, ArmState.STOWED, ArmState.CORAL_PICKUP); // Default state, also is the CORAL_CARRY
+    // addStateBinding(8, ArmState.BALL_PICKUP_1, ArmState.CORAL_SCORE_1);
+    // addStateBinding(9, ArmState.BALL_PICKUP_2, ArmState.CORAL_SCORE_2);
+    // addStateBinding(10, ArmState.BALL_SCORE_1, ArmState.CORAL_SCORE_3);
+    // addStateBinding(11, ArmState.BALL_SCORE_2, ArmState.CORAL_SCORE_4);
+    // addStateBinding(12, ArmState.BALL_CARRY, ArmState.BLOW);
   }
 
   /**
