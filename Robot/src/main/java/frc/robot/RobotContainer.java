@@ -100,8 +100,8 @@ public class RobotContainer {
    * Use this method to define your trigger->command mappings. Triggers can be
    */
   private void configureBindings() {
-    JoystickButton gyroResetButton = new JoystickButton(driverController, 12);
-    gyroResetButton.onTrue(new ResetOrientationCommand(this.drive));
+    JoystickButton gyroResetButton = new JoystickButton(armController, 12);
+    gyroResetButton.whileTrue(new ResetOrientationCommand(this.drive));
 
     // JoystickButton myButton = new JoystickButton(driverController, 1);
     // myButton.whileTrue(new EncoderTestCommand(swerveTestSubsystem));
@@ -117,9 +117,11 @@ public class RobotContainer {
 
     // Elevator Manual
     JoystickButton elevatorUPButton = new JoystickButton(armController, 5);
-    JoystickButton elevatorDownButton = new JoystickButton(armController, 3);
+    JoystickButton elevatorDownButton = new JoystickButton(armController, 3); 
+    JoystickButton elevatorStopButton = new JoystickButton(armController, 11);
     elevatorUPButton.whileTrue(new ElevatorTickUpwards(this.elevatorSubsystem));
     elevatorDownButton.whileTrue(new ElevatorTickBackwards(this.elevatorSubsystem));
+    elevatorStopButton.whileTrue(new ElevatorTickBackwards(this.elevatorSubsystem));
     // STOP ELEVATOR ITS GOING CRAZY
     // JoystickButton stopElevatorCommand = new JoystickButton(armController, 7);
     // stopElevatorCommand.whileTrue(new StopElevatorCommand(this.elevatorSubsystem));
@@ -143,12 +145,12 @@ public class RobotContainer {
     rimmerBackwardButton.whileTrue(new CounterClockwiseRim(this.rimmerSubsystem));
 
     // Apriltag commands (we need pi with camera, pi is fried)
-    JoystickButton followApriltag = new JoystickButton(armController, 11);  // flight controller version
-    JoystickButton travelToApriltag = new JoystickButton(armController , 12);  // flight controller version
-    followApriltag.whileTrue(new FollowApriltagCommand(this.drive, this.apriltagSubsystem));
-    travelToApriltag.whileTrue(new TravelToApriltagCommand(this.drive, this.apriltagSubsystem));
+    // JoystickButton followApriltag = new JoystickButton(armController, 11);  // flight controller version
+    // JoystickButton travelToApriltag = new JoystickButton(armController , 12);  // flight controller version
+    // followApriltag.whileTrue(new FollowApriltagCommand(this.drive, this.apriltagSubsystem));
+    // travelToApriltag.whileTrue(new TravelToApriltagCommand(this.drive, this.apriltagSubsystem));
 
-    // // States
+    // States
     // addStateBinding(7, ArmState.STOWED, ArmState.CORAL_PICKUP); // Default state, also is the CORAL_CARRY
     // addStateBinding(8, ArmState.BALL_PICKUP_1, ArmState.CORAL_SCORE_1);
     // addStateBinding(9, ArmState.BALL_PICKUP_2, ArmState.CORAL_SCORE_2);
