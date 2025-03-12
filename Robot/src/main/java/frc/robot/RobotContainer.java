@@ -166,7 +166,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    // return Autos.stationAlign(drive, this.apriltagSubsystem);
-    return null;
+    return Autos.stationAlign(drive);
   }
 }

@@ -98,4 +98,7 @@ public final class Constants {
     public static final double D = 0.01;
   }
   
+  public static class AutoConstants {
+    public static final long milisecondsAlive = 1500;
+  }
 }
