@@ -44,6 +44,16 @@ public class TravelToApriltagCommand extends Command {
         final double driveSpeed = 0.7;
 
         drive.drive(driveYSpeed, driveXSpeed, driveRotation, driveSpeed);
+        System.out.print("----------------------------------------");
+
+        System.out.printf("Apriltag X meters away: %.6f\n", xMetersAway);
+        System.out.printf("Apriltag Y meters away: %.6f\n", yMetersAway);
+        System.out.printf("Apriltag rotation offset: %.6f\n", rotationAway);
+        // System.out.printf("Elevator Current Position: %.6f\n", driveXSpeed);
+        // System.out.printf("Elevator Current Position: %.6f\n", driveYSpeed);
+
+        System.out.print("----------------------------------------");
+
     }
 
     // Called once the command ends or is interrupted.
