@@ -139,13 +139,13 @@ public class RobotContainer {
     
     // Lift Manual
     // Penetrator (kind of like elevator, talonfx encoder)
-    JoystickButton penetratorForwardButton = new JoystickButton(armController, 7);  // flight controller version
-    JoystickButton penetratorBackwardButton = new JoystickButton(armController , 8);  // flight controller version
+    JoystickButton penetratorForwardButton = new JoystickButton(driverController, 2);  // flight controller version
+    JoystickButton penetratorBackwardButton = new JoystickButton(driverController , 3);  // flight controller version
     penetratorForwardButton.whileTrue(new InsertPenetrator(this.penetratorSubsystem));
     penetratorBackwardButton.whileTrue(new PullOutPenetrator(this.penetratorSubsystem));
     // Rimmer (kind of like sucknblow, sparkmax encoder)
-    JoystickButton rimmerForwardButton = new JoystickButton(armController, 9);  // flight controller version
-    JoystickButton rimmerBackwardButton = new JoystickButton(armController, 10);  // flight controller version
+    JoystickButton rimmerForwardButton = new JoystickButton(driverController, 5);  // flight controller version
+    JoystickButton rimmerBackwardButton = new JoystickButton(driverController, 6);  // flight controller version
     rimmerForwardButton.whileTrue(new ClockwiseRim(this.rimmerSubsystem));
     rimmerBackwardButton.whileTrue(new CounterClockwiseRim(this.rimmerSubsystem));
 
