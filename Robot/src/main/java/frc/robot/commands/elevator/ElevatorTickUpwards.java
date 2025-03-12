@@ -12,7 +12,8 @@ public class ElevatorTickUpwards extends Command {
     }
 
     @Override
-    public void initialize() {
+    public void execute() {
         this.elevatorSubsystem.tickUpwards();
+        this.elevatorSubsystem.moveToTargetHeight();
     }
 }

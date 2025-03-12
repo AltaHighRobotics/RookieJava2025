@@ -10,7 +10,7 @@ import frc.robot.commands.apriltag.FollowApriltagCommand;
 import frc.robot.subsystems.ApriltagSubsystem;
 import frc.robot.subsystems.Swerve.SwerveDriveSubsystem;
 
-public final class Autos {
+public final class Autos extends Command {
   /** Example static factory for an autonomous command. */
   public static Command stationAlign(SwerveDriveSubsystem drive, ApriltagSubsystem apriltagSubsystem) {
     return Commands.sequence(new FollowApriltagCommand(drive, apriltagSubsystem));

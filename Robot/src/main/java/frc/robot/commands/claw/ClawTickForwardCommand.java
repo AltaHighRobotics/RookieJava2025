@@ -12,7 +12,8 @@ public class ClawTickForwardCommand extends Command {
     }
 
     @Override
-    public void initialize() {
-        this.clawSubsystem.tickForward();
+    public void execute() {
+        this.clawSubsystem.forward();
+        this.clawSubsystem.moveToTarget();
     }
 }

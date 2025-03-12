@@ -5,6 +5,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ElevatorConstants;
 
@@ -22,6 +23,10 @@ public class ElevatorSubsystem extends SubsystemBase{
         final double D = ElevatorConstants.D;
         this.pidController = new PIDController(P, I, D);
 
+        SmartDashboard.putNumber("Elevator P", P);
+        SmartDashboard.putNumber("Elevator I", I);
+        SmartDashboard.putNumber("Elevator D", D);
+
         this.motorController.setNeutralMode(NeutralModeValue.Brake);
     }
 
@@ -29,20 +34,21 @@ public class ElevatorSubsystem extends SubsystemBase{
      * @param height A percentage (0 to 1)
      */
     public void setHeight(double heightPercentage) {
-        if (heightPercentage < 0) {
-            heightPercentage = 0;
-        }
-        
-        if (heightPercentage > 1 ) {
-            heightPercentage = 1;
-        } 
-
         targetHeightPercentage = heightPercentage;
     }
 
     public void moveToTargetHeight() { // Meant to be called each tick
+        final double newP = SmartDashboard.getEntry("Elevator P").getDouble(0);
+        final double newI = SmartDashboard.getEntry("Elevator I").getDouble(0);
+        final double newD = SmartDashboard.getEntry("Elevator D").getDouble(0);
+        this.pidController.setPID(newP, newI, newD);
+
+        this.targetHeightPercentage = MathUtil.clamp(targetHeightPercentage, 0.1, 0.95);
+
         final double targetPositionRevolutions = targetHeightPercentage * ElevatorConstants.TOP_MAG;
         final double currentPositionRevolutions = this.getHeight();
+
+        System.out.printf("Elevator Current Position: %.6f\n", this.getHeight());
 
         double motorOutput = this.pidController.calculate(currentPositionRevolutions, targetPositionRevolutions);
 
@@ -53,7 +59,7 @@ public class ElevatorSubsystem extends SubsystemBase{
         if (motorOutput < 0) {
             motorOutput *= 0.5;
         }
-
+        // If the robot is trying to move upwards while at max height, it will stop itself, will always work when moving down
         motorController.set(motorOutput);
     }
 
@@ -75,11 +81,11 @@ public class ElevatorSubsystem extends SubsystemBase{
     }
 
     public void tickUpwards() {
-        setHeight(this.targetHeightPercentage + ElevatorConstants.TICK_PERCENT_DISTANCE);
+        setHeight(this.targetHeightPercentage + 0.01);
     }
 
     public void tickBackwards() {
-        setHeight(this.targetHeightPercentage - ElevatorConstants.TICK_PERCENT_DISTANCE);
+        setHeight(this.targetHeightPercentage - 0.01);
     }
 
     public void stop() {
