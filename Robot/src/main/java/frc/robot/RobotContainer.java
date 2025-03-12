@@ -15,7 +15,6 @@ import frc.robot.Constants.SwerveDriveConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.FullArmCommand;
 import frc.robot.commands.PauseArm;
-import frc.robot.commands.FullArmCommand.ArmState;
 import frc.robot.commands.SuckNBlowCommands.BlowCommand;
 import frc.robot.commands.SuckNBlowCommands.StopSuckCommand;
 import frc.robot.commands.SuckNBlowCommands.SuckCommand;
@@ -36,6 +35,8 @@ import frc.robot.commands.lift.ClockwiseRim;
 import frc.robot.commands.lift.CounterClockwiseRim;
 import frc.robot.commands.lift.InsertPenetrator;
 import frc.robot.commands.lift.PullOutPenetrator;
+import frc.robot.commands.orientation.FieldOrient;
+import frc.robot.commands.orientation.RobotOrient;
 import frc.robot.subsystems.SuckNBlowSubsystem;
 import frc.robot.subsystems.Swerve.SwerveDriveSubsystem;
 // import frc.robot.subsystems.Swerve.TESTSwervesusbsystem;
@@ -88,11 +89,11 @@ public class RobotContainer {
     this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem));
   }
 
-  private void addStateBinding(int buttonNumber, ArmState armState, ArmState armState2) {
-    JoystickButton stateButton = new JoystickButton(driverController, buttonNumber);
+  private void addStateBinding(int buttonNumber, double elevatorHeight, double clawDegrees) {
+    JoystickButton stateButton = new JoystickButton(armController, buttonNumber);
     // stateButton.whileFalse(new PauseArm(elevatorSubsystem, clawSubsystem));
     stateButton.whileTrue(new FullArmCommand(
-      this.elevatorSubsystem, this.clawSubsystem, armState, armState2, this.armController
+      this.elevatorSubsystem, this.clawSubsystem, elevatorHeight, clawDegrees
     ));
   }
 
@@ -102,6 +103,10 @@ public class RobotContainer {
   private void configureBindings() {
     JoystickButton gyroResetButton = new JoystickButton(driverController, 7);
     gyroResetButton.whileTrue(new ResetOrientationCommand(this.drive));
+
+    JoystickButton fieldButton = new JoystickButton(driverController, 1);
+    fieldButton.whileTrue(new RobotOrient(drive));
+    fieldButton.whileFalse(new FieldOrient(drive));
 
     // JoystickButton myButton = new JoystickButton(driverController, 1);
     // myButton.whileTrue(new EncoderTestCommand(swerveTestSubsystem));
@@ -151,12 +156,8 @@ public class RobotContainer {
     // travelToApriltag.whileTrue(new TravelToApriltagCommand(this.drive, this.apriltagSubsystem));
 
     // States
-    // addStateBinding(7, ArmState.STOWED, ArmState.CORAL_PICKUP); // Default state, also is the CORAL_CARRY
-    // addStateBinding(8, ArmState.BALL_PICKUP_1, ArmState.CORAL_SCORE_1);
-    // addStateBinding(9, ArmState.BALL_PICKUP_2, ArmState.CORAL_SCORE_2);
-    // addStateBinding(10, ArmState.BALL_SCORE_1, ArmState.CORAL_SCORE_3);
-    // addStateBinding(11, ArmState.BALL_SCORE_2, ArmState.CORAL_SCORE_4);
-    // addStateBinding(12, ArmState.BALL_CARRY, ArmState.BLOW);
+    addStateBinding(11, 0.0, 90);
+    addStateBinding(12,0.9, 10);
   }
 
   /**
@@ -166,7 +167,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    // return Autos.stationAlign(drive, this.apriltagSubsystem);
-    return null;
+    return Autos.stationAlign(drive);
   }
 }

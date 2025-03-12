@@ -129,7 +129,6 @@ public class SwerveModuleSubsystem extends SubsystemBase {
     
     // Actually sets the speed of the motors and how much they need to rotate
     final double maxOut = SwerveDriveConstants.SWERVE_MAX_OUTPUT;
-    System.out.printf("PID Volt: %.6f\n", MathUtil.clamp(driveOuput, -maxOut, maxOut));
     this.drive.set(TalonSRXControlMode.PercentOutput, MathUtil.clamp(driveOuput, -maxOut, maxOut));
     this.turn.setVoltage(turnOutput);
   }
