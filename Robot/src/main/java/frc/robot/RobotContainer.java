@@ -22,6 +22,8 @@ import frc.robot.commands.SuckNBlowCommands.SuckCommand;
 // import frc.robot.commands.Swerve.EncoderTestCommand;
 import frc.robot.commands.Swerve.ResetOrientationCommand;
 import frc.robot.commands.Swerve.SwerveDriveCommand;
+import frc.robot.commands.apriltag.FollowApriltagCommand;
+import frc.robot.commands.apriltag.TravelToApriltagCommand;
 import frc.robot.commands.claw.ClawGoToTarget;
 import frc.robot.commands.claw.ClawStopCommand;
 import frc.robot.commands.claw.ClawTickBackwardCommand;
@@ -40,6 +42,7 @@ import frc.robot.subsystems.Swerve.SwerveDriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.PenetratorSubsystem;
 import frc.robot.subsystems.RimmerSubsystem;
+import frc.robot.subsystems.ApriltagSubsystem;
 import frc.robot.subsystems.ClawSubsystem;
 
 
@@ -62,6 +65,7 @@ public class RobotContainer {
   private ClawSubsystem clawSubsystem;
   private PenetratorSubsystem penetratorSubsystem;
   private RimmerSubsystem rimmerSubsystem;
+  private ApriltagSubsystem apriltagSubsystem;
 
   public RobotContainer() {
     this.driverController = new Joystick(1);
@@ -73,6 +77,7 @@ public class RobotContainer {
     this.clawSubsystem = new ClawSubsystem();
     this.rimmerSubsystem = new RimmerSubsystem();
     this.penetratorSubsystem = new PenetratorSubsystem();
+    this.apriltagSubsystem = new ApriltagSubsystem();
 
     // this.swerveTestSubsystem = new TESTSwervesusbsystem(SwerveDriveConstants.FRONT_RIGHT_TURN_ID);
 
@@ -136,6 +141,12 @@ public class RobotContainer {
     JoystickButton rimmerBackwardButton = new JoystickButton(armController, 10);  // flight controller version
     rimmerForwardButton.whileTrue(new ClockwiseRim(this.rimmerSubsystem));
     rimmerBackwardButton.whileTrue(new CounterClockwiseRim(this.rimmerSubsystem));
+
+    // Apriltag commands (we need pi with camera, pi is fried)
+    JoystickButton followApriltag = new JoystickButton(armController, 11);  // flight controller version
+    JoystickButton travelToApriltag = new JoystickButton(armController , 12);  // flight controller version
+    followApriltag.whileTrue(new FollowApriltagCommand(this.drive, this.apriltagSubsystem));
+    travelToApriltag.whileTrue(new TravelToApriltagCommand(this.drive, this.apriltagSubsystem));
 
     // // States
     // addStateBinding(7, ArmState.STOWED, ArmState.CORAL_PICKUP); // Default state, also is the CORAL_CARRY
