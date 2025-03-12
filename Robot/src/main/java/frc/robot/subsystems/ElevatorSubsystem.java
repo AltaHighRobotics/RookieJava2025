@@ -48,7 +48,7 @@ public class ElevatorSubsystem extends SubsystemBase{
         final double targetPositionRevolutions = targetHeightPercentage * ElevatorConstants.TOP_MAG;
         final double currentPositionRevolutions = this.getHeight();
 
-        // System.out.printf("Elevator Current Position: %.6f\n", this.getHeight());
+        System.out.printf("Elevator Current Position: %.6f\n", this.getHeight());
 
         double motorOutput = this.pidController.calculate(currentPositionRevolutions, targetPositionRevolutions);
 

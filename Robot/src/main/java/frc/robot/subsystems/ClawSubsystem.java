@@ -49,6 +49,10 @@ public class ClawSubsystem extends SubsystemBase{
         final double motorRawOutput = this.pidController.calculate(currentRad, targetRad);
         final double limitedMotorOutput = MathUtil.clamp(motorRawOutput, -ClawConstants.MOTOR_MAX_OUTPUT, ClawConstants.MOTOR_MAX_OUTPUT);
         motor.set(limitedMotorOutput);
+
+        System.out.printf("Claw Current Position: %.6f\n", this.getDegrees());
+
+
     }
 
     public void setDegrees(double targetDegrees) {
