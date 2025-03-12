@@ -5,6 +5,7 @@
 package frc.robot.subsystems.Swerve;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
@@ -12,6 +13,7 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 // import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.ElevatorConstants;
 import frc.robot.Constants.SwerveDriveConstants;
 
 import com.revrobotics.spark.SparkLowLevel;
@@ -30,6 +32,7 @@ public class SwerveModuleSubsystem extends SubsystemBase {
   private RelativeEncoder turnEncoder;
   private ProfiledPIDController turningPIDController;
   private double maxOut;
+  private PIDController pidController;
 
   /**
   * Construct module, pid, and start encoder
@@ -46,6 +49,8 @@ public class SwerveModuleSubsystem extends SubsystemBase {
     this.turn = new SparkMax(steerID, SparkLowLevel.MotorType.kBrushless);
     this.turnEncoder = this.turn.getEncoder(); // Zero wheels before power on
 
+
+
     this.turningPIDController = new ProfiledPIDController(
       P, I, D,
       new TrapezoidProfile.Constraints(
@@ -54,6 +59,11 @@ public class SwerveModuleSubsystem extends SubsystemBase {
       )
 
     );
+
+    SmartDashboard.putNumber("Swerve P", P);
+    SmartDashboard.putNumber("Swerve I", I);
+    SmartDashboard.putNumber("Swerve D", D);
+
     this.turningPIDController.enableContinuousInput(-Math.PI, Math.PI);
 
     // Default maxOutput to 0
@@ -89,6 +99,12 @@ public class SwerveModuleSubsystem extends SubsystemBase {
   * @param desiredState The desired state of the module from kinematics
   */
   public void setDesiredState(final SwerveModuleState desiredState) {
+
+    final double newP = SmartDashboard.getEntry("Swerve P").getDouble(0);
+    final double newI = SmartDashboard.getEntry("Swerve I").getDouble(0);
+    final double newD = SmartDashboard.getEntry("Swerve D").getDouble(0);
+    this.turningPIDController.setPID(newP, newI, newD);
+
     final double tau = Math.PI * 2;
     final double gearRatio = SmartDashboard.getNumber("Gear Ratio", 0);
 

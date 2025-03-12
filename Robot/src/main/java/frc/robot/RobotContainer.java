@@ -83,13 +83,13 @@ public class RobotContainer {
 
     configureBindings();
 
-    this.drive.setDefaultCommand(new SwerveDriveCommand(drive, armController));
+    this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
     this.elevatorSubsystem.setDefaultCommand(new ElevatorGoToTarget(elevatorSubsystem));
     this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem));
   }
 
   private void addStateBinding(int buttonNumber, ArmState armState, ArmState armState2) {
-    JoystickButton stateButton = new JoystickButton(armController, buttonNumber);
+    JoystickButton stateButton = new JoystickButton(driverController, buttonNumber);
     // stateButton.whileFalse(new PauseArm(elevatorSubsystem, clawSubsystem));
     stateButton.whileTrue(new FullArmCommand(
       this.elevatorSubsystem, this.clawSubsystem, armState, armState2, this.armController
@@ -100,7 +100,7 @@ public class RobotContainer {
    * Use this method to define your trigger->command mappings. Triggers can be
    */
   private void configureBindings() {
-    JoystickButton gyroResetButton = new JoystickButton(armController, 12);
+    JoystickButton gyroResetButton = new JoystickButton(driverController, 7);
     gyroResetButton.whileTrue(new ResetOrientationCommand(this.drive));
 
     // JoystickButton myButton = new JoystickButton(driverController, 1);
@@ -134,13 +134,13 @@ public class RobotContainer {
     
     // Lift Manual
     // Penetrator (kind of like elevator, talonfx encoder)
-    JoystickButton penetratorForwardButton = new JoystickButton(armController, 7);  // flight controller version
-    JoystickButton penetratorBackwardButton = new JoystickButton(armController , 8);  // flight controller version
+    JoystickButton penetratorForwardButton = new JoystickButton(armController, 5);  // flight controller version
+    JoystickButton penetratorBackwardButton = new JoystickButton(armController , 6);  // flight controller version
     penetratorForwardButton.whileTrue(new InsertPenetrator(this.penetratorSubsystem));
     penetratorBackwardButton.whileTrue(new PullOutPenetrator(this.penetratorSubsystem));
     // Rimmer (kind of like sucknblow, sparkmax encoder)
-    JoystickButton rimmerForwardButton = new JoystickButton(armController, 9);  // flight controller version
-    JoystickButton rimmerBackwardButton = new JoystickButton(armController, 10);  // flight controller version
+    JoystickButton rimmerForwardButton = new JoystickButton(armController, 1);  // flight controller version
+    JoystickButton rimmerBackwardButton = new JoystickButton(armController, 2);  // flight controller version
     rimmerForwardButton.whileTrue(new ClockwiseRim(this.rimmerSubsystem));
     rimmerBackwardButton.whileTrue(new CounterClockwiseRim(this.rimmerSubsystem));
 
