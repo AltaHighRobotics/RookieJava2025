@@ -35,6 +35,8 @@ import frc.robot.commands.lift.ClockwiseRim;
 import frc.robot.commands.lift.CounterClockwiseRim;
 import frc.robot.commands.lift.InsertPenetrator;
 import frc.robot.commands.lift.PullOutPenetrator;
+import frc.robot.commands.orientation.FieldOrient;
+import frc.robot.commands.orientation.RobotOrient;
 import frc.robot.subsystems.SuckNBlowSubsystem;
 import frc.robot.subsystems.Swerve.SwerveDriveSubsystem;
 // import frc.robot.subsystems.Swerve.TESTSwervesusbsystem;
@@ -101,6 +103,10 @@ public class RobotContainer {
   private void configureBindings() {
     JoystickButton gyroResetButton = new JoystickButton(driverController, 7);
     gyroResetButton.whileTrue(new ResetOrientationCommand(this.drive));
+
+    JoystickButton fieldButton = new JoystickButton(driverController, 1);
+    fieldButton.whileTrue(new RobotOrient(drive));
+    fieldButton.whileFalse(new FieldOrient(drive));
 
     // JoystickButton myButton = new JoystickButton(driverController, 1);
     // myButton.whileTrue(new EncoderTestCommand(swerveTestSubsystem));

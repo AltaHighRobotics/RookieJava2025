@@ -33,6 +33,8 @@ public class SwerveDriveSubsystem extends SubsystemBase {
   private AHRS gyro;
 
   private SwerveDriveKinematics kinematics;
+
+  public boolean fieldOriented;
   
   /**
   * Constructs the drive, creates modules for each of the four motors.
@@ -41,6 +43,8 @@ public class SwerveDriveSubsystem extends SubsystemBase {
   */
   public SwerveDriveSubsystem() {
     super();
+
+    this.fieldOriented = true;
 
     final double P = SwerveDriveConstants.P;
     final double I = SwerveDriveConstants.I;
@@ -125,7 +129,7 @@ public class SwerveDriveSubsystem extends SubsystemBase {
 
     // Tells the robot which way it needs to go
     ChassisSpeeds chassisSpeeds;
-    if (InputConstants.FIELD_ORIENTED) {
+    if (this.fieldOriented) {
       // v is for Velocity
       final double vxMetersPerSecond = -xSpeed * speed;
       final double vyMetersPerSecond = ySpeed * speed;
