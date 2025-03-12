@@ -55,7 +55,7 @@ public final class Constants {
   public static class ElevatorConstants {
     public static final int MOTOR_ID = 6;
 
-    public static final double MOTOR_MAX_OUTPUT = 0.2;
+    public static final double MOTOR_MAX_OUTPUT = 0.6;
 
     public static final double TICK_PERCENT_DISTANCE = 0.05;
 
@@ -63,9 +63,9 @@ public final class Constants {
 
     public static final double MAX_HEIGHT = 15; // CHANGE THIS
 
-    public static final double P = 0.3;
+    public static final double P = 0.2;
     public static final double I = 0;
-    public static final double D = 0;
+    public static final double D = 0.01;
   }
 
   public static class PenetratorConstants {

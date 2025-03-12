@@ -15,7 +15,6 @@ import frc.robot.Constants.SwerveDriveConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.FullArmCommand;
 import frc.robot.commands.PauseArm;
-import frc.robot.commands.FullArmCommand.ArmState;
 import frc.robot.commands.SuckNBlowCommands.BlowCommand;
 import frc.robot.commands.SuckNBlowCommands.StopSuckCommand;
 import frc.robot.commands.SuckNBlowCommands.SuckCommand;
@@ -88,11 +87,11 @@ public class RobotContainer {
     this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem));
   }
 
-  private void addStateBinding(int buttonNumber, ArmState armState, ArmState armState2) {
-    JoystickButton stateButton = new JoystickButton(driverController, buttonNumber);
+  private void addStateBinding(int buttonNumber, double elevatorHeight, double clawDegrees) {
+    JoystickButton stateButton = new JoystickButton(armController, buttonNumber);
     // stateButton.whileFalse(new PauseArm(elevatorSubsystem, clawSubsystem));
     stateButton.whileTrue(new FullArmCommand(
-      this.elevatorSubsystem, this.clawSubsystem, armState, armState2, this.armController
+      this.elevatorSubsystem, this.clawSubsystem, elevatorHeight, clawDegrees
     ));
   }
 
@@ -151,12 +150,8 @@ public class RobotContainer {
     // travelToApriltag.whileTrue(new TravelToApriltagCommand(this.drive, this.apriltagSubsystem));
 
     // States
-    // addStateBinding(7, ArmState.STOWED, ArmState.CORAL_PICKUP); // Default state, also is the CORAL_CARRY
-    // addStateBinding(8, ArmState.BALL_PICKUP_1, ArmState.CORAL_SCORE_1);
-    // addStateBinding(9, ArmState.BALL_PICKUP_2, ArmState.CORAL_SCORE_2);
-    // addStateBinding(10, ArmState.BALL_SCORE_1, ArmState.CORAL_SCORE_3);
-    // addStateBinding(11, ArmState.BALL_SCORE_2, ArmState.CORAL_SCORE_4);
-    // addStateBinding(12, ArmState.BALL_CARRY, ArmState.BLOW);
+    addStateBinding(11, 0.0, 90);
+    addStateBinding(12,0.9, 10);
   }
 
   /**
