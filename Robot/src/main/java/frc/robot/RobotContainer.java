@@ -156,8 +156,12 @@ public class RobotContainer {
     // travelToApriltag.whileTrue(new TravelToApriltagCommand(this.drive, this.apriltagSubsystem));
 
     // States
-    addStateBinding(11, 0.0, 90);
-    addStateBinding(12,0.9, 10);
+    addStateBinding(7, 0.02, 92);  // Coral intake
+    addStateBinding(8, 0.95, -108);            // High level coral
+    addStateBinding(9, 0.7, -69);             // Medium level Algae
+    addStateBinding(10, 0.7, -69); // Medium level coral  height: 14.2
+    addStateBinding(11, 0.4, -69);            // Low level Algae
+    addStateBinding(12,0.0, -69);  // Low level coral
   }
 
   /**
