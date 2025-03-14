@@ -60,7 +60,7 @@ public class RobotContainer {
   private final XboxController driverController;  // Xbox Controller
   private final Joystick armController;     // Flight controller
 
-  private SwerveDriveSubsystem drive;
+  // private SwerveDriveSubsystem drive;
   private SuckNBlowSubsystem suckNBlowSubsystem;
   private ElevatorSubsystem elevatorSubsystem;
   private ClawSubsystem clawSubsystem;
@@ -72,7 +72,7 @@ public class RobotContainer {
     this.driverController = new XboxController(1);
     this.armController = new Joystick(0);
 
-    this.drive = new SwerveDriveSubsystem();
+    // this.drive = new SwerveDriveSubsystem();
     this.suckNBlowSubsystem = new SuckNBlowSubsystem();
     this.elevatorSubsystem = new ElevatorSubsystem();
     this.clawSubsystem = new ClawSubsystem();
@@ -84,7 +84,7 @@ public class RobotContainer {
 
     configureBindings();
 
-    this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
+    // this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
     this.elevatorSubsystem.setDefaultCommand(new ElevatorGoToTarget(elevatorSubsystem));
     this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem));
   }
@@ -101,12 +101,14 @@ public class RobotContainer {
    * Use this method to define your trigger->command mappings. Triggers can be
    */
   private void configureBindings() {
-    JoystickButton gyroResetButton = new JoystickButton(driverController, 7);
-    gyroResetButton.whileTrue(new ResetOrientationCommand(this.drive));
+    JoystickButton gyroResetButton1 = new JoystickButton(driverController, 7);
+    JoystickButton gyroResetButton2 = new JoystickButton(driverController, 8);
+    // gyroResetButton1.whileTrue(new ResetOrientationCommand(this.drive));
+    // gyroResetButton2.whileTrue(new ResetOrientationCommand(this.drive));
 
     JoystickButton fieldButton = new JoystickButton(driverController, 1);
-    fieldButton.whileTrue(new RobotOrient(drive));
-    fieldButton.whileFalse(new FieldOrient(drive));
+    // fieldButton.whileTrue(new RobotOrient(drive));
+    // fieldButton.whileFalse(new FieldOrient(drive));
 
     // JoystickButton myButton = new JoystickButton(driverController, 1);
     // myButton.whileTrue(new EncoderTestCommand(swerveTestSubsystem));
@@ -169,8 +171,8 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
-    return Autos.stationAlign(drive);
-  }
+  // public Command getAutonomousCommand() {
+    // // An example command will be run in autonomous
+    // return Autos.stationAlign(drive);
+  // }
 }
