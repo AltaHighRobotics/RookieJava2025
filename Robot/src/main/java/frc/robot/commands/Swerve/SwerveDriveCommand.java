@@ -1,5 +1,6 @@
 package frc.robot.commands.Swerve;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -11,6 +12,10 @@ public class SwerveDriveCommand extends Command {
     private final SwerveDriveSubsystem driveSubsystem;
     private XboxController driverController;
 
+    public boolean snapRotationMode;
+    private PIDController snapRotationController;
+    public double snapTargetDegrees;
+
     /**
      * Creates a new ExampleCommand.
      *
@@ -19,6 +24,11 @@ public class SwerveDriveCommand extends Command {
     public SwerveDriveCommand(SwerveDriveSubsystem driveSubsystem, XboxController driverController) {
       this.driveSubsystem = driveSubsystem;
       this.driverController = driverController;
+
+      this.snapRotationMode = false;
+      this.snapRotationController = new PIDController(1, 0, 0);
+      this.snapTargetDegrees = 0;
+
       addRequirements(driveSubsystem);
     }
 
@@ -29,12 +39,19 @@ public class SwerveDriveCommand extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-      final double forwardSpeed = this.driverController.getLeftX();
-      final double strafeSpeed = -this.driverController.getLeftY();
-      final double rotationSpeed = this.driverController.getRightX();
-      final double speedScaling = 0.75;//(-(this.driverController.getRawAxis(3)) + 1.0) / 2.0;
+      if (snapRotationMode) {
+        final double rotationSpeed = this.snapRotationController.calculate(this.driveSubsystem.getAngleDegrees(), snapTargetDegrees);
+        this.driveSubsystem.drive(0, 0, rotationSpeed, 1);
+      }
+
+      else {
+        final double forwardSpeed = this.driverController.getLeftX();
+        final double strafeSpeed = -this.driverController.getLeftY();
+        final double rotationSpeed = this.driverController.getRightX();
+        final double speedScaling = 0.75;//(-(this.driverController.getRawAxis(3)) + 1.0) / 2.0;
     
-      this.driveSubsystem.drive(forwardSpeed, strafeSpeed, rotationSpeed, speedScaling);
+        this.driveSubsystem.drive(forwardSpeed, strafeSpeed, rotationSpeed, speedScaling);
+      }
     }
 
     // Called once the command ends or is interrupted.
