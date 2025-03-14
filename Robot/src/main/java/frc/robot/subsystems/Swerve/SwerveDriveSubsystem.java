@@ -7,6 +7,7 @@ package frc.robot.subsystems.Swerve;
 import com.studica.frc.AHRS;
 import com.studica.frc.AHRS.NavXComType;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -31,6 +32,9 @@ public class SwerveDriveSubsystem extends SubsystemBase {
 
   private boolean turnLock;
   private AHRS gyro;
+
+  private double targetSnapDegrees;
+  private PIDController snapRotationController;
 
   private SwerveDriveKinematics kinematics;
 
@@ -85,6 +89,8 @@ public class SwerveDriveSubsystem extends SubsystemBase {
     this.turnLock = false;
 
     this.gyro = new AHRS(NavXComType.kMXP_SPI);
+    targetSnapDegrees = 0;
+    snapRotationController = new PIDController(1, 0, 0);
 
     // Kinematics calculates our movement from x, y, and rot
     this.kinematics = new SwerveDriveKinematics(
@@ -171,6 +177,8 @@ public class SwerveDriveSubsystem extends SubsystemBase {
     this.backRightModule.setMaxOut(maxOutput);
   }
 
+
+  
   /**
   * Resets the gyro, which resets the orientation.
   * The x and y axis will be changed to fit how the robot is turned when called.
@@ -185,5 +193,9 @@ public class SwerveDriveSubsystem extends SubsystemBase {
 
   public void unlockTurn() {
     this.turnLock = false;
+  }
+
+  public double getAngleDegrees() {
+    return gyro.getAngle();
   }
 }
