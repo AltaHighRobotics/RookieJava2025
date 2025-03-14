@@ -83,6 +83,7 @@ public final class Constants {
     public static final int SPARK_MAX_ID = 42;
     public static final double MOTOR_SUCK_SPEED = 0.8;
     public static final double MOTOR_BLOW_SPEED = 0.8;
+    public static final double MOTOR_SUCKLE_SPEED = 0.2;    // Holds the coral in place without burning out the rubber wheels
   }
 
   public static class ClawConstants {
