@@ -82,7 +82,7 @@ public final class Constants {
   public static class SuckNBlowConstants {
     public static final int SPARK_MAX_ID = 42;
     public static final double MOTOR_SUCK_SPEED = 0.8;
-    public static final double MOTOR_BLOW_SPEED = 0.8;
+    public static final double MOTOR_BLOW_SPEED = 0.5;
   }
 
   public static class ClawConstants {
@@ -105,7 +105,7 @@ public final class Constants {
     public static final double CORAL_LEVEL_TWO_HEIGHT = 0.7;          // The second level for the coral deposit
     public static final double LOWER_DEPOSIT_ROTATION = -69.0;    // The rotation the claw needs to be at for the first two levels of coral deposit, since the third one has a different angle
 
-    public static final double CORAL_LEVEL_THREE_HEIGHT = 0.90;       // The max height needed for the elevator to reach so that the claw can barely slip the coral on the thrid level without the elevator slipping out of it's slot (max elevator constant found in elevator subsystem)
+    public static final double CORAL_LEVEL_THREE_HEIGHT = 0.9;       // The max height needed for the elevator to reach so that the claw can barely slip the coral on the thrid level without the elevator slipping out of it's slot (max elevator constant found in elevator subsystem)
     public static final double CORAL_HIGHER_LEVEL_ROTATION = -108.0;  // The rotation needed for the claw to be able to slip the coral on the third level
 
     // ALGAE (NOT TESTED YET)
