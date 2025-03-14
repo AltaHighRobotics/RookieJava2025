@@ -43,7 +43,7 @@ public class ElevatorSubsystem extends SubsystemBase{
         final double newD = SmartDashboard.getEntry("Elevator D").getDouble(0);
         this.pidController.setPID(newP, newI, newD);
 
-        this.targetHeightPercentage = MathUtil.clamp(targetHeightPercentage, 0.1, 0.98);
+        this.targetHeightPercentage = MathUtil.clamp(targetHeightPercentage, 0.03, 0.98);
 
         final double targetPositionRevolutions = targetHeightPercentage * ElevatorConstants.TOP_MAG;
         final double currentPositionRevolutions = this.getHeight();

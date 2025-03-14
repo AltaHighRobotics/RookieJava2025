@@ -69,7 +69,7 @@ public final class Constants {
 
   public static class PenetratorConstants {
     public static final int MOTOR_ID = 8;
-    public static final double MOTOR_INSERT_SPEED = 0.4;
+    public static final double MOTOR_INSERT_SPEED = 0.6;
     public static final double MOTOR_PULLOUT_SPEED = 0.8;
   }
 
