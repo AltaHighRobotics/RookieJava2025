@@ -153,6 +153,8 @@ public class RobotContainer {
     rimmerForwardButton.whileTrue(new ClockwiseRim(this.rimmerSubsystem));
     rimmerBackwardButton.whileTrue(new CounterClockwiseRim(this.rimmerSubsystem));
 
+    JoystickButton snapRotateHexForwardButton = new JoystickButton(driverController, 4);
+
     // Apriltag commands (we need pi with camera, pi is fried)
     // JoystickButton followApriltag = new JoystickButton(armController, 11);
     // JoystickButton travelToApriltag = new JoystickButton(armController , 12);
