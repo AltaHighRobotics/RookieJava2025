@@ -42,6 +42,10 @@ public class SwerveDriveCommand extends Command {
       if (snapRotationMode) {
         final double rotationSpeed = this.snapRotationController.calculate(this.driveSubsystem.getAngleDegrees(), snapTargetDegrees);
         this.driveSubsystem.drive(0, 0, rotationSpeed, 1);
+
+        if (Math.abs(this.driverController.getLeftX()) > 0) { snapRotationMode = false; } 
+        if (Math.abs(this.driverController.getLeftY()) > 0) { snapRotationMode = false; } 
+        if (Math.abs(this.driverController.getRightX()) > 0) { snapRotationMode = false; } 
       }
 
       else {
