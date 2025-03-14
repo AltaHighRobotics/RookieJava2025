@@ -4,6 +4,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.subsystems.Swerve.SwerveDriveSubsystem;
 
 /** An example command that uses an example subsystem. */
@@ -11,10 +12,6 @@ public class SwerveDriveCommand extends Command {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final SwerveDriveSubsystem driveSubsystem;
     private XboxController driverController;
-
-    public boolean snapRotationMode;
-    private PIDController snapRotationController;
-    public double snapTargetDegrees;
 
     /**
      * Creates a new ExampleCommand.
@@ -24,10 +21,6 @@ public class SwerveDriveCommand extends Command {
     public SwerveDriveCommand(SwerveDriveSubsystem driveSubsystem, XboxController driverController) {
       this.driveSubsystem = driveSubsystem;
       this.driverController = driverController;
-
-      this.snapRotationMode = false;
-      this.snapRotationController = new PIDController(1, 0, 0);
-      this.snapTargetDegrees = 0;
 
       addRequirements(driveSubsystem);
     }
@@ -39,13 +32,14 @@ public class SwerveDriveCommand extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-      if (snapRotationMode) {
-        final double rotationSpeed = this.snapRotationController.calculate(this.driveSubsystem.getAngleDegrees(), snapTargetDegrees);
+      if (driveSubsystem.snapRotationMode) {
+        final double rotationSpeed = driveSubsystem.snapRotationController.calculate(this.driveSubsystem.getAngleDegrees(), driveSubsystem.snapTargetDegrees);
+        System.out.println(rotationSpeed);
         this.driveSubsystem.drive(0, 0, rotationSpeed, 1);
 
-        if (Math.abs(this.driverController.getLeftX()) > 0) { snapRotationMode = false; } 
-        if (Math.abs(this.driverController.getLeftY()) > 0) { snapRotationMode = false; } 
-        if (Math.abs(this.driverController.getRightX()) > 0) { snapRotationMode = false; } 
+        if (Math.abs(this.driverController.getLeftX()) > 0) {  this.driveSubsystem.snapRotationMode = false; } 
+        if (Math.abs(this.driverController.getLeftY()) > 0) {  this.driveSubsystem.snapRotationMode = false; } 
+        if (Math.abs(this.driverController.getRightX()) > 0) { this.driveSubsystem.snapRotationMode = false; } 
       }
 
       else {

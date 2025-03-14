@@ -15,9 +15,14 @@ public class SnapHexRotateForward extends Command {
 
     @Override
     public void initialize() {
-        final double currentDegrees = this.subsystem.getAngleDegrees();
-        final double newTargetDegrees = Math.ceil(currentDegrees / 60.0) * 60;
-        this.defaultCommand.snapTargetDegrees = newTargetDegrees;
-        this.defaultCommand.snapRotationMode = true;
+        if (this.subsystem.snapTargetDegrees % 60 != 0) {
+            final double currentDegrees = this.subsystem.getAngleDegrees();
+            final double newTargetDegrees = Math.ceil(currentDegrees / 60.0) * 60;
+            this.subsystem.snapTargetDegrees = newTargetDegrees;
+        } else {
+            this.subsystem.snapTargetDegrees += 60;
+        }
+
+        this.subsystem.snapRotationMode = true;
     }
 }

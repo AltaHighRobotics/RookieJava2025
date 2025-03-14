@@ -21,6 +21,7 @@ import frc.robot.commands.SuckNBlowCommands.StopSuckCommand;
 import frc.robot.commands.SuckNBlowCommands.SuckCommand;
 // import frc.robot.commands.Swerve.EncoderTestCommand;
 import frc.robot.commands.Swerve.ResetOrientationCommand;
+import frc.robot.commands.Swerve.SnapHexRotateForward;
 import frc.robot.commands.Swerve.SwerveDriveCommand;
 import frc.robot.commands.apriltag.FollowApriltagCommand;
 import frc.robot.commands.apriltag.TravelToApriltagCommand;
@@ -154,6 +155,7 @@ public class RobotContainer {
     rimmerBackwardButton.whileTrue(new CounterClockwiseRim(this.rimmerSubsystem));
 
     JoystickButton snapRotateHexForwardButton = new JoystickButton(driverController, 4);
+    snapRotateHexForwardButton.whileTrue(new SnapHexRotateForward(drive));
 
     // Apriltag commands (we need pi with camera, pi is fried)
     // JoystickButton followApriltag = new JoystickButton(armController, 11);

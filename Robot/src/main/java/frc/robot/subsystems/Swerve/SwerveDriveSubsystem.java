@@ -33,8 +33,9 @@ public class SwerveDriveSubsystem extends SubsystemBase {
   private boolean turnLock;
   private AHRS gyro;
 
-  private double targetSnapDegrees;
-  private PIDController snapRotationController;
+  public boolean snapRotationMode;
+  public PIDController snapRotationController;
+  public double snapTargetDegrees;
 
   private SwerveDriveKinematics kinematics;
 
@@ -60,6 +61,10 @@ public class SwerveDriveSubsystem extends SubsystemBase {
     this.frontRightLocation = new Translation2d(ctc2, -ctc2);
     this.backLeftLocation = new Translation2d(-ctc2, ctc2);
     this.backRightLocation = new Translation2d(-ctc2, -ctc2);
+
+    this.snapRotationMode = false;
+    this.snapRotationController = new PIDController(10, 0, 0);
+    this.snapTargetDegrees = 0;
 
     // Create our modules
     this.frontLeftModule = new SwerveModuleSubsystem(
@@ -89,8 +94,6 @@ public class SwerveDriveSubsystem extends SubsystemBase {
     this.turnLock = false;
 
     this.gyro = new AHRS(NavXComType.kMXP_SPI);
-    targetSnapDegrees = 0;
-    snapRotationController = new PIDController(1, 0, 0);
 
     // Kinematics calculates our movement from x, y, and rot
     this.kinematics = new SwerveDriveKinematics(
