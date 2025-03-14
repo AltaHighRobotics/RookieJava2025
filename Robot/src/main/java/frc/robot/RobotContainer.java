@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.InputConstants;
 import frc.robot.Constants.SwerveDriveConstants;
+import frc.robot.Constants.StateConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.FullArmCommand;
 import frc.robot.commands.PauseArm;
@@ -158,12 +159,12 @@ public class RobotContainer {
     // travelToApriltag.whileTrue(new TravelToApriltagCommand(this.drive, this.apriltagSubsystem));
 
     // States
-    addStateBinding(7, 0.02, 92);   // Coral intake
-    addStateBinding(8, 0.95, -108);             // High level coral
-    addStateBinding(9, 0.7, -69);               // Medium level Algae [HEIGHT IS WRONG]
-    addStateBinding(10, 0.7, -69);              // Medium level coral
-    addStateBinding(11, 0.4, -69);              // Low level Algae [HEIGHT IS WRONG]
-    addStateBinding(12,0.0, -69);               // Low level coral
+    addStateBinding(7,  StateConstants.CORAL_INTAKE_HEIGHT, StateConstants.CORAL_INTAKE_ROTATION);              // Coral intake:                          Height: 0.0    Rotation: 92.0
+    addStateBinding(8,  StateConstants.CORAL_LEVEL_THREE_HEIGHT, StateConstants.CORAL_HIGHER_LEVEL_ROTATION);   // High level coral                       Height: 0.9    Rotation: -108.0
+    addStateBinding(9,  StateConstants.ALGAE_LEVEL_TWO_HEIGHT, StateConstants.ALGAE_DEPOSIT_ROTATION);          // Medium level Algae [HEIGHT IS WRONG]   Height: 0.7    Rotation: -69
+    addStateBinding(10, StateConstants.CORAL_LEVEL_TWO_HEIGHT, StateConstants.CORAL_LOWER_LEVEL_ROTATION);      // Medium level coral                     Height: 0.7    Rotation: -69
+    addStateBinding(11, StateConstants.ALGAE_LEVEL_ONE_HEIGHT, StateConstants.ALGAE_DEPOSIT_ROTATION);          // Low level Algae [HEIGHT IS WRONG]      Height: 0.4    Rotation: -69
+    addStateBinding(12, StateConstants.CORAL_LEVEL_ONE_HEIGHT, StateConstants.CORAL_LOWER_LEVEL_ROTATION);      // Low level coral                        Height: 0.0    Rotation: -69
   }
 
   /**
