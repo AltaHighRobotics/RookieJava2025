@@ -141,29 +141,29 @@ public class RobotContainer {
     
     // Lift Manual
     // Penetrator (kind of like elevator, talonfx encoder)
-    JoystickButton penetratorForwardButton = new JoystickButton(driverController, 2);  // flight controller version
-    JoystickButton penetratorBackwardButton = new JoystickButton(driverController , 3);  // flight controller version
+    JoystickButton penetratorForwardButton = new JoystickButton(driverController, 2);
+    JoystickButton penetratorBackwardButton = new JoystickButton(driverController , 3);
     penetratorForwardButton.whileTrue(new InsertPenetrator(this.penetratorSubsystem));
     penetratorBackwardButton.whileTrue(new PullOutPenetrator(this.penetratorSubsystem));
     // Rimmer (kind of like sucknblow, sparkmax encoder)
-    JoystickButton rimmerForwardButton = new JoystickButton(driverController, 5);  // flight controller version
-    JoystickButton rimmerBackwardButton = new JoystickButton(driverController, 6);  // flight controller version
+    JoystickButton rimmerForwardButton = new JoystickButton(driverController, 5);
+    JoystickButton rimmerBackwardButton = new JoystickButton(driverController, 6);
     rimmerForwardButton.whileTrue(new ClockwiseRim(this.rimmerSubsystem));
     rimmerBackwardButton.whileTrue(new CounterClockwiseRim(this.rimmerSubsystem));
 
     // Apriltag commands (we need pi with camera, pi is fried)
-    // JoystickButton followApriltag = new JoystickButton(armController, 11);  // flight controller version
-    // JoystickButton travelToApriltag = new JoystickButton(armController , 12);  // flight controller version
+    // JoystickButton followApriltag = new JoystickButton(armController, 11);
+    // JoystickButton travelToApriltag = new JoystickButton(armController , 12);
     // followApriltag.whileTrue(new FollowApriltagCommand(this.drive, this.apriltagSubsystem));
     // travelToApriltag.whileTrue(new TravelToApriltagCommand(this.drive, this.apriltagSubsystem));
 
     // States
-    addStateBinding(7, 0.02, 92);  // Coral intake
-    addStateBinding(8, 0.95, -108);            // High level coral
-    addStateBinding(9, 0.7, -69);             // Medium level Algae
-    addStateBinding(10, 0.7, -69); // Medium level coral  height: 14.2
-    addStateBinding(11, 0.4, -69);            // Low level Algae
-    addStateBinding(12,0.0, -69);  // Low level coral
+    addStateBinding(7, 0.02, 92);   // Coral intake
+    addStateBinding(8, 0.95, -108);             // High level coral
+    addStateBinding(9, 0.7, -69);               // Medium level Algae [HEIGHT IS WRONG]
+    addStateBinding(10, 0.7, -69);              // Medium level coral
+    addStateBinding(11, 0.4, -69);              // Low level Algae [HEIGHT IS WRONG]
+    addStateBinding(12,0.0, -69);               // Low level coral
   }
 
   /**

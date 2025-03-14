@@ -60,7 +60,7 @@ public final class Constants {
 
     public static final double TOP_MAG = 45; // What the fuck does this mean
 
-    public static final double MAX_HEIGHT = 15; // CHANGE THIS
+    public static final double MAX_HEIGHT = 15; 
 
     public static final double P = 0.3;
     public static final double I = 0;
@@ -74,7 +74,7 @@ public final class Constants {
   }
 
   public static class RimmerConstants {
-    public static final int SPARK_MAX_ID = 15; //CHANGE THIS
+    public static final int SPARK_MAX_ID = 15;
     public static final double MOTOR_INSERT_SPEED = 0.4;
     public static final double MOTOR_PULLOUT_SPEED = 0.8;
   }
@@ -85,8 +85,8 @@ public final class Constants {
     public static final double MOTOR_BLOW_SPEED = 0.8;
   }
 
-  public static class ClawConstants { //Pretty much a copy of the elevator constants, along with the subsystem and commands
-    public static final int TURN_ID = 7; //This ID can be changed later
+  public static class ClawConstants {
+    public static final int TURN_ID = 7;
 
     public static final double MOTOR_MAX_OUTPUT = 0.5;
     public static final double MOTOR_REVOLUTIONS_FOR_FULL_ROTATION = 100;
