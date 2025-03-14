@@ -103,7 +103,7 @@ public final class Constants {
     
     public static final double CORAL_LEVEL_ONE_HEIGHT = 0.0;          // Lowest elevator level as that is the best position for the claw to be variablely rotated at
     public static final double CORAL_LEVEL_TWO_HEIGHT = 0.7;          // The second level for the coral deposit
-    public static final double CORAL_LOWER_LEVEL_ROTATION = -69.0;    // The rotation the claw needs to be at for the first two levels of coral deposit, since the third one has a different angle
+    public static final double LOWER_DEPOSIT_ROTATION = -69.0;    // The rotation the claw needs to be at for the first two levels of coral deposit, since the third one has a different angle
 
     public static final double CORAL_LEVEL_THREE_HEIGHT = 0.90;       // The max height needed for the elevator to reach so that the claw can barely slip the coral on the thrid level without the elevator slipping out of it's slot (max elevator constant found in elevator subsystem)
     public static final double CORAL_HIGHER_LEVEL_ROTATION = -108.0;  // The rotation needed for the claw to be able to slip the coral on the third level
@@ -111,7 +111,6 @@ public final class Constants {
     // ALGAE (NOT TESTED YET)
     public static final double ALGAE_LEVEL_ONE_HEIGHT = 0.6;          // The height needed for the first level algae to be collected from the reef without hurting the motor
     public static final double ALGAE_LEVEL_TWO_HEIGHT = 0.85;         // The height needed for the second level algae to be collected from the reef without hurting the motor
-    public static final double ALGAE_DEPOSIT_ROTATION = -69.0;        // The rotation the claw needs to be at for the first two levels of algaw collection, since we want to pluck it right out
   }
   
   public static class AutoConstants {
