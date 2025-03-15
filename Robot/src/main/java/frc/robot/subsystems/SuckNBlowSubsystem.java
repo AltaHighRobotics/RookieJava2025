@@ -36,7 +36,7 @@ public class SuckNBlowSubsystem extends SubsystemBase{
                 this.motor.set(SuckNBlowConstants.MOTOR_BLOW_SPEED);
                 break;
             case SUCKLE:
-                this.motor.set(SuckNBlowConstants.MOTOR_SUCKLE_SPEED);
+                this.motor.set(SuckNBlowConstants.MOTOR_SUCKLE_SPEED); // Very low speed
                 break;
             case STOP:
                 this.motor.set(0);

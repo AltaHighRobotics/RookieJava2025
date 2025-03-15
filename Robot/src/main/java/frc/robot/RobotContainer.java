@@ -88,7 +88,7 @@ public class RobotContainer {
     // THIS IS THE SWERVE DRIVE TOGGLE //
     this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
     this.elevatorSubsystem.setDefaultCommand(new ElevatorGoToTarget(elevatorSubsystem));
-    this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem, armController));
+    this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem));
   }
 
   private void addStateBinding(int buttonNumber, double elevatorHeight, double clawDegrees) {

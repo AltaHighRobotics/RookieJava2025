@@ -69,15 +69,17 @@ public class ClawSubsystem extends SubsystemBase{
     }
 
     public void forward(double throttleSpeed) {
-        setDegrees(this.targetDegrees + 1 * ClawConstants.TICK_DEGREE_DISTANCE);
+        setDegrees(this.targetDegrees + 1 * ClawConstants.TICK_DEGREE_DISTANCE * throttleSpeed);
+        System.out.printf("Claw speed: %.6f\n", throttleSpeed);
     }
 
     public void backward(double throttleSpeed) {
-        setDegrees(this.targetDegrees - 1 * ClawConstants.TICK_DEGREE_DISTANCE);
+        setDegrees(this.targetDegrees - 1 * ClawConstants.TICK_DEGREE_DISTANCE * throttleSpeed);
+        System.out.printf("Claw speed: %.6f\n", throttleSpeed);
     }
 
     public void stop() {
-        System.out.println("Claw Rotation Stoped");
+        System.out.println("Claw Rotation Stopped");
         setDegrees(this.getDegrees());
         this.motor.set(0);
     }
