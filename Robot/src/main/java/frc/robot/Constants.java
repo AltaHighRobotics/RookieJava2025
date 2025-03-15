@@ -90,7 +90,7 @@ public final class Constants {
 
     public static final double MOTOR_MAX_OUTPUT = 0.5;
     public static final double MOTOR_REVOLUTIONS_FOR_FULL_ROTATION = 100;
-    public static final double TICK_DEGREE_DISTANCE = 1;
+    public static final double TICK_DEGREE_DISTANCE = 3;
 
     public static final double P = 1;
     public static final double I = 0;
