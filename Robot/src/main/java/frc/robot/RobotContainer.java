@@ -88,7 +88,7 @@ public class RobotContainer {
     // THIS IS THE SWERVE DRIVE TOGGLE //
     this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
     this.elevatorSubsystem.setDefaultCommand(new ElevatorGoToTarget(elevatorSubsystem));
-    this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem));
+    this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem, armController));
   }
 
   private void addStateBinding(int buttonNumber, double elevatorHeight, double clawDegrees) {
@@ -138,8 +138,8 @@ public class RobotContainer {
     // Claw Manual
     JoystickButton clawForwardButton = new JoystickButton(armController, 4);
     JoystickButton clawBackwardButton = new JoystickButton(armController, 6);
-    clawForwardButton.whileTrue(new ClawTickForwardCommand(this.clawSubsystem));
-    clawBackwardButton.whileTrue(new ClawTickBackwardCommand(this.clawSubsystem));
+    clawForwardButton.whileTrue(new ClawTickForwardCommand(this.clawSubsystem, this.armController));
+    clawBackwardButton.whileTrue(new ClawTickBackwardCommand(this.clawSubsystem, this.armController));
     
     // Lift Manual
     // Penetrator (kind of like elevator, talonfx encoder)

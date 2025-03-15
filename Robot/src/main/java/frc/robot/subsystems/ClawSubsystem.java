@@ -68,11 +68,11 @@ public class ClawSubsystem extends SubsystemBase{
         return currentMotorPercentage * 360;
     }
 
-    public void forward() {
+    public void forward(double throttleSpeed) {
         setDegrees(this.targetDegrees + 1 * ClawConstants.TICK_DEGREE_DISTANCE);
     }
 
-    public void backward() {
+    public void backward(double throttleSpeed) {
         setDegrees(this.targetDegrees - 1 * ClawConstants.TICK_DEGREE_DISTANCE);
     }
 
