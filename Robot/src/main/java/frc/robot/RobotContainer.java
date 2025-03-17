@@ -23,6 +23,7 @@ import frc.robot.commands.SuckNBlowCommands.SuckCommand;
 import frc.robot.commands.Swerve.ResetOrientationCommand;
 import frc.robot.commands.Swerve.SwerveDriveCommand;
 import frc.robot.commands.apriltag.FollowApriltagCommand;
+import frc.robot.commands.apriltag.TestAprilTagCommand;
 import frc.robot.commands.apriltag.TravelToApriltagCommand;
 import frc.robot.commands.claw.ClawGoToTarget;
 import frc.robot.commands.claw.ClawStopCommand;
@@ -89,6 +90,7 @@ public class RobotContainer {
     this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
     this.elevatorSubsystem.setDefaultCommand(new ElevatorGoToTarget(elevatorSubsystem));
     this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem));
+    this.apriltagSubsystem.setDefaultCommand(new TestAprilTagCommand(apriltagSubsystem));
   }
 
   private void addStateBinding(int buttonNumber, double elevatorHeight, double clawDegrees) {
