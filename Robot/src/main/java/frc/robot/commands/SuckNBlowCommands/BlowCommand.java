@@ -29,6 +29,6 @@ public class BlowCommand extends Command {
 
     @Override
     public void end(boolean interrupted) {
-      this.subsystem.set(OralType.STOP);
+      this.subsystem.set(OralType.SUCKLE);
     }
 }
