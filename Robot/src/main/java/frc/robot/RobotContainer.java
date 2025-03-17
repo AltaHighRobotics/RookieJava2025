@@ -163,9 +163,9 @@ public class RobotContainer {
     addStateBinding(7,  StateConstants.CORAL_INTAKE_HEIGHT,      StateConstants.CORAL_INTAKE_ROTATION);           // Coral intake:                          Height: 0.0    Rotation: 92.0
     addStateBinding(8,  StateConstants.CORAL_LEVEL_THREE_HEIGHT, StateConstants.CORAL_HIGHER_LEVEL_ROTATION);     // High level coral                       Height: 0.9    Rotation: -108.0
     addStateBinding(9,  StateConstants.ALGAE_LEVEL_TWO_HEIGHT,   StateConstants.LOWER_DEPOSIT_ROTATION);          // Medium level Algae [HEIGHT IS WRONG]   Height: 0.7    Rotation: -69
-    addStateBinding(10, StateConstants.CORAL_LEVEL_TWO_HEIGHT,   StateConstants.LOWER_DEPOSIT_ROTATION);      // Medium level coral                     Height: 0.7    Rotation: -69
+    addStateBinding(10, StateConstants.CORAL_LEVEL_TWO_HEIGHT,   StateConstants.LOWER_DEPOSIT_ROTATION);          // Medium level coral                     Height: 0.7    Rotation: -69
     addStateBinding(11, StateConstants.ALGAE_LEVEL_ONE_HEIGHT,   StateConstants.LOWER_DEPOSIT_ROTATION);          // Low level Algae [HEIGHT IS WRONG]      Height: 0.4    Rotation: -69
-    addStateBinding(12, StateConstants.CORAL_LEVEL_ONE_HEIGHT,   StateConstants.LOWER_DEPOSIT_ROTATION);      // Low level coral                        Height: 0.0    Rotation: -69
+    addStateBinding(12, StateConstants.CORAL_LEVEL_ONE_HEIGHT,   StateConstants.LOWER_DEPOSIT_ROTATION);          // Low level coral                        Height: 0.0    Rotation: -69
   }
 
   /**
