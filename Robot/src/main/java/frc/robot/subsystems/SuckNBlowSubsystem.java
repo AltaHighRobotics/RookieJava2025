@@ -5,7 +5,6 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.SuckNBlowConstants;
-import frc.robot.commands.SuckNBlowCommands.StopSuckCommand;
 
 public class SuckNBlowSubsystem extends SubsystemBase{
     public enum OralType {
