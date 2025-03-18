@@ -143,23 +143,23 @@ public class RobotContainer {
     clawForwardButton.whileTrue(new ClawTickForwardCommand(this.clawSubsystem, this.armController));
     clawBackwardButton.whileTrue(new ClawTickBackwardCommand(this.clawSubsystem, this.armController));
     
-    // Lift Manual
-    // Penetrator (kind of like elevator, talonfx encoder)
-    JoystickButton penetratorForwardButton = new JoystickButton(driverController, 2);
-    JoystickButton penetratorBackwardButton = new JoystickButton(driverController , 3);
-    penetratorForwardButton.whileTrue(new InsertPenetrator(this.penetratorSubsystem));
-    penetratorBackwardButton.whileTrue(new PullOutPenetrator(this.penetratorSubsystem));
-    // Rimmer (kind of like sucknblow, sparkmax encoder)
-    JoystickButton rimmerForwardButton = new JoystickButton(driverController, 5);
-    JoystickButton rimmerBackwardButton = new JoystickButton(driverController, 6);
-    rimmerForwardButton.whileTrue(new ClockwiseRim(this.rimmerSubsystem));
-    rimmerBackwardButton.whileTrue(new CounterClockwiseRim(this.rimmerSubsystem));
+    // // Lift Manual
+    // // Penetrator (kind of like elevator, talonfx encoder)
+    // JoystickButton penetratorForwardButton = new JoystickButton(driverController, 2);
+    // JoystickButton penetratorBackwardButton = new JoystickButton(driverController , 3);
+    // penetratorForwardButton.whileTrue(new InsertPenetrator(this.penetratorSubsystem));
+    // penetratorBackwardButton.whileTrue(new PullOutPenetrator(this.penetratorSubsystem));
+    // // Rimmer (kind of like sucknblow, sparkmax encoder)
+    // JoystickButton rimmerForwardButton = new JoystickButton(driverController, 5);
+    // JoystickButton rimmerBackwardButton = new JoystickButton(driverController, 6);
+    // rimmerForwardButton.whileTrue(new ClockwiseRim(this.rimmerSubsystem));
+    // rimmerBackwardButton.whileTrue(new CounterClockwiseRim(this.rimmerSubsystem));
 
     // Apriltag commands (we need pi with camera, pi is fried)
-    // JoystickButton followApriltag = new JoystickButton(armController, 11);
-    // JoystickButton travelToApriltag = new JoystickButton(armController , 12);
-    // followApriltag.whileTrue(new FollowApriltagCommand(this.drive, this.apriltagSubsystem));
-    // travelToApriltag.whileTrue(new TravelToApriltagCommand(this.drive, this.apriltagSubsystem));
+    JoystickButton followApriltag = new JoystickButton(armController, 5);
+    JoystickButton travelToApriltag = new JoystickButton(armController , 6);
+    followApriltag.whileTrue(new FollowApriltagCommand(this.drive, this.apriltagSubsystem));
+    travelToApriltag.whileTrue(new TravelToApriltagCommand(this.drive, this.apriltagSubsystem));
 
     // States
     addStateBinding(7,  StateConstants.CORAL_INTAKE_HEIGHT,      StateConstants.CORAL_INTAKE_ROTATION);           // Coral intake:                          Height: 0.0    Rotation: 92.0
