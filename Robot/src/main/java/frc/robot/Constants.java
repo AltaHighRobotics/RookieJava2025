@@ -100,11 +100,11 @@ public final class Constants {
   public static class StateConstants {  // I need to be able to edit these in real time for now, but will make REAL constants later after we're done testing with the new claw/elevator configuration
     // CORAL (NOT FINISHED)
     public static final double CORAL_INTAKE_HEIGHT = 0.0;             // Height needed to pick up coral from ports (Set at zero because we already have a minimum elevator height constant)
-    public static final double CORAL_INTAKE_ROTATION = 92.0;          // Suggested rotation for claw to be so that that coral can be picked up correctly
+    public static final double CORAL_INTAKE_ROTATION = 82.0;          // Suggested rotation for claw to be so that that coral can be picked up correctly
     
     public static final double CORAL_LEVEL_ONE_HEIGHT = 0.0;          // Lowest elevator level as that is the best position for the claw to be variablely rotated at
     public static final double CORAL_LEVEL_TWO_HEIGHT = 0.7;          // The second level for the coral deposit
-    public static final double LOWER_DEPOSIT_ROTATION = -69.0;    // The rotation the claw needs to be at for the first two levels of coral deposit, since the third one has a different angle
+    public static final double LOWER_DEPOSIT_ROTATION = -80;    // The rotation the claw needs to be at for the first two levels of coral deposit, since the third one has a different angle
 
     public static final double CORAL_LEVEL_THREE_HEIGHT = 0.9;       // The max height needed for the elevator to reach so that the claw can barely slip the coral on the thrid level without the elevator slipping out of it's slot (max elevator constant found in elevator subsystem)
     public static final double CORAL_HIGHER_LEVEL_ROTATION = -108.0;  // The rotation needed for the claw to be able to slip the coral on the third level

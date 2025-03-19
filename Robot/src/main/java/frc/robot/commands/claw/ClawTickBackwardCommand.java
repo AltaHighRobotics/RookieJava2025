@@ -17,7 +17,7 @@ public class ClawTickBackwardCommand extends Command {
 
     @Override
     public void execute() {
-        this.clawSubsystem.backward(this.armController.getThrottle()+1);
+        this.clawSubsystem.backward(-this.armController.getThrottle()+1);
         this.clawSubsystem.moveToTarget();
     }
 }

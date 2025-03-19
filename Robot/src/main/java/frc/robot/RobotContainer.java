@@ -90,7 +90,7 @@ public class RobotContainer {
     this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
     this.elevatorSubsystem.setDefaultCommand(new ElevatorGoToTarget(elevatorSubsystem));
     this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem));
-    this.apriltagSubsystem.setDefaultCommand(new TestAprilTagCommand(apriltagSubsystem));
+    // this.apriltagSubsystem.setDefaultCommand(new TestAprilTagCommand(apriltagSubsystem));
   }
 
   private void addStateBinding(int buttonNumber, double elevatorHeight, double clawDegrees) {
@@ -143,31 +143,31 @@ public class RobotContainer {
     clawForwardButton.whileTrue(new ClawTickForwardCommand(this.clawSubsystem, this.armController));
     clawBackwardButton.whileTrue(new ClawTickBackwardCommand(this.clawSubsystem, this.armController));
     
-    // // Lift Manual
-    // // Penetrator (kind of like elevator, talonfx encoder)
-    // JoystickButton penetratorForwardButton = new JoystickButton(driverController, 2);
-    // JoystickButton penetratorBackwardButton = new JoystickButton(driverController , 3);
-    // penetratorForwardButton.whileTrue(new InsertPenetrator(this.penetratorSubsystem));
-    // penetratorBackwardButton.whileTrue(new PullOutPenetrator(this.penetratorSubsystem));
-    // // Rimmer (kind of like sucknblow, sparkmax encoder)
-    // JoystickButton rimmerForwardButton = new JoystickButton(driverController, 5);
-    // JoystickButton rimmerBackwardButton = new JoystickButton(driverController, 6);
-    // rimmerForwardButton.whileTrue(new ClockwiseRim(this.rimmerSubsystem));
-    // rimmerBackwardButton.whileTrue(new CounterClockwiseRim(this.rimmerSubsystem));
+    // Lift Manual
+    // Penetrator (kind of like elevator, talonfx encoder)
+    JoystickButton penetratorForwardButton = new JoystickButton(driverController, 2);
+    JoystickButton penetratorBackwardButton = new JoystickButton(driverController , 3);
+    penetratorForwardButton.whileTrue(new InsertPenetrator(this.penetratorSubsystem));
+    penetratorBackwardButton.whileTrue(new PullOutPenetrator(this.penetratorSubsystem));
+    // Rimmer (kind of like sucknblow, sparkmax encoder)
+    JoystickButton rimmerForwardButton = new JoystickButton(driverController, 5);
+    JoystickButton rimmerBackwardButton = new JoystickButton(driverController, 6);
+    rimmerForwardButton.whileTrue(new ClockwiseRim(this.rimmerSubsystem));
+    rimmerBackwardButton.whileTrue(new CounterClockwiseRim(this.rimmerSubsystem));
 
     // Apriltag commands (we need pi with camera, pi is fried)
-    JoystickButton followApriltag = new JoystickButton(armController, 5);
-    JoystickButton travelToApriltag = new JoystickButton(armController , 6);
-    followApriltag.whileTrue(new FollowApriltagCommand(this.drive, this.apriltagSubsystem));
-    travelToApriltag.whileTrue(new TravelToApriltagCommand(this.drive, this.apriltagSubsystem));
+    // JoystickButton followApriltag = new JoystickButton(armController, 11);
+    // JoystickButton travelToApriltag = new JoystickButton(armController , 12);
+    // followApriltag.whileTrue(new FollowApriltagCommand(this.drive, this.apriltagSubsystem));
+    // travelToApriltag.whileTrue(new TravelToApriltagCommand(this.drive, this.apriltagSubsystem));
 
     // States
     addStateBinding(7,  StateConstants.CORAL_INTAKE_HEIGHT,      StateConstants.CORAL_INTAKE_ROTATION);           // Coral intake:                          Height: 0.0    Rotation: 92.0
     addStateBinding(8,  StateConstants.CORAL_LEVEL_THREE_HEIGHT, StateConstants.CORAL_HIGHER_LEVEL_ROTATION);     // High level coral                       Height: 0.9    Rotation: -108.0
     addStateBinding(9,  StateConstants.ALGAE_LEVEL_TWO_HEIGHT,   StateConstants.LOWER_DEPOSIT_ROTATION);          // Medium level Algae [HEIGHT IS WRONG]   Height: 0.7    Rotation: -69
-    addStateBinding(10, StateConstants.CORAL_LEVEL_TWO_HEIGHT,   StateConstants.LOWER_DEPOSIT_ROTATION);          // Medium level coral                     Height: 0.7    Rotation: -69
+    addStateBinding(10, StateConstants.CORAL_LEVEL_TWO_HEIGHT,   StateConstants.LOWER_DEPOSIT_ROTATION);      // Medium level coral                     Height: 0.7    Rotation: -69
     addStateBinding(11, StateConstants.ALGAE_LEVEL_ONE_HEIGHT,   StateConstants.LOWER_DEPOSIT_ROTATION);          // Low level Algae [HEIGHT IS WRONG]      Height: 0.4    Rotation: -69
-    addStateBinding(12, StateConstants.CORAL_LEVEL_ONE_HEIGHT,   StateConstants.LOWER_DEPOSIT_ROTATION);          // Low level coral                        Height: 0.0    Rotation: -69
+    addStateBinding(12, StateConstants.CORAL_LEVEL_ONE_HEIGHT,   StateConstants.LOWER_DEPOSIT_ROTATION);      // Low level coral                        Height: 0.0    Rotation: -69
   }
 
   /**
