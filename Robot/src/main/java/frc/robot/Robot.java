@@ -9,6 +9,15 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
+import org.photonvision.PhotonCamera;
+import org.photonvision.PhotonUtils;
+import org.photonvision.common.hardware.VisionLEDMode;
+import org.photonvision.targeting.PhotonPipelineResult;
+import org.photonvision.targeting.PhotonTrackedTarget;
+import edu.wpi.first.math.geometry.Transform3d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.TimedRobot;
+
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
  * the TimedRobot documentation. If you change the name of this class or the package after creating
@@ -16,6 +25,9 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
+  private PhotonCamera camera;
+  private double targetYaw;
+  private boolean targetVisible;
 
   private final RobotContainer m_robotContainer;
 
@@ -44,6 +56,39 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    PhotonPipelineResult result = camera.getLatestResult();
+    targetVisible = false;
+
+    if (result.hasTargets()) {
+        PhotonTrackedTarget target = result.getBestTarget();
+        targetYaw = target.getYaw();
+        targetVisible = true;
+
+        // Calculate distance to the target using PhotonUtils (if needed)
+        // double distance = PhotonUtils.calculateDistanceToTargetMeters(
+        //     camera.getLensHeight(), 
+        //     target.getPitch(), 
+        //     target.getArea(),
+        //     0 // Replace with actual target height
+        // );
+
+        // Get transform to target
+        Transform3d transform = target.getBestCameraToTarget();
+
+        SmartDashboard.putNumber("Target Yaw", targetYaw);
+        // SmartDashboard.putNumber("Distance to Target", distance);
+        SmartDashboard.putNumber("Transform X", transform.getX());
+        SmartDashboard.putNumber("Transform Y", transform.getY());
+        SmartDashboard.putNumber("Transform Z", transform.getZ());
+
+    }
+    SmartDashboard.putBoolean("Target Visible", targetVisible);
+  }
+
+  @Override
+  public void robotInit() {
+      camera = new PhotonCamera("your_camera_name"); // Replace with your camera name
+      camera.setLED(VisionLEDMode.kOn); // Turn on the LEDs
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -83,7 +128,17 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+        // Example: Use target data for robot control
+        if (targetVisible) {
+          // Adjust robot's heading based on target yaw (example PID control)
+          double turn = -0.1 * targetYaw;
+          // yourDriveTrain.arcadeDrive(0, turn); // Assuming you have a drive train
+      } else {
+          // Handle case where no target is visible
+          // yourDriveTrain.arcadeDrive(0, 0);
+      }
+  }
 
   @Override
   public void testInit() {
