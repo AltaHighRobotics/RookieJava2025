@@ -1,7 +1,11 @@
 package frc.robot.commands.apriltag;
 
+import static edu.wpi.first.units.Units.Milliseconds;
+
+import org.photonvision.targeting.PhotonPipelineResult;
 import org.photonvision.targeting.PhotonTrackedTarget;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -12,6 +16,10 @@ public class TravelToApriltagCommand extends Command {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private SwerveDriveSubsystem drive;
     private ApriltagSubsystem apriltagSubsystem;
+    private long lastSeenTime = 0;
+    private PIDController pidForward;
+    private PIDController pidAdjust;
+    private PIDController pidRotation;
 
     /**
      * Creates a new ExampleCommand.
@@ -21,6 +29,11 @@ public class TravelToApriltagCommand extends Command {
     public TravelToApriltagCommand(SwerveDriveSubsystem drive, ApriltagSubsystem apriltagSubsystem) {
       this.drive = drive;
       this.apriltagSubsystem = apriltagSubsystem;
+
+      this.pidForward = new PIDController(1.5, 5, 0);
+      this.pidAdjust = new PIDController(10, 5, 0);
+      this.pidRotation = new PIDController(0.5, 0, 0);
+
       addRequirements(drive, apriltagSubsystem);
     }
 
@@ -32,18 +45,36 @@ public class TravelToApriltagCommand extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        final PhotonTrackedTarget target = this.apriltagSubsystem.getFirstTarget();
+        final PhotonPipelineResult results = apriltagSubsystem.camera.getLatestResult();
+        final PhotonTrackedTarget target = results.getBestTarget();   
+        
+        if (System.currentTimeMillis() - lastSeenTime > 10) {
+          drive.drive(0,0,0,0);
+        }
+        
+        if (target == null) { return; }
+
+        lastSeenTime = System.currentTimeMillis();
+
         final Transform3d pose = target.getBestCameraToTarget();
-        final double xMetersAway = pose.getX();
-        final double yMetersAway = pose.getY();
-        final Rotation3d rotationAway = pose.getRotation();
 
-        final double driveXSpeed = Math.abs(xMetersAway) / xMetersAway; // Make sure they are in terms of -1 to 1
-        final double driveYSpeed = Math.abs(yMetersAway) / yMetersAway;
-        final double driveRotation = rotationAway.getAngle();
-        final double driveSpeed = 0.7;
+        double forward = this.pidForward.calculate(pose.getX(), 0.5);
+        double adjust = this.pidAdjust.calculate(pose.getY(), 0); 
 
-        drive.drive(driveYSpeed, driveXSpeed, driveRotation, driveSpeed);
+        double driveRotation = 0;
+        // if (Math.abs(forward) < 0.1) {
+          driveRotation = this.pidRotation.calculate(pose.getZ(), Math.abs(pose.getZ()) / pose.getZ() * 179);
+
+          if (pose.getZ() < 0)
+          {
+            // driveRotation *= -1;
+          }
+        // }
+
+        final double driveSpeed = 0.2;
+
+        drive.fieldOriented = false;
+        drive.drive(-0, 0, -driveRotation, driveSpeed);
     }
 
     // Called once the command ends or is interrupted.

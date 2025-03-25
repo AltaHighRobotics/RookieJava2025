@@ -54,27 +54,29 @@ public final class Constants {
   public static class ElevatorConstants {
     public static final int MOTOR_ID = 6;
 
-    public static final double MOTOR_MAX_OUTPUT = 0.6;
+    public static final double MOTOR_MAX_OUTPUT = 0.3;
 
     public static final double TICK_PERCENT_DISTANCE = 0.05;
 
     public static final double TOP_MAG = 45; // What the fuck does this mean
 
-    public static final double MAX_HEIGHT = 15; // CHANGE THIS
+    public static final double MAX_HEIGHT = 15; 
 
-    public static final double P = 0.2;
+    public static final double P = 0.3;
     public static final double I = 0;
-    public static final double D = 0.01;
+    public static final double D = 0;
+
+    public static final double STUPID_ELEVATOR_OFFSET = 0.02; // For some reason the elevator has a different zero sometimes, and this can be modified to change to that zero
   }
 
   public static class PenetratorConstants {
     public static final int MOTOR_ID = 8;
-    public static final double MOTOR_INSERT_SPEED = 0.4;
+    public static final double MOTOR_INSERT_SPEED = 0.6;
     public static final double MOTOR_PULLOUT_SPEED = 0.8;
   }
 
   public static class RimmerConstants {
-    public static final int SPARK_MAX_ID = 15; //CHANGE THIS
+    public static final int SPARK_MAX_ID = 15;
     public static final double MOTOR_INSERT_SPEED = 0.4;
     public static final double MOTOR_PULLOUT_SPEED = 0.8;
   }
@@ -82,19 +84,40 @@ public final class Constants {
   public static class SuckNBlowConstants {
     public static final int SPARK_MAX_ID = 42;
     public static final double MOTOR_SUCK_SPEED = 0.8;
-    public static final double MOTOR_BLOW_SPEED = 0.8;
+    public static final double MOTOR_BLOW_SPEED = 0.5;
+    public static final double MOTOR_SUCKLE_SPEED = 0.05;    // Holds the coral in place without burning out the rubber wheels
   }
 
-  public static class ClawConstants { //Pretty much a copy of the elevator constants, along with the subsystem and commands
-    public static final int TURN_ID = 7; //This ID can be changed later
+  public static class ClawConstants {
+    public static final int TURN_ID = 7;
 
-    public static final double MOTOR_MAX_OUTPUT = 0.9;
+    public static final double MOTOR_MAX_OUTPUT = 0.5;
     public static final double MOTOR_REVOLUTIONS_FOR_FULL_ROTATION = 100;
-    public static final double TICK_DEGREE_DISTANCE = 1;
+    public static final double TICK_DEGREE_DISTANCE = 3;
 
     public static final double P = 1;
     public static final double I = 0;
     public static final double D = 0.01;
+  }
+  public static class StateConstants {  // I need to be able to edit these in real time for now, but will make REAL constants later after we're done testing with the new claw/elevator configuration
+    // CORAL (NOT FINISHED)
+    public static final double CORAL_INTAKE_HEIGHT = 0.0;             // Height needed to pick up coral from ports (Set at zero because we already have a minimum elevator height constant)
+    public static final double CORAL_INTAKE_ROTATION = 85;          // Suggested rotation for claw to be so that that coral can be picked up correctly
+    
+    public static final double CORAL_LEVEL_ONE_HEIGHT = 0.0;          // Lowest elevator level as that is the best position for the claw to be variablely rotated at
+    public static final double CORAL_LEVEL_ONE_ROTATION = -88.0;    // The rotation the claw needs to be at for the first two levels of coral deposit, since the third one has a different angle
+    public static final double CORAL_LEVEL_TWO_HEIGHT = 0.4;          // The second level for the coral deposit
+    public static final double CORAL_LEVEL_TWO_ROTATION = -96.0;    // The rotation the claw needs to be at for the first two levels of coral deposit, since the third one has a different angle
+
+    // We dont seem to be doing level 4, so these are kinda useless rn
+    public static final double CORAL_LEVEL_THREE_HEIGHT = 0.6;       // The max height needed for the elevator to reach so that the claw can barely slip the coral on the thrid level without the elevator slipping out of it's slot (max elevator constant found in elevator subsystem)
+    public static final double CORAL_HIGHER_LEVEL_ROTATION = -97.0;  // The rotation needed for the claw to be able to slip the coral on the third level
+
+    // ALGAE (NOT TESTED YET)
+    public static final double ALGAE_LEVEL_ONE_HEIGHT = 0.2;          // The height needed for the first level algae to be collected from the reef without hurting the motor
+    public static final double ALGAE_LEVEL_ONE_ROTATION = -120.0;         // The height needed for the second level algae to be collected from the reef without hurting the motor
+    public static final double ALGAE_LEVEL_TWO_HEIGHT = 0.90;         // The height needed for the second level algae to be collected from the reef without hurting the motor
+    public static final double ALGAE_LEVEL_TWO_ROTATION = -120.0;         // The height needed for the second level algae to be collected from the reef without hurting the motor
   }
   
   public static class AutoConstants {

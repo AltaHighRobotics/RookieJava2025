@@ -16,7 +16,7 @@ import frc.robot.Constants.PhotonVisionConsants;
 
 public class ApriltagSubsystem extends SubsystemBase {
 
-  private PhotonCamera camera;
+  public PhotonCamera camera;
   private List<PhotonTrackedTarget> targets;
 
   /** Creates a new ApriltagSubsystem. */
@@ -39,7 +39,7 @@ public class ApriltagSubsystem extends SubsystemBase {
     return bestTarget;
   }
 
-  List<PhotonTrackedTarget> refresh() {
+  public List<PhotonTrackedTarget> refresh() {
     PhotonPipelineResult result = this.camera.getLatestResult();
 
     if (result.hasTargets()) {
