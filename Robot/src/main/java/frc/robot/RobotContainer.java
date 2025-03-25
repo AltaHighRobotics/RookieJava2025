@@ -68,7 +68,7 @@ public class RobotContainer {
   private ClawSubsystem clawSubsystem;
   private PenetratorSubsystem penetratorSubsystem;
   private RimmerSubsystem rimmerSubsystem;
-  private ApriltagSubsystem apriltagSubsystem;
+  // private ApriltagSubsystem apriltagSubsystem;
 
   public RobotContainer() {
     this.driverController = new XboxController(1);
@@ -80,17 +80,17 @@ public class RobotContainer {
     this.clawSubsystem = new ClawSubsystem();
     this.rimmerSubsystem = new RimmerSubsystem();
     this.penetratorSubsystem = new PenetratorSubsystem();
-    this.apriltagSubsystem = new ApriltagSubsystem();
+    // this.apriltagSubsystem = new ApriltagSubsystem();
 
     // this.swerveTestSubsystem = new TESTSwervesusbsystem(SwerveDriveConstants.FRONT_RIGHT_TURN_ID);
 
     configureBindings(); 
 
     // THIS IS THE SWERVE DRIVE TOGGLE //
-    // this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
-    // this.elevatorSubsystem.setDefaultCommand(new ElevatorGoToTarget(elevatorSubsystem));
-    // this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem));
-    this.apriltagSubsystem.setDefaultCommand(new TravelToApriltagCommand(drive, apriltagSubsystem));
+    this.drive.setDefaultCommand(new SwerveDriveCommand(drive, driverController));
+    this.elevatorSubsystem.setDefaultCommand(new ElevatorGoToTarget(elevatorSubsystem));
+    this.clawSubsystem.setDefaultCommand(new ClawGoToTarget(clawSubsystem));
+    // this.apriltagSubsystem.setDefaultCommand(new TravelToApriltagCommand(drive, apriltagSubsystem));
   }
 
   private void addStateBinding(int buttonNumber, double elevatorHeight, double clawDegrees) {

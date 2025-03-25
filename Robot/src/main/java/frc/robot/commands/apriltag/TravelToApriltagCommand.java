@@ -30,9 +30,9 @@ public class TravelToApriltagCommand extends Command {
       this.drive = drive;
       this.apriltagSubsystem = apriltagSubsystem;
 
-      this.pidForward = new PIDController(2, 0, 0);
-      this.pidAdjust = new PIDController(3, 0, 0);
-      this.pidRotation = new PIDController(0.01, 0, 0);
+      this.pidForward = new PIDController(1.5, 5, 0);
+      this.pidAdjust = new PIDController(10, 5, 0);
+      this.pidRotation = new PIDController(0.5, 0, 0);
 
       addRequirements(drive, apriltagSubsystem);
     }
@@ -48,7 +48,7 @@ public class TravelToApriltagCommand extends Command {
         final PhotonPipelineResult results = apriltagSubsystem.camera.getLatestResult();
         final PhotonTrackedTarget target = results.getBestTarget();   
         
-        if (System.currentTimeMillis() - lastSeenTime > 100) {
+        if (System.currentTimeMillis() - lastSeenTime > 10) {
           drive.drive(0,0,0,0);
         }
         
@@ -58,23 +58,23 @@ public class TravelToApriltagCommand extends Command {
 
         final Transform3d pose = target.getBestCameraToTarget();
 
-        double forward = this.pidForward.calculate(pose.getX(), 0.7);
+        double forward = this.pidForward.calculate(pose.getX(), 0.5);
         double adjust = this.pidAdjust.calculate(pose.getY(), 0); 
 
         double driveRotation = 0;
-        if (Math.abs(forward) < 0.01) {
-          driveRotation = this.pidRotation.calculate(Math.abs(pose.getZ()), 180);
+        // if (Math.abs(forward) < 0.1) {
+          driveRotation = this.pidRotation.calculate(pose.getZ(), Math.abs(pose.getZ()) / pose.getZ() * 179);
 
-          if (pose.getZ() > 0)
+          if (pose.getZ() < 0)
           {
             // driveRotation *= -1;
           }
-        }
+        // }
 
         final double driveSpeed = 0.2;
 
         drive.fieldOriented = false;
-        drive.drive(-adjust, forward, driveRotation, driveSpeed);
+        drive.drive(-0, 0, -driveRotation, driveSpeed);
     }
 
     // Called once the command ends or is interrupted.
